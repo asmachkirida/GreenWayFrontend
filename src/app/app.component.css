@@ -1,0 +1,69 @@
+/* Define Angular Material colors */
+:root {
+    --primary-color: #588157; /* Darker Green */
+    --secondary-color: #3a5a40; /* Medium Green */
+    --accent-color: #344e41; /* Darker Green for accents */
+    --light-bg: #dad7cd; /* Light Beige */
+    --border-color: #dad7cd; /* Light Beige */
+    --button-border-color: #344e41; /* Darker Green */
+  }
+  
+  /* Apply styles to mat-toolbar */
+  .mat-toolbar {
+    background-color: var(--primary-color) !important;
+    border-bottom: 1px solid var(--border-color); /* Line separating navbar from hero */
+  }
+  
+  /* Style for buttons */
+  .mat-toolbar button {
+    color: var(--light-bg);
+    border: 1px solid var(--button-border-color);
+    background-color: transparent;
+    margin: 0 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .mat-toolbar button:hover {
+    background-color: var(--button-border-color);
+    color: var(--light-bg);
+  }
+  
+  /* Style for mat-icon */
+  .mat-icon {
+    color: var(--light-bg);
+  }
+  
+  /* Style for text */
+  .mat-toolbar span {
+    color: var(--light-bg);
+  }
+  
+  /* Align the GreenWay text to the left and other items to the right */
+  .mat-toolbar .left-aligned {
+    flex: 1;
+  }
+  
+  /* Align buttons to the right */
+  .mat-toolbar .right-aligned {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Style for search input */
+  .search-input {
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    transition: width 0.3s;
+    width: 40px; /* Default width */
+  }
+  
+  .search-input:focus {
+    width: 200px; /* Width when focused */
+  }
+  
+  /* Optional: add hover effects */
+  .mat-toolbar button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  

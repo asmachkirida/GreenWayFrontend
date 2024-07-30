@@ -1,0 +1,47 @@
+.search-form {
+    position: absolute;
+    top: 50px; /* Adjust based on where you want the form to start */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%; /* Adjust based on your design needs */
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .search-form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .form-group {
+    flex: 1 1 200px; /* Flexbox to handle responsive layout */
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .search-button {
+    background-color: #3a5a40; /* Button color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: #588157; /* Darker shade on hover */
+  }
+  

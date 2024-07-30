@@ -1,0 +1,35 @@
+.navbar {
+    background-color: #344e41; // Darker green
+    color: #dad7cd; // Light beige
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .app-name {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+  
+      .nav-links {
+        a {
+          color: #dad7cd;
+          text-decoration: none;
+          margin: 0 10px;
+          border: 2px solid #3a5a40;
+          padding: 5px 10px;
+          border-radius: 5px;
+          background-color: #a3b18a;
+  
+          &:hover {
+            background-color: #588157; 
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  

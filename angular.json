@@ -37,6 +37,7 @@
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": [],
@@ -97,15 +98,20 @@
               {
                 "glob": "**/*",
                 "input": "public"
+
               }
             ],
             "styles": [
-              "src/styles.css"
-            ],
+              "src/styles.css" ,
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+           ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
