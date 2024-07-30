@@ -17,6 +17,8 @@ import { AnimatedCardComponent } from './components/animated-card/animated-card.
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HelloComponent } from './hello/hello.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     HeroComponent,
     SearchFormComponent,
     AnimatedCardComponent,
+    HelloComponent,
+    MainLayoutComponent,
 
     
   ],
