@@ -1,0 +1,43 @@
+.animated-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    opacity: 0; /* Start with fade effect */
+    animation: fadeIn 2s forwards; /* Fade-in effect */
+  }
+  
+  .text-section {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .card-section {
+    flex: 1;
+  }
+  
+  .image-slider {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Adjust based on your design */
+    overflow: hidden;
+  }
+  
+  .image-slider img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out; /* Smooth transition between images */
+    opacity: 0;
+  }
+  
+  .image-slider img.active {
+    opacity: 1;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  

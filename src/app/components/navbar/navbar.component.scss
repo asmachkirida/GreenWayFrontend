@@ -19,14 +19,16 @@
           color: #dad7cd;
           text-decoration: none;
           margin: 0 10px;
-          border: 2px solid #3a5a40;
+          text-emphasis-color: #192523;
+          border: 2px solid #bac0cc;
           padding: 5px 10px;
-          border-radius: 5px;
-          background-color: #a3b18a;
+          border-radius: 25px;
+          background-color: #192523;
+          font-weight: bolder;
   
           &:hover {
-            background-color: #588157; 
-            color: #fff;
+            background-color: #bac0cc; 
+            color: #192523;
           }
         }
       }

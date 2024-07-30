@@ -1,0 +1,12 @@
+<div class="animated-card">
+    <div class="text-section">
+      <h2>Your Title Here</h2>
+      <p>Your descriptive text goes here. You can add more content as needed.</p>
+    </div>
+    <div class="card-section">
+      <div class="image-slider">
+        <img *ngFor="let img of images; let i = index" [src]="img" [class.active]="currentImageIndex === i">
+      </div>
+    </div>
+  </div>
+  
