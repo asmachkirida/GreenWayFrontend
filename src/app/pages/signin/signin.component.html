@@ -1,0 +1,30 @@
+<div class="signin-background">
+    <div class="signin-container">
+      <div class="signin-left">
+        <h2>LOGIN</h2>
+        <hr>
+        <form>
+            <mat-form-field appearance="outline" class="full-width styled-input">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" required />
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="full-width styled-input">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" required />
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+    
+            <button mat-raised-button color="primary" class="signin-btn">Sign In</button>
+          </form>
+        <p class="register-link">Don't have an account? <a href="/signup">Register now</a></p>
+      </div>
+      <div class="signin-right">
+        <img src="girl.jpg" alt="Girl" class="signin-image">
+      </div>
+    </div>
+  </div>
+  

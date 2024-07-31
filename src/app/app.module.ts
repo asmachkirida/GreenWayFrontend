@@ -19,6 +19,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HelloComponent } from './hello/hello.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SigninComponent } from './pages/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
     AnimatedCardComponent,
     HelloComponent,
     MainLayoutComponent,
+    SignupComponent,
+    SigninComponent,
 
     
   ],
