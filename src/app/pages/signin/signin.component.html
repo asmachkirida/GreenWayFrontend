@@ -3,23 +3,29 @@
       <div class="signin-left">
         <h2>LOGIN</h2>
         <hr>
-        <form>
-            <mat-form-field appearance="outline" class="full-width styled-input">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" required />
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="full-width styled-input">
-              <mat-label>Password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" required />
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-    
-            <button mat-raised-button color="primary" class="signin-btn">Sign In</button>
-          </form>
+        <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width styled-input">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required />
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="signinForm.get('email')?.invalid && signinForm.get('email')?.touched">
+              Please enter a valid email address.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width styled-input">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="signinForm.get('password')?.invalid && signinForm.get('password')?.touched">
+              Password is required.
+            </mat-error>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" class="signin-btn" type="submit" [disabled]="signinForm.invalid">Sign In</button>
+        </form>
         <p class="register-link">Don't have an account? <a href="/signup">Register now</a></p>
       </div>
       <div class="signin-right">

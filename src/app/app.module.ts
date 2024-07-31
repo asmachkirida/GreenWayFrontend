@@ -12,6 +12,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { AnimatedCardComponent } from './components/animated-card/animated-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 // Angular Material Modules
 import { MatCardModule } from '@angular/material/card';
@@ -21,6 +26,7 @@ import { HelloComponent } from './hello/hello.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { SignupdriverComponent } from './components/signupdriver/signupdriver.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { SigninComponent } from './pages/signin/signin.component';
     MainLayoutComponent,
     SignupComponent,
     SigninComponent,
+    SignupdriverComponent,
 
     
   ],
@@ -49,7 +56,12 @@ import { SigninComponent } from './pages/signin/signin.component';
         MatButtonModule,
         MatIconModule,
         ReactiveFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatButtonToggleModule
 
   ],
   providers: [
