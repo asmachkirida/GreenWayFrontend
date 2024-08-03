@@ -1,0 +1,19 @@
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f3eff5; /* Page background color */
+  }
+  
+  .content {
+    display: flex;
+    flex: 1;
+    margin-top: 20px; /* Margin from the top */
+  }
+  
+  .page-content {
+    flex: 1;
+    margin-left: 280px; /* Adjusted for sidebar width and margin */
+    padding: 20px;
+  }
+  

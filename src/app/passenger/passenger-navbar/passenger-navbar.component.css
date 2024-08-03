@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #344e41;
+    color: white;
+    border-radius: 20px;
+    margin: 20px 20px 0 20px; /* margin-top and margin-left */
+   margin-left: 270px;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-date {
+    margin-right: auto;
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  
+  .navbar-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mat-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .mat-menu-item span {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .navbar-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .white-icon {
+    color: white;
+  }
