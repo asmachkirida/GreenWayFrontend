@@ -5,11 +5,10 @@ import { HelloComponent } from './hello/hello.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { PassengerComponent } from './passenger/passenger/passenger.component';
-import { Page1Component } from './passenger/page1/page1.component';
-import { Page2Component } from './passenger/page2/page2.component';
 import { ProfileComponent } from './passenger/profile/profile.component';
 import { RidesHistoryComponent } from './passenger/rides-history/rides-history.component';
 import { BikeridesComponent } from './passenger/bikerides/bikerides.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 const routes: Routes = [
   {
@@ -31,6 +30,7 @@ const routes: Routes = [
   { path: 'hello', component: HelloComponent }, // This route does not include the common layout components
   { path: 'signup', component: SignupComponent }, // Signup route
   { path: 'signin', component: SigninComponent }, // Signin route
+  { path: 'search-results', component: SearchResultsComponent }, // Search results route
   { path: '**', redirectTo: '/hello' } // Redirect any unknown path to hello
 ];
 

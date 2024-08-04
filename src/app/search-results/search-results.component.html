@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+<div class="search-form">
+    <form>
+        <div class="form-group">
+            <input type="text" id="depart" name="depart" placeholder="Depart">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="form-group">
+            <input type="text" id="destination" name="destination" placeholder="Destination">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="form-group">
+            <input type="date" id="date" name="date" placeholder="Date">
+            <i class="fas fa-calendar-day"></i>
+        </div>
+        <div class="form-group passengers-group">
+            <input type="number" id="passengers" name="passengers" min="1" value="1" placeholder="Passengers">
+            <i class="fas fa-user"></i>
+            <button type="button" class="plus-button">+</button>
+        </div>
+        <button type="submit" class="search-button">Search</button>
+    </form>
+</div>
+
+<div class="container">
+    <div class="left-pane">
+        <div class="filter-card">
+            <h3>Filters</h3>
+            <hr>
+            <div class="filter-section">
+                <h4>Services</h4>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>Pets Allowed</span>
+                    <mat-icon>pets</mat-icon>
+                </label>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>Cigarettes Allowed</span>
+                    <mat-icon>smoking_rooms</mat-icon>
+                </label>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>AC Available</span>
+                    <mat-icon>ac_unit</mat-icon>
+                </label>
+            </div>
+            <hr>
+            <div class="filter-section">
+                <h4>Driver</h4>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>Female</span>
+                    <mat-icon>female</mat-icon>
+                </label>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>Male</span>
+                    <mat-icon>male</mat-icon>
+                </label>
+            </div>
+            <hr>
+            <div class="filter-section">
+                <h4>Price</h4>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>Low to High</span>
+                    <mat-icon>arrow_downward</mat-icon>
+                </label>
+                <label class="styled-checkbox">
+                    <input type="checkbox">
+                    <span>High to Low</span>
+                    <mat-icon>arrow_upward</mat-icon>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="right-pane">
+        <div class="result-card">
+            <div class="result-header">
+                <div class="time">17:30 <span>10h10</span> 03:40</div>
+                <div class="price">71,29 €</div>
+            </div>
+            <div class="result-body">
+                <div class="route">Neuilly-sur-Seine &rarr; Nice</div>
+                <div class="driver">
+                    <img src="assets/driver.jpg" alt="Driver">
+                    <span>Nicolas</span>
+                    <span class="rating">4.8</span>
+                    <span class="badge">Super Driver</span>
+                </div>
+                <div class="details">
+                    <mat-icon>directions_car</mat-icon>
+                    <span>Instant Booking</span>
+                    <span>Max 2 at the back</span>
+                </div>
+            </div>
+        </div>
+        <!-- Add more result cards here -->
+    </div>
+</div>

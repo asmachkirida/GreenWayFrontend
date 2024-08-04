@@ -41,7 +41,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BikeridesComponent } from './passenger/bikerides/bikerides.component';
 import { RidesHistoryComponent } from './passenger/rides-history/rides-history.component';
 import { ProfileComponent } from './passenger/profile/profile.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -65,6 +69,7 @@ import { ProfileComponent } from './passenger/profile/profile.component';
     BikeridesComponent,
     RidesHistoryComponent,
     ProfileComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +94,10 @@ import { ProfileComponent } from './passenger/profile/profile.component';
         MatListModule,
         MatDialogModule,
         MatSidenavModule,
-        MatMenuModule
+        MatMenuModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatSliderModule
   ],
   providers: [
     provideClientHydration(),

@@ -1,0 +1,262 @@
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+.left-pane {
+    width: 18%;
+    margin-top: 90px;
+    margin-left: 35px;
+}
+
+.right-pane {
+    width: 70%;
+    margin-top: 7%;
+    margin-left:50px;
+}
+
+.filter-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.filter-section h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+.styled-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.styled-checkbox:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+ 
+}
+
+
+/* Custom checkbox styling */
+.styled-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .styled-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  .styled-checkbox input[type="checkbox"] + span {
+    position: relative;
+    padding-left: 35px;
+  }
+  
+  .styled-checkbox input[type="checkbox"] + span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #3a5a40;
+    background: white;
+  }
+  
+  .styled-checkbox input[type="checkbox"]:checked + span::before {
+    background: white;
+  }
+  
+  .styled-checkbox input[type="checkbox"]:checked + span::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #3a5a40;
+  }
+  
+  .styled-checkbox span:hover::before {
+    border-color: #588157;
+
+  }
+
+.styled-checkbox span {
+    flex: 1;
+}
+
+.styled-checkbox mat-icon {
+    margin-left: 10px;
+    color: #344e41;
+}
+
+.result-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.result-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.route {
+    font-size: 16px;
+}
+
+.driver {
+    display: flex;
+    align-items: center;
+}
+
+.driver img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.rating {
+    font-size: 14px;
+    color: #FFC107;
+    margin-right: 10px;
+}
+
+.badge {
+    background: #03A9F4;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+}
+
+.details mat-icon {
+    margin-right: 5px;
+}
+
+.search-form {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative;
+}
+
+.form-group {
+    position: relative;
+    flex: 1 1 200px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    padding-left: 40px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    border-radius: 0;
+    box-sizing: border-box;
+}
+
+.form-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3a5a40;
+}
+
+.passengers-group {
+    display: flex;
+    align-items: center;
+}
+
+.passengers-group input {
+    flex: 1;
+}
+
+.passengers-group .plus-button {
+    margin-left: 10px;
+    background: #3a5a40;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search-button {
+    background-color: #3a5a40;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #588157;
+}
+
