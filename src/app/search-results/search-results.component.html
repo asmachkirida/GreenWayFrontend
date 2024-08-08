@@ -76,26 +76,51 @@
         </div>
     </div>
     <div class="right-pane">
-        <div class="result-card">
+        <div *ngFor="let ride of rides" class="result-card">
+          <div class="background-image"></div>
+          <div class="result-content">
             <div class="result-header">
-                <div class="time">17:30 <span>10h10</span> 03:40</div>
-                <div class="price">71,29 €</div>
+              <div class="time">{{ ride.startTime }} - {{ ride.endTime }} <span>({{ ride.duration }}h)</span></div>
+              <div class="price">{{ ride.price | currency }}</div>
             </div>
             <div class="result-body">
-                <div class="route">Neuilly-sur-Seine &rarr; Nice</div>
-                <div class="driver">
-                    <img src="assets/driver.jpg" alt="Driver">
-                    <span>Nicolas</span>
-                    <span class="rating">4.8</span>
-                    <span class="badge">Super Driver</span>
+              <div class="route">{{ ride.startLocation }} &rarr; {{ ride.endLocation }}</div>
+              <div class="date">{{ ride.date | date:'fullDate' }}</div>
+              
+              <div class="info-row">
+                <div class="info-box car-info">
+                  <i class="fas fa-car"></i>
+                  <p>{{ ride.car.color }} {{ ride.car.brand }}</p>
                 </div>
-                <div class="details">
-                    <mat-icon>directions_car</mat-icon>
-                    <span>Instant Booking</span>
-                    <span>Max 2 at the back</span>
+                <div *ngIf="ride.airConditionning" class="info-box">
+                  <i class="fas fa-snowflake"></i>
                 </div>
+                <div *ngIf="ride.petAllowed" class="info-box">
+                  <i class="fas fa-paw"></i>
+                </div>
+                <div *ngIf="ride.cigaretteAllowed" class="info-box">
+                  <i class="fas fa-smoking"></i>
+                </div>
+                <div class="info-box">
+                  <i class="fas fa-user"></i>
+                  <p>Passengers: {{ ride.nbrPassengers }}</p>
+                </div>
+              </div>
+              
+              <div class="driver-info">
+                <div class="driver-details">
+                  <p><strong>{{ ride.driver.firstName }} {{ ride.driver.lastName }}</strong></p>
+                  <p>Rating: {{ ride.driver.rating }}</p>
+                  <p>Age: {{ ride.driver.age || 'N/A' }}</p>
+                  <p>Gender: {{ ride.driver.gender || 'N/A' }}</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- Add more result cards here -->
-    </div>
+      </div>
+      
+      
+    
+        
 </div>
