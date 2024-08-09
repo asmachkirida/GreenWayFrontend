@@ -46,6 +46,13 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
+import { StatisticsComponent } from './admin/statistics/statistics.component';
+import { PassengersComponent } from './admin/passengers/passengers.component';
+import { DriversComponent } from './admin/drivers/drivers.component';
+import { CarRidesComponent } from './admin/car-rides/car-rides.component';
+import { BikeRidesComponent } from './admin/bike-rides/bike-rides.component';
+import { CarsComponent } from './admin/cars/cars.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 
 
@@ -70,6 +77,13 @@ import { MatSliderModule } from '@angular/material/slider';
     RidesHistoryComponent,
     ProfileComponent,
     SearchResultsComponent,
+    StatisticsComponent,
+    PassengersComponent,
+    DriversComponent,
+    CarRidesComponent,
+    BikeRidesComponent,
+    CarsComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

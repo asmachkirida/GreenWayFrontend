@@ -1,0 +1,41 @@
+<div class="page-container">
+    <!-- Left Pane: Sidebar -->
+    <div class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2>GreenWay Admin</h2>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item" [routerLink]="['/admin/statistics']" routerLinkActive="active">
+          <i class="fas fa-home"></i><span>Dashboard</span>
+        </li>
+        <li class="nav-item" [routerLink]="['/admin/drivers']" routerLinkActive="active">
+          <i class="fas fa-user-tie"></i><span>Drivers</span>
+        </li>
+        <li class="nav-item" [routerLink]="['/admin/passengers']" routerLinkActive="active">
+          <i class="fas fa-users"></i><span>Passengers</span>
+        </li>
+        <li class="nav-item" [routerLink]="['/admin/cars']" routerLinkActive="active">
+          <i class="fas fa-car"></i><span>Cars</span>
+        </li>
+        <li class="nav-item" [routerLink]="['/admin/car-rides']" routerLinkActive="active">
+          <i class="fas fa-car-side"></i><span>Car rides</span>
+        </li>
+        <li class="nav-item" [routerLink]="['/admin/bike-rides']" routerLinkActive="active">
+          <i class="fas fa-bicycle"></i><span>Bike rides</span>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <li class="nav-item">
+          <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+        </li>
+        <li class="nav-item">
+          <i class="fas fa-cog"></i><span>Settings</span>
+        </li>
+      </div>
+    </div>
+  
+    <div class="admin-content">
+      <router-outlet></router-outlet> <!-- This is where your content will load based on sidebar selection -->
+    </div>
+  </div>
+  

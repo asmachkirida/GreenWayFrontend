@@ -74,3 +74,15 @@
 .search-button:hover {
   background-color: #588157; /* Darker shade on hover */
 }
+
+.pac-container:after {
+  content: "Powered by Google";
+  font-size: 10px;
+}
+
+.pac-container:after {
+  background-image: none !important;
+  height: 0px;
+  padding: 0;
+  margin: 0;
+}

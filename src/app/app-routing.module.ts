@@ -10,6 +10,15 @@ import { RidesHistoryComponent } from './passenger/rides-history/rides-history.c
 import { BikeridesComponent } from './passenger/bikerides/bikerides.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 
+// Admin components
+import { StatisticsComponent } from './admin/statistics/statistics.component';
+import { PassengersComponent } from './admin/passengers/passengers.component';
+import { DriversComponent } from './admin/drivers/drivers.component';
+import { CarRidesComponent } from './admin/car-rides/car-rides.component';
+import { BikeRidesComponent } from './admin/bike-rides/bike-rides.component';
+import { CarsComponent } from './admin/cars/cars.component';
+import { AdminComponent } from './admin/admin/admin.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +34,18 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'rides-history', component: RidesHistoryComponent },
       { path: 'bikerides', component: BikeridesComponent },
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: 'statistics', component: StatisticsComponent },
+      { path: 'passengers', component: PassengersComponent },
+      { path: 'drivers', component: DriversComponent },
+      { path: 'car-rides', component: CarRidesComponent },
+      { path: 'bike-rides', component: BikeRidesComponent },
+      { path: 'cars', component: CarsComponent },
     ]
   },
   { path: 'hello', component: HelloComponent }, // This route does not include the common layout components
