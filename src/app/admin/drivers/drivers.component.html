@@ -1,7 +1,25 @@
 <div class="drivers-container">
-    <h1>Drivers</h1>
-    <hr />
-    <h3>Drivers List</h3>
+    <div class="header">
+      <h1>Drivers</h1>
+      <hr />
+      <div class="header-actions">
+        <h3>Drivers List</h3>
+        <div class="actions">
+          <button class="export-btn">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search by name"
+              [(ngModel)]="searchTerm"
+              (input)="searchDrivers()"
+            />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
   
     <table>
       <thead>
