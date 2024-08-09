@@ -1,1 +1,52 @@
-<p>drivers works!</p>
+<div class="drivers-container">
+    <h1>Drivers</h1>
+    <hr />
+    <h3>Drivers List</h3>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Birth Date</th>
+          <th>Phone Number</th>
+          <th>Gender</th>
+          <th>City</th>
+          <th>License Number</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of drivers">
+          <td>{{ driver.id }}</td>
+          <td>{{ driver.email }}</td>
+          <td>{{ driver.firstName }}</td>
+          <td>{{ driver.lastName }}</td>
+          <td>{{ driver.birthDate | date }}</td>
+          <td>{{ driver.phoneNumber }}</td>
+          <td>{{ driver.gender }}</td>
+          <td>{{ driver.city }}</td>
+          <td>{{ driver.licenseNumber || 'N/A' }}</td>
+          <td>{{ driver.rating }}</td>
+          <td>
+            <button (click)="editDriver(driver.id)" class="action-btn edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deleteDriver(driver.id)" class="action-btn delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  
