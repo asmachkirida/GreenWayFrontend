@@ -23,14 +23,21 @@ export class CarsComponent implements OnInit {
   loadCars() {
     const searchQuery = this.searchTerm.trim() ? `?brand=${encodeURIComponent(this.searchTerm.trim())}` : '';
     this.http.get<any[]>(`http://localhost:8080/driver/cars/search${searchQuery}`).subscribe(data => {
-      this.totalPages = Math.ceil(data.length / this.pageSize);
-      this.cars = data.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
-
-      // Fetch driver's full names
-      this.cars.forEach(car => {
-        this.fetchDriverFullName(car.driverId);
-      });
+      this.cars = data;
+      this.totalPages = Math.ceil(this.cars.length / this.pageSize);
+      this.updateCarsWithDriverNames();
     });
+  }
+
+  updateCarsWithDriverNames() {
+    // Fetch driver's full names for all cars
+    const driverIds = Array.from(new Set(this.cars.map(car => car.driverId)));
+    driverIds.forEach(driverId => {
+      this.fetchDriverFullName(driverId);
+    });
+
+    // Update pagination
+    this.updatePagination();
   }
 
   fetchDriverFullName(driverId: number) {
@@ -39,12 +46,27 @@ export class CarsComponent implements OnInit {
         const user = response.ourUsers;
         const fullName = `${user.firstName} ${user.lastName}`;
         this.drivers[driverId] = fullName;
-        // Trigger UI update
-        this.cars = [...this.cars];
+        // Update car data with driver full names
+        this.updateCarsWithDriverNamesInUI();
       } else {
         console.error(`Error fetching user data for ID ${driverId}: ${response.message}`);
       }
     });
+  }
+
+  updateCarsWithDriverNamesInUI() {
+    // Update car objects with driver full names
+    this.cars = this.cars.map(car => ({
+      ...car,
+      driverName: this.drivers[car.driverId] || 'Unknown Driver'
+    }));
+    // Trigger UI update
+    this.updatePagination();
+  }
+
+  updatePagination() {
+    this.totalPages = Math.ceil(this.cars.length / this.pageSize);
+    this.cars = this.cars.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
   }
 
   searchCars() {
@@ -69,14 +91,14 @@ export class CarsComponent implements OnInit {
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.loadCars();
+      this.updatePagination();
     }
   }
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.loadCars();
+      this.updatePagination();
     }
   }
 
