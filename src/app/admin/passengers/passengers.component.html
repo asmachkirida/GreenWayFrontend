@@ -1,1 +1,68 @@
-<p>passengers works!</p>
+<div class="passengers-container">
+    <div class="header">
+      <h1>Passengers</h1>
+      <hr />
+      <div class="header-actions">
+        <h3>Passengers List</h3>
+        <div class="actions">
+          <button class="export-btn">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search by name"
+              [(ngModel)]="searchTerm"
+              (input)="searchPassengers()"
+            />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Birth Date</th>
+          <th>Phone Number</th>
+          <th>Gender</th>
+          <th>City</th>
+          <th>Membership</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let passenger of passengers">
+          <td>{{ passenger.id }}</td>
+          <td>{{ passenger.email }}</td>
+          <td>{{ passenger.firstName }}</td>
+          <td>{{ passenger.lastName }}</td>
+          <td>{{ passenger.birthDate | date }}</td>
+          <td>{{ passenger.phoneNumber }}</td>
+          <td>{{ passenger.gender }}</td>
+          <td>{{ passenger.city }}</td>
+          <td>{{ passenger.membership || 'N/A' }}</td>
+          <td>
+            <button (click)="editPassenger(passenger.id)" class="action-btn edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deletePassenger(passenger.id)" class="action-btn delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  

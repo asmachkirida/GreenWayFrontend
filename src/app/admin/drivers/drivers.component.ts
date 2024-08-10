@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 export class DriversComponent implements OnInit {
   drivers: any[] = [];
   currentPage = 1;
-  pageSize = 7;
+  pageSize = 6;
   totalPages = 1;
   searchTerm = '';
   searchByFirstName = true;
@@ -51,10 +51,7 @@ export class DriversComponent implements OnInit {
     console.log('Edit driver', id);
   }
 
-  deleteDriver(id: number) {
-    // Implement delete logic
-    console.log('Delete driver', id);
-  }
+
 
   prevPage() {
     if (this.currentPage > 1) {
@@ -73,5 +70,15 @@ export class DriversComponent implements OnInit {
   exportData() {
     // Implement export logic (e.g., export to CSV or Excel)
     console.log('Export data');
+  }
+
+  deleteDriver(id: number) {
+    if (confirm('Are you sure you want to delete this driver?')) {
+      this.http.delete(`http://localhost:8080/admin/delete/${id}`).subscribe(() => {
+        this.loadDrivers(); // Refresh the list after deletion
+      }, error => {
+        console.error('Error deleting driver:', error);
+      });
+    }
   }
 }

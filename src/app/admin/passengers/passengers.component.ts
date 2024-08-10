@@ -1,10 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',
-  styleUrl: './passengers.component.css'
+  styleUrls: ['./passengers.component.css']
 })
-export class PassengersComponent {
+export class PassengersComponent implements OnInit {
+  passengers: any[] = [];
+  currentPage = 1;
+  pageSize = 6;
+  totalPages = 1;
+  searchTerm = '';
 
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.loadPassengers();
+  }
+
+  loadPassengers() {
+    const searchQuery = this.searchTerm.trim() ? `?searchTerm=${encodeURIComponent(this.searchTerm.trim())}` : '';
+    this.http.get<any[]>(`http://localhost:8080/admin/passengers/search${searchQuery}`).subscribe(data => {
+      this.totalPages = Math.ceil(data.length / this.pageSize);
+      this.passengers = data.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+    });
+  }
+
+  searchPassengers() {
+    this.currentPage = 1;
+    this.loadPassengers();
+  }
+
+  editPassenger(id: number) {
+    console.log('Edit passenger', id);
+    // Add logic to navigate to edit form or open a modal for editing
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadPassengers();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadPassengers();
+    }
+  }
+
+  exportData() {
+    console.log('Export data');
+    // Implement export logic (e.g., export to CSV or Excel)
+  }
+
+  deletePassenger(id: number) {
+    if (confirm('Are you sure you want to delete this passenger?')) {
+      this.http.delete(`http://localhost:8080/admin/delete/${id}`).subscribe(() => {
+        this.loadPassengers(); 
+      }, error => {
+        console.error('Error deleting passenger:', error);
+      });
+    }
+  }
 }
