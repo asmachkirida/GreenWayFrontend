@@ -1,1 +1,64 @@
-<p>cars works!</p>
+<div class="cars-container">
+    <div class="header">
+      <h1>Cars</h1>
+      <hr />
+      <div class="header-actions">
+        <h3>Cars List</h3>
+        <div class="actions">
+          <button class="export-btn" (click)="exportData()">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search by brand"
+              [(ngModel)]="searchTerm"
+              (input)="searchCars()"
+            />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Capacity</th>
+          <th>License Plate</th>
+          <th>Color</th>
+          <th>Driver Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.id }}</td>
+          <td>{{ car.brand }}</td>
+          <td>{{ car.model }}</td>
+          <td>{{ car.capacity }}</td>
+          <td>{{ car.licensePlate }}</td>
+          <td>{{ car.color }}</td>
+          <td>{{ drivers[car.driverId] || 'Loading...' }}</td>
+          <td>
+            <button (click)="editCar(car.id)" class="action-btn edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deleteCar(car.id)" class="action-btn delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  
