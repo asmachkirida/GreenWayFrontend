@@ -1,90 +1,23 @@
 .profile-container {
-    display: flex;
-    justify-content: center;
-   
-    padding: 20px;
+  padding: 20px;
+}
 
-  }
-  
-  .profile-card {
-    width: 800px; /* Increased width */
-    background-color: #ae9682; /* Light brown background */
-    color: #ffffff; /* White text color */
-    border-radius: 10px;
-    padding: 15px;
-    margin-left: -600px;
-    margin-top: -30px;
-  }
-  
-  .profile-header {
-    border-bottom: 1px solid #ffffff; /* White border */
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-  }
-  
-  .profile-header h2 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .profile-subtitle {
-    font-size: 14px;
-    color: #7e674a; /* Dark brown text color */
-    margin: 5px 0 15px;
-  }
-  
-  .profile-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .profile-field-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .half-width {
-    width: 48%; /* Half-width fields */
-  }
-  
-  .full-width {
-    width: 100%; /* Full-width field */
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    padding: 0 8px;
-    border-radius: 5px;
-    background-color: #4c6c68; /* Dark green background for input fields */
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-flex {
-    background-color: transparent;
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: #ffffff;
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-label {
-    color: #ffffff;
-  }
-  
-  .mat-form-field-appearance-outline .mat-input-element {
-    color: #ffffff;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  button.mat-raised-button {
-    background-color: #7e674a; /* Dark brown button */
-    color: #ffffff;
-  }
-  
-  button.mat-raised-button:hover {
-    background-color: #4c6c68; /* Dark green on hover */
-  }
-  
+.profile-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 100%;
+}

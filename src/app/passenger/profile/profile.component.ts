@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -8,27 +9,63 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-  isEditMode: boolean = false;
+  isEditing = false;
+  userId = 14;  // Assume user ID is 14 for demonstration
 
-  constructor(private fb: FormBuilder) {
-    // Initializing form with demo data
+  constructor(private http: HttpClient, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
-      email: [{ value: 'demo@example.com', disabled: true }],
-      firstName: [{ value: 'John', disabled: true }],
-      lastName: [{ value: 'Doe', disabled: true }],
-      birthDate: [{ value: '1990-01-01', disabled: true }],
-      phoneNumber: [{ value: '1234567890', disabled: true }],
-      password: [{ value: 'password', disabled: true }],
-      city: [{ value: 'New York', disabled: true }]
+      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+      firstName: [{ value: '', disabled: true }, Validators.required],
+      lastName: [{ value: '', disabled: true }, Validators.required],
+      birthDate: [{ value: '', disabled: true }, Validators.required],
+      phoneNumber: [{ value: '', disabled: true }, Validators.required],
+      city: [{ value: '', disabled: true }, Validators.required],
+      password: [{ value: '', disabled: true }, Validators.required],
+      confirmPassword: [{ value: '', disabled: true }, Validators.required],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadUserData();
+  }
 
-  toggleEditMode(): void {
-    this.isEditMode = !this.isEditMode;
-    Object.keys(this.profileForm.controls).forEach(control => {
-      this.isEditMode ? this.profileForm.get(control)?.enable() : this.profileForm.get(control)?.disable();
+  loadUserData() {
+    this.http.get<any>(`http://localhost:8080/admin/get-user/${this.userId}`).subscribe(data => {
+      this.profileForm.patchValue({
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        birthDate: data.birthDate.split('T')[0],  // Format date as yyyy-mm-dd
+        phoneNumber: data.phoneNumber,
+        city: data.city,
+        password: '',
+        confirmPassword: '',
+      });
     });
+  }
+
+  enableEditing() {
+    this.isEditing = true;
+    this.profileForm.enable();
+  }
+
+  saveChanges() {
+    if (this.profileForm.valid && this.profileForm.get('password')?.value === this.profileForm.get('confirmPassword')?.value) {
+      const updatedUserData = {
+        ...this.profileForm.value,
+        role: 'PASSENGER',  // Add the role field
+        birthDate: new Date(this.profileForm.get('birthDate')?.value).toISOString()  // Convert birthDate to ISO string
+      };
+
+      this.http.put(`http://localhost:8080/admin/update/${this.userId}`, updatedUserData).subscribe(() => {
+        alert('Profile updated successfully');
+        this.isEditing = false;
+        this.profileForm.disable();
+      }, error => {
+        alert('Failed to update profile: ' + error.message);
+      });
+    } else {
+      alert('Please ensure all fields are correctly filled and passwords match.');
+    }
   }
 }
