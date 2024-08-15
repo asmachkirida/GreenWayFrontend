@@ -7,13 +7,33 @@
   min-height: 100vh;
 }
 
+.profile-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px; /* Adjust as needed */
+}
+
+.left-pane {
+  width: 60%;
+  padding-right: 20px; /* Space between panes */
+}
+
+.right-pane {
+  width: 20%;
+}
+
+.right-pane img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 .profile-card {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 100%;
-  max-width: 600px;
 }
 
 .profile-card h1 {

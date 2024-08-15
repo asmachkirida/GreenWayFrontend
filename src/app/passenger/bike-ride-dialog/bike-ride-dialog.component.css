@@ -1,0 +1,98 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(50px);
+    z-index: 998; /* Layer behind the modal */
+  }
+  
+  .bike-ride-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    z-index: 999; /* On top of the backdrop */
+  }
+  
+  .dialog-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .dialog-header h2 {
+    font-size: 1.5rem;
+    color: #3a5a40;
+  }
+  
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px; /* Space for the icon */
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .form-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3a5a40;
+    font-size: 18px;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .dialog-actions button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cancel-button {
+    background-color: #dad7cd;
+    color: #3a5a40;
+    border: none;
+  }
+  
+  .cancel-button:hover {
+    background-color: #b5b2a6;
+  }
+  
+  .create-button {
+    background-color: #3a5a40;
+    color: white;
+    border: none;
+  }
+  
+  .create-button:hover {
+    background-color: #588157;
+  }
+  

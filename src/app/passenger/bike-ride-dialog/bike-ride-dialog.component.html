@@ -1,0 +1,36 @@
+<div class="bike-ride-dialog">
+    <form [formGroup]="bikeRideForm">
+      <div class="dialog-header">
+        <h2>Organize Bike Ride</h2>
+      </div>
+      
+      <div class="dialog-content">
+        <div class="form-group">
+          <i class="fa fa-calendar"></i>
+          <input type="date" formControlName="date" placeholder="Date" required />
+        </div>
+        <div class="form-group">
+          <i class="fa fa-clock"></i>
+          <input type="time" formControlName="startTime" placeholder="Start Time" required />
+        </div>
+        <div class="form-group">
+          <i class="fa fa-map-marker-alt"></i>
+          <input type="text" id="startLocation" formControlName="startLocation" placeholder="Start Location" required />
+        </div>
+        <div class="form-group">
+          <i class="fa fa-map-marker-alt"></i>
+          <input type="text" id="endLocation" formControlName="endLocation" placeholder="End Location" required />
+        </div>
+        <div class="form-group">
+          <i class="fa fa-users"></i>
+          <input type="number" formControlName="maxRiders" placeholder="Max Riders" min="1" value="4" required />
+        </div>
+      </div>
+      
+      <div class="dialog-actions">
+        <button class="cancel-button" (click)="closeDialog()">Cancel</button>
+        <button class="create-button" (click)="createBikeRide()">Create Ride</button>
+      </div>
+    </form>
+  </div>
+  
