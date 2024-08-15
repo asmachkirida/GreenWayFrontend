@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare var google: any;
 
@@ -8,6 +9,8 @@ declare var google: any;
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements AfterViewInit {
+
+  constructor(private router: Router) {}
 
   ngAfterViewInit() {
     this.initAutocomplete();
@@ -25,7 +28,6 @@ export class SearchFormComponent implements AfterViewInit {
       const departAutocomplete = new google.maps.places.Autocomplete(departInput);
       const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
 
-      // Optional: Add event listeners for place changes
       departAutocomplete.addListener('place_changed', () => {
         const place = departAutocomplete.getPlace();
         console.log('Depart place:', place);
@@ -38,5 +40,22 @@ export class SearchFormComponent implements AfterViewInit {
     } else {
       console.error('Google Maps API is not loaded');
     }
+  }
+
+  onSearchSubmit() {
+    const depart = (document.getElementById('depart') as HTMLInputElement).value;
+    const destination = (document.getElementById('destination') as HTMLInputElement).value;
+    const date = (document.getElementById('date') as HTMLInputElement).value;
+    const passengers = (document.getElementById('passengers') as HTMLInputElement).value;
+
+    const queryParams = {
+      depart,
+      destination,
+      date,
+      passengers,
+    };
+    console.log('Search submitted with:', { depart, destination, date, passengers });
+
+    this.router.navigate(['/search-results'], { queryParams });
   }
 }

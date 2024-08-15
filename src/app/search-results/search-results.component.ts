@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -9,34 +10,53 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
-
-  apiUrl = 'http://localhost:8080/rides';
+  apiUrl = 'http://localhost:8080/rides/search';
+  filterUrl = 'http://localhost:8080/rides/filter';
   carApiUrl = 'http://localhost:8080/driver/cars/';
   driverApiUrl = 'http://localhost:8080/admin/get-user/';
-  rides: any[] = []; 
+  rides: any[] = [];
+  filters: any = {
+    petAllowed: false,
+    airConditionning: false,
+    minPrice: null,
+    maxPrice: null
+  };
+  allRides: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.fetchRideData();
+    this.route.queryParams.subscribe(params => {
+      console.log('Received search parameters:', params);
+      const searchParams = {
+        startLocation: params['depart'],
+        endLocation: params['destination'],
+        nbrPassengers: params['passengers'],
+        date: params['date']
+      };
+      console.log('Transformed search parameters:', searchParams);
+      this.fetchRideData(searchParams);
+    });
   }
 
-  fetchRideData() {
-    this.http.get<any[]>(this.apiUrl).pipe(
+  fetchRideData(searchParams: any) {
+    this.http.get<any[]>(this.apiUrl, { params: searchParams }).pipe(
       switchMap(rides => {
-        const carRequests = rides.map(ride => 
-          this.http.get<any>(`${this.carApiUrl}${ride.carId}`).pipe(
+        this.allRides = rides; // Save all search results
+        const carRequests = rides.map(ride =>
+          this.http.get<any>(`${this.carApiUrl}${ride.car.id}`).pipe(
             map(car => ({ ...ride, car }))
           )
         );
         return forkJoin(carRequests);
       }),
       switchMap(ridesWithCars => {
-        const driverRequests = ridesWithCars.map(ride => 
+        const driverRequests = ridesWithCars.map(ride =>
           this.http.get<any>(`${this.driverApiUrl}${ride.car.driverId}`).pipe(
             map(driverResponse => {
-              const driver = driverResponse.ourUsers; // Access the driver data correctly
-              return { ...ride, driver };
+              const driver = driverResponse.ourUsers;
+              const age = this.calculateAge(driver.birthDate); // Calculate age here
+              return { ...ride, driver: { ...driver, age } }; // Add age to driver object
             })
           )
         );
@@ -44,14 +64,9 @@ export class SearchResultsComponent implements OnInit {
       })
     ).subscribe(
       data => {
-        this.rides = data.map(ride => ({
-          ...ride,
-          driver: {
-            ...ride.driver,
-            age: this.calculateAge(ride.driver.birthDate) // Calculate age
-          }
-        }));
-        console.log('Final combined data:', data); // Log final combined data
+        this.allRides = data; // Save all fetched rides before filtering
+        this.rides = this.applyFilters(this.allRides); // Apply filters after fetching data
+        console.log('Filtered data:', this.rides);
       },
       error => {
         console.error('Error fetching rides', error);
@@ -59,6 +74,24 @@ export class SearchResultsComponent implements OnInit {
     );
   }
 
+  onFilterChange() {
+    console.log('Filter changed:', this.filters);
+    this.rides = this.applyFilters(this.allRides);
+  }
+  
+  applyFilters(rides: any[]): any[] {
+    console.log('Applying filters:', this.filters);
+    if (!this.filters) return rides;
+    return rides.filter(ride => {
+      console.log('Filtering ride:', ride);
+      return (!this.filters.petAllowed || ride.petAllowed) &&
+             (!this.filters.airConditionning || ride.airConditionning) &&
+             (!this.filters.cigaretteAllowed || ride.cigaretteAllowed) &&
+             (this.filters.minPrice === null || ride.price >= this.filters.minPrice) &&
+             (this.filters.maxPrice === null || ride.price <= this.filters.maxPrice);
+    });
+  }
+  
   calculateAge(birthDate: string): number {
     const birth = new Date(birthDate);
     const today = new Date();
@@ -71,7 +104,11 @@ export class SearchResultsComponent implements OnInit {
   }
 
   getDriverImage(): string {
-    // Since no driver images are available, return a placeholder
     return 'https://via.placeholder.com/40';
   }
+
+  testTrigger() {
+    console.log('Checkbox clicked');
+  }
+  
 }

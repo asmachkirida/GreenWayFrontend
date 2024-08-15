@@ -30,17 +30,17 @@
             <div class="filter-section">
                 <h4>Services</h4>
                 <label class="styled-checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox"  [(ngModel)]="filters.petAllowed" (change)="onFilterChange()">
                     <span>Pets Allowed</span>
                     <mat-icon>pets</mat-icon>
                 </label>
                 <label class="styled-checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" [(ngModel)]="filters.cigaretteAllowed" (change)="onFilterChange()">
                     <span>Cigarettes Allowed</span>
                     <mat-icon>smoking_rooms</mat-icon>
                 </label>
                 <label class="styled-checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" [(ngModel)]="filters.airConditionning" (change)="onFilterChange()">
                     <span>AC Available</span>
                     <mat-icon>ac_unit</mat-icon>
                 </label>

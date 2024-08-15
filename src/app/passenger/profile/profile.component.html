@@ -1,52 +1,57 @@
 <div class="profile-container">
-  <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
-    <div class="profile-form">
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
-        </mat-form-field>
+  <div class="profile-card">
+    <h1>Profile</h1>
+    <hr>
+    <h3>Edit My Profile Information</h3>
+    <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+      <div class="profile-form">
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Birth Date</mat-label>
+            <input matInput type="date" formControlName="birthDate">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phoneNumber">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+          </mat-form-field>
+        </div>
+        <div *ngIf="isEditing" class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>New Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+          </mat-form-field>
+        </div>
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!isEditing">Save</button>
+          <button mat-button type="button" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+        </div>
       </div>
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>First Name</mat-label>
-          <input matInput formControlName="firstName">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Last Name</mat-label>
-          <input matInput formControlName="lastName">
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>Birth Date</mat-label>
-          <input matInput type="date" formControlName="birthDate">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Phone Number</mat-label>
-          <input matInput formControlName="phoneNumber">
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>City</mat-label>
-          <input matInput formControlName="city">
-        </mat-form-field>
-      </div>
-      <div *ngIf="isEditing" class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>New Password</mat-label>
-          <input matInput type="password" formControlName="password">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Confirm Password</mat-label>
-          <input matInput type="password" formControlName="confirmPassword">
-        </mat-form-field>
-      </div>
-      <div class="form-actions">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!isEditing">Save</button>
-        <button mat-button type="button" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

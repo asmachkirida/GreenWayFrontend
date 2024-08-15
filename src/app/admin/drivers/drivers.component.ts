@@ -75,7 +75,10 @@ export class DriversComponent implements OnInit {
   deleteDriver(id: number) {
     if (confirm('Are you sure you want to delete this driver?')) {
       this.http.delete(`http://localhost:8080/admin/delete/${id}`).subscribe(() => {
+        console.log("done");
+
         this.loadDrivers(); // Refresh the list after deletion
+        console.log("done");
       }, error => {
         console.error('Error deleting driver:', error);
       });
