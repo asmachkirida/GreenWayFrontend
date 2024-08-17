@@ -7,10 +7,10 @@
         <h1>GREENWAY</h1>
         <p>Find your perfect ride in just a few clicks.</p>
       </div>
-      <form id="signinForm">
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
         <div class="input-group">
-          <i class="fas fa-user icon"></i>
-          <input type="text" id="username" name="username" placeholder="Username" required>
+          <i class="fas fa-envelope icon"></i>
+          <input type="email" formControlName="email" placeholder="Email" required>
         </div>
         <div class="input-group">
           <i class="fas fa-lock icon"></i>
@@ -20,7 +20,6 @@
         <button type="submit" class="signin-btn">Sign In</button>
         <p class="register-link">Don't have an account? <a href="/signup">Join as a Driver</a> or <a href="/signup">Join as a Passenger</a></p>
       </form>
-
     </div>
     <div class="signin-right">
       <div class="signin-overlay">
