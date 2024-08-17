@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  private apiUrl = 'http://localhost:8080/auth/login';
+  constructor() {}
 
-  constructor(private http: HttpClient) { }
+  private hasToken(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
 
-  login(credentials: any): Observable<any> {
-    return this.http.post(this.apiUrl, credentials);
+  updateAuthStatus(isAuthenticated: boolean): void {
+    this.isAuthenticatedSubject.next(isAuthenticated);
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    this.isAuthenticatedSubject.next(false);
   }
 }
