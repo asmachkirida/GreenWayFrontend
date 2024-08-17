@@ -1,43 +1,136 @@
-.newsletter {
-    background-color: #3a5a40;
-    color: white;
+.newsletter-section {
+    background-color: rgba(255, 255, 255, 0.8); /* Milky white background */
     padding: 50px 20px;
-    text-align: center;
-  }
-  
-  .newsletter h2 {
-    margin-bottom: 20px;
-    font-size: 2em;
-  }
-  
-  .newsletter form {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden; /* Ensure circles stay within the section */
   }
   
-  .newsletter input[type="email"] {
-    padding: 10px;
-    font-size: 1em;
-    border: none;
-    border-radius: 4px;
-    margin-right: 10px;
-    min-width: 300px;
+  .newsletter-shape {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 300px;
+    width: 900px;
+    position: relative;
+    z-index: 1; /* Ensure shape is above circles */
   }
   
-  .newsletter button {
-    padding: 10px 20px;
+  .newsletter-image {
+    width: 600px; /* Adjust size as needed */
+    margin-top: -80px;
+    height: auto;
+    border-radius: 50%;
+
+    margin-left: -50px;
+  }
+  
+  .newsletter-content {
+    text-align: center;
+    margin-right: 20px; /* Space between content and image */
+  }
+  
+  .newsletter-title {
+    font-size: 2.5em;
+    font-family: 'Merriweather', serif;
+    color: #344e41;
+    margin-bottom: 10px;
+    margin-left:210px ;
+margin-top: -20px;  
+}
+  
+  .newsletter-description {
     font-size: 1em;
+    font-family: 'Lato', sans-serif;
+    color: #3a5a40;
+    margin-bottom: 30px;
+    margin-top: 20px;
+
+  }
+  
+  .newsletter-form {
+margin-left: -150px;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 250px;
+   
+  }
+  
+  .newsletter-input {
+    padding: 15px;
+    border-radius: 25px;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    font-size: 1em;
+  }
+  
+  .newsletter-button {
+    position: absolute;
+    right: 10px;
     border: none;
-    background-color: #588157;
+    background-color: black;
     color: white;
-    border-radius: 4px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    font-size: 1.2em;
     transition: background-color 0.3s;
+    z-index: 2; /* Ensure button is above the input field */
   }
   
-  .newsletter button:hover {
+  .newsletter-button:hover {
+    background-color: #333;
+  }
+  
+  /* Green circles background */
+  .green-circles {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    z-index: 0; /* Ensure circles are behind the content */
+  }
+  
+  .circle {
+    background-color: #588157;
+    border-radius: 50%;
+    opacity: 0.2;
+    margin-bottom: 120px;
+    margin-left: -10px;
+  }
+  
+  .circle:nth-child(1) {
+    background-color: #4c3a5a;
+    width: 400px;
+
+    height: 200px;
+    opacity: 0;
+  }
+  
+
+  
+  .circle:nth-child(3) {
     background-color: #a3b18a;
+    width: 250px;
+    height: 250px;
+    opacity: 0.4;
   }
   

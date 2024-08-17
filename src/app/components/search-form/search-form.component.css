@@ -1,6 +1,6 @@
 .search-form {
   position: absolute;
-  top: 400px; /* Adjust based on where you want the form to start */
+  top: 450px; /* Adjust based on where you want the form to start */
   left: 50%;
   transform: translateX(-50%);
   width: 80%; /* Adjust based on your design needs */

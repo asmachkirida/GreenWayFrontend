@@ -8,14 +8,14 @@ import { Component } from '@angular/core';
 export class ServicesComponent {
   services = [
     {
-      icon: 'fa-car',
+      image: 'assets/ride-sharing.jpg',
       title: 'Ride Sharing',
-      description: 'Share your ride with others and reduce travel costs.',
+      description: 'Share your ride with others and reduce travel costs while minimizing your carbon footprint.',
     },
     {
-      icon: 'fa-bicycle',
+      image: 'bike.jpg',
       title: 'Group Bike Rides',
-      description: 'Join or create group bike rides in your area.',
+      description: 'Join or create group bike rides in your area for a fun and healthy way to explore.',
     },
   ];
 }

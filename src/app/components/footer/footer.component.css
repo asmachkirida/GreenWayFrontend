@@ -5,37 +5,13 @@
     text-align: center;
     position: relative;
     bottom: 0;
-    width: 100%;
+
   }
   
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .footer-section {
-    margin: 10px;
-  }
-  
-  .footer-section h4 {
-    margin-bottom: 10px;
-  }
-  
-  .footer-section a {
-    color: #dad7cd;
-    margin: 0 10px;
-    font-size: 1.2em;
-    transition: color 0.3s;
-  }
-  
-  .footer-section a:hover {
-    color: #a3b18a;
-  }
+ 
   
   .footer-bottom {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 0.9em;
   }
   
