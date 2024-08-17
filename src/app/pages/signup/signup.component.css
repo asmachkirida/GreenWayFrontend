@@ -1,154 +1,245 @@
-.signup-background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .circle1, .circle2 {
-    position: absolute;
-    border-radius: 50%;
-    background: #588157;
-    opacity: 0.6;
-    z-index: 1;
-  }
-  
-  .circle1 {
-    width: 500px;
-    height: 500px;
-    top: 5%;
-    left: 10%;
-    opacity: 0.5;
-  }
-  
-  .circle2 {
-    width: 600px;
-    height: 600px;
-    top: 40%;
-    right: 10%;
-    opacity: 0.1;
-  }
-  
-  .signup-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 2;
-    padding: 20px;
-   
-  }
-  
-  .signup-left,
-  .signup-right {
-    padding: 20px;
-    width: 500px;
-    height: 580px;
-    margin-top: -20px;
-  }
-  
-  .signup-left {
-    flex: 1;
-  }
-  
-  .signup-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-  
-  .signup-image {
-    width: 100%;
-    height: auto;
-    border-radius: 45px 0px 45px 0px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    margin-bottom: 16px;
-    font-size: 24px;
-  }
-  
-  hr {
-    margin-bottom: 24px;
-    border: none;
-    border-top: 1px solid #ddd;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .half-width {
-    width: 48%;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .styled-input {
-    margin-bottom: 8px; /* Reduce margin to make fields more compact */
-  }
-  
-  .signup-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .signin-link {
-    margin-top: 16px;
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
-  
-  .mat-form-field-wrapper {
-    padding-bottom: 2px;
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-outline {
-    border-width: 1px;
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-outline-thickness {
-    border-width: 1px;
-  }
-  
-  .mat-form-field-label {
-    font-size: 14px;
-  }
-  
-  .mat-input-element {
-    padding: 4px 0;
-    font-size: 12px; /* Reduce font size */
-    height: 25px; /* Adjust height */
-  }
-  
-  .mat-form-field-subscript-wrapper {
-    margin-top: 2px; /* Adjust the margin to make the spacing smaller */
-  }
-  
-  .mat-form-field-infix {
-    padding: 0 8px; /* Adjust the padding to make the input fields smaller */
-  }
-  
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.signin-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.green-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(88, 129, 87, 0.7), rgba(88, 129, 87, 0) 40%),
+              radial-gradient(circle at 80% 80%, rgba(52, 78, 65, 0.7), rgba(52, 78, 65, 0) 40%);
+  z-index: 0;
+  opacity: 1; /* Ensure the shapes are fully opaque */
+}
+
+.signin-container {
+  width: 1100px;
+  height: 600px;
+  display: flex;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.signin-left {
+  width: 45%;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.signin-right {
+  width: 55%;
+  background: url('/happy.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+.signin-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(58, 90, 64, 0.8); /* Green overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+}
+
+.signin-header h2 {
+  color: #3a5a40;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.signin-header h1 {
+  color: #588157;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.signin-header p {
+  color: #344e41;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group .icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #588157;
+  font-size: 1.2rem;
+}
+
+.input-group input, 
+.input-group select {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #3a5a40;
+  border-radius: 30px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #ffffff;
+  color: #344e41;
+}
+
+.input-group input:focus, 
+.input-group select:focus {
+  border-color: #588157;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #588157;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #588157;
+  border: none;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.signin-btn:hover {
+  background-color: #3a5a40;
+  transform: scale(1.05);
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #588157;
+  text-decoration: none;
+}
+
+.social-login {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.social-login p {
+  font-size: 1rem;
+  color: #344e41;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Flexbox row for two inputs per row */
+.flex-row {
+  display: flex;
+  gap: 20px; /* Space between inputs */
+  margin-bottom: 10px; /* Space below the row */
+}
+
+.flex-row .input-group {
+  flex: 1; /* Ensure both input groups take up equal space */
+  position: relative;
+}
+
+/* Gender and City Select Styling */
+.gender-city-row {
+  display: flex;
+  gap: 20px; /* Space between select inputs */
+  margin-bottom: 20px; /* Space below the row */
+}
+
+.gender-city-row .input-group {
+  flex: 1; /* Ensure both select inputs take up equal space */
+  position: relative;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 40px; /* Add space for the icon */
+  padding-left: 50px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.toggle-icon i {
+  font-size: 16px;
+  color: #333;
+}
+.already-account {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.already-account p {
+  font-size: 0.9rem;
+  color: #344e41;
+}
+
+.already-account a {
+  color: #588157;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.already-account a:hover {
+  text-decoration: underline;
+}

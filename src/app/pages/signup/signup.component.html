@@ -1,81 +1,66 @@
-<div class="signup-background">
-    <div class="circle1"></div>
-    <div class="circle2"></div>
-    <div class="signup-container">
-      <div class="signup-left">
-        <h2>SIGN UP</h2>
-        <hr>
-        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-          <div class="row">
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email" class="inputfield" type="email" required />
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>First Name</mat-label>
-              <input matInput formControlName="firstName" type="text" required />
-            </mat-form-field>
-          </div>
-  
-          <div class="row">
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Last Name</mat-label>
-              <input matInput formControlName="lastName" type="text" required />
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Birth Date</mat-label>
-              <input matInput formControlName="birthDate" [matDatepicker]="picker" required />
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-  
-          <div class="row">
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Phone Number</mat-label>
-              <input matInput formControlName="phoneNumber" type="text" required />
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Gender</mat-label>
-              <mat-select formControlName="gender" required>
-                <mat-option value="Male">Male</mat-option>
-                <mat-option value="Female">Female</mat-option>
-                <mat-option value="Other">Other</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-  
-          <div class="row">
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Role</mat-label>
-              <input matInput formControlName="role" type="text" required />
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline" class="half-width styled-input">
-              <mat-label>Password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required />
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-          </div>
-  
-          <mat-form-field appearance="outline" class="full-width styled-input">
-            <mat-label>City</mat-label>
-            <input matInput formControlName="city" type="text" required />
-          </mat-form-field>
-  
-          <button mat-raised-button color="primary" class="signup-btn">Sign Up</button>
-        </form>
-        <p class="signin-link">Already have an account? <a href="/signin">Sign in now</a></p>
+<div class="signin-background">
+  <div class="green-shapes"></div>
+  <div class="signin-container">
+    <div class="signin-left">
+      <div class="signin-header">
+        <h2>WELCOME TO</h2>
+        <h1>GREENWAY</h1>
       </div>
-      <div class="signup-right">
-        <img src="girl2.jpg" alt="Girl" class="signup-image">
+      <form id="signupForm" (ngSubmit)="onSubmit()">
+        <div class="flex-row">
+          <div class="input-group">
+            <i class="fas fa-user icon"></i>
+            <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-user icon"></i>
+            <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-calendar-alt icon"></i>
+          <input type="date" id="birthDate" formControlName="birthDate" placeholder="Birth Date" required>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-phone icon"></i>
+          <input type="text" id="phoneNumber" formControlName="phoneNumber" placeholder="Phone Number" required>
+        </div>
+
+        <div class="gender-city-row">
+          <div class="input-group">
+            <i class="fas fa-venus-mars icon"></i>
+            <select id="gender" formControlName="gender" required>
+              <option value="" disabled selected>Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-city icon"></i>
+            <input type="text" id="city" formControlName="city" placeholder="City" />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-lock icon"></i>
+          <input [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password" required>
+          <i class="fas fa-eye eye-icon" (click)="togglePasswordVisibility()"></i>
+        </div>
+        
+        <button type="submit" class="signin-btn">Sign Up</button>
+        
+        <div class="already-account">
+          <p>Already have an account? <a routerLink="/signin">Sign in</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="signin-right">
+      <div class="signin-overlay">
+        <h1>FIND YOUR RIDE</h1>
+        <p>Discover your ideal ride from our extensive options.</p>
       </div>
     </div>
   </div>
-  
+</div>
