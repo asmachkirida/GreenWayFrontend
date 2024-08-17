@@ -6,37 +6,41 @@
         <h2>WELCOME TO</h2>
         <h1>GREENWAY</h1>
       </div>
-      <form id="signupForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="flex-row">
           <div class="input-group">
             <i class="fas fa-user icon"></i>
-            <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" required>
+            <input type="text" formControlName="firstName" placeholder="First Name" required>
           </div>
           <div class="input-group">
             <i class="fas fa-user icon"></i>
-            <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" required>
+            <input type="text" formControlName="lastName" placeholder="Last Name" required>
           </div>
         </div>
 
         <div class="input-group">
           <i class="fas fa-calendar-alt icon"></i>
-          <input type="date" id="birthDate" formControlName="birthDate" placeholder="Birth Date" required>
+          <input type="date" formControlName="birthDate" placeholder="Birth Date" required>
         </div>
 
         <div class="input-group">
           <i class="fas fa-phone icon"></i>
-          <input type="text" id="phoneNumber" formControlName="phoneNumber" placeholder="Phone Number" required>
+          <input type="text" formControlName="phoneNumber" placeholder="Phone Number" required>
         </div>
-
+        <div class="input-group">
+          <i class="fas fa-envelope icon"></i>
+          <input type="email" formControlName="email" placeholder="Email" required>
+        </div>
         <div class="gender-city-row">
           <div class="input-group">
-            <i class="fas fa-venus-mars icon"></i>
-            <select id="gender" formControlName="gender" required>
-              <option value="" disabled selected>Gender</option>
+            <select formControlName="gender" required>
+              <option value="" disabled>Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
+            <i class="fa fa-venus-mars icon"></i>
           </div>
+          
           <div class="input-group">
             <i class="fas fa-city icon"></i>
             <input type="text" id="city" formControlName="city" placeholder="City" />
