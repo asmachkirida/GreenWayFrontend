@@ -17,7 +17,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms'; // Import FormsModule here
-
 // Angular Material Modules
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -55,6 +54,11 @@ import { BikeRidesComponent } from './admin/bike-rides/bike-rides.component';
 import { CarsComponent } from './admin/cars/cars.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { RidesComponent } from './driver/rides/rides.component';
+import { BikeRideDialogComponent } from './passenger/bike-ride-dialog/bike-ride-dialog.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { NewsletterComponent } from './components/newsletter/newsletter.component';
+import { ServicesComponent } from './components/services/services.component';
 
 
 
@@ -87,6 +91,11 @@ import { RidesComponent } from './driver/rides/rides.component';
     CarsComponent,
     AdminComponent,
     RidesComponent,
+    BikeRideDialogComponent,
+    FooterComponent,
+    ReviewsComponent,
+    NewsletterComponent,
+    ServicesComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,7 +124,8 @@ import { RidesComponent } from './driver/rides/rides.component';
         MatCheckboxModule,
         MatRadioModule,
         MatSliderModule,
-        FormsModule
+        FormsModule,
+        MatDialogModule
   ],
   providers: [
     provideClientHydration(),

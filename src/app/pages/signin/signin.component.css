@@ -1,146 +1,187 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
 .signin-background {
-    position: relative;
-    background-color: white;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  
-  .signin-background::before {
-    content: '';
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background-color: #3a5a40;
-    border-radius: 50%;
-    top: 10%;
-    left: 10%;
-    z-index: 1;
-    opacity: 0.5;
-  }
-  
-  .signin-background::after {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background-color: #3a5a40;
-    border-radius: 50%;
-    top: 40%;
-    right: 10%;
-    z-index: 1;
-    opacity: 0.1;
-  }
-  
-  .signin-container {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    max-width: 1100px;
-    margin-top: 50px;
-    width: 100%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
-    background: white;
-  }
-  
-  .signin-left,
-  .signin-right {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .signin-left {
-    background-color: white;
-  }
-  
-  .signin-right {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .signin-image {
-    max-width: 60%;
-    border-radius: 45px 0px 45px 0px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    color: #2d402d;
-  }
-  
-  hr {
-    width: 100%;
-    margin-bottom: 20px;
-    border: none;
-    border-top: 1px solid #3a5a40;
-  }
-  
-  .full-width {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  .styled-input .mat-form-field-wrapper {
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .styled-input .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-    border-color: #3a5a40;
-  }
-  
-  .styled-input .mat-form-field-appearance-outline .mat-form-field-outline {
-    transition: all 0.3s ease;
-  }
-  
-  .styled-input.mat-focused .mat-form-field-outline-thick {
-    border-color: #2d402d;
-  }
-  
-  .styled-input input {
-    border-radius: 8px;
-  }
-  
-  .forgot-password {
-    display: block;
-    text-align: right;
-    color: #3f4f38;
-    margin-bottom: 20px;
-    text-decoration: none;
-  }
-  
-  .signin-btn {
-    width: 100%;
-    background-color: #3a5a40;
-    color: #ffffff;
-  }
-  
-  .signin-btn:hover {
-    background-color: #2d402d;
-  }
-  
-  .register-link {
-    margin-top: 20px;
-    text-align: center;
-    color: #3f4f38;
-  }
-  
-  .register-now {
-    color: #3a5a40;
-    text-decoration: none;
-  }
-  
-  .register-now:hover {
-    text-decoration: underline;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.green-shapes {
+  position: absolute;
+  top: 0;
+
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, #588157, transparent 60%),
+              radial-gradient(circle at 80% 80%, #344e41, transparent 60%);
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.signin-container {
+
+  width: 1000px;
+  height: 500px;
+  display: flex;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.signin-left {
+  width: 45%;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.signin-right {
+  width: 55%;
+  background: url('/happy.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+.signin-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(58, 90, 64, 0.8); /* Green overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+}
+
+.signin-header h2 {
+  color: #3a5a40;
+  font-size: 1.5rem;
+  text-align: center;
+
+  margin-bottom: 10px;
+}
+
+.signin-header h1 {
+  color: #588157;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.signin-header p {
+  color: #344e41;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  text-align: center;
+
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group .icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #588157;
+  font-size: 1.2rem;
+}
+
+.input-group input {
+  width: 85%;
+  padding: 10px 10px 15px 50px;
+  border: 2px solid #3a5a40;
+  border-radius: 30px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #588157;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #588157;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #588157;
+  border: none;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.signin-btn:hover {
+  background-color: #3a5a40;
+  transform: scale(1.05);
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #588157;
+  text-decoration: none;
+}
+
+.social-login {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.social-login p {
+  font-size: 1rem;
+  color: #344e41;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+}
+.green-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(88, 129, 87, 0.7), rgba(88, 129, 87, 0) 40%),
+              radial-gradient(circle at 80% 80%, rgba(52, 78, 65, 0.7), rgba(52, 78, 65, 0) 40%);
+  z-index: 0;
+  opacity: 1; /* Ensure the shapes are fully opaque */
+}

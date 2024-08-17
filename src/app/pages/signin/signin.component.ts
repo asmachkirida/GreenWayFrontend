@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';  // Adjust the path a
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  hide = true;
+  hide = true;  // This will control the visibility of the password field
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.signinForm = this.fb.group({
@@ -20,6 +20,10 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     // Any additional initialization logic
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 
   onSubmit(): void {
