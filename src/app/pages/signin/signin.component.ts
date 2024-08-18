@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import {jwtDecode} from 'jwt-decode';
 
 @Component({
   selector: 'app-signin',
@@ -43,16 +44,28 @@ export class SigninComponent implements OnInit {
         localStorage.setItem('authToken', token);
         localStorage.setItem('userRole', role);
 
-        // Update the authentication state
-        this.authService.updateAuthStatus(true);
+        const decodedToken: any = jwtDecode(token);
+        const email = decodedToken.sub;
 
-        if (role === 'PASSENGER') {
-          this.router.navigate(['/passenger/profile']);
-        } else if (role === 'DRIVER') {
-          this.router.navigate(['/driver']);
-        } else {
-          console.error('Unknown role:', role);
-        }
+        const getUserByEmailApiUrl = `http://localhost:8080/admin/get-user-by-email?email=${email}`;
+        this.http.get<any>(getUserByEmailApiUrl).subscribe(userResponse => {
+          const userId = userResponse.ourUsers.id;
+
+          localStorage.setItem('userId', userId.toString());
+          console.log('User ID:', userId);
+
+          this.authService.updateAuthStatus(true);
+
+          if (role === 'PASSENGER') {
+            this.router.navigate(['/passenger/profile']);
+          } else if (role === 'DRIVER') {
+            this.router.navigate(['/driver']);
+          } else {
+            console.error('Unknown role:', role);
+          }
+        }, error => {
+          console.error('Failed to fetch user by email', error);
+        });
       }, error => {
         console.error('Login failed', error);
       });
