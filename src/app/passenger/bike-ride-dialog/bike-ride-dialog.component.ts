@@ -74,20 +74,25 @@ export class BikeRideDialogComponent implements OnInit, OnDestroy {
 
   createBikeRide(): void {
     if (this.bikeRideForm.valid) {
-      const rideData = {
-        ...this.bikeRideForm.value,
-        creatorId: 40  // Default creator ID since authentication isn't integrated yet
-      };
+      const creatorId = localStorage.getItem('userId');
+      if (creatorId) {
+        const rideData = {
+          ...this.bikeRideForm.value,
+          creatorId: parseInt(creatorId, 10) 
+        };
 
-      this.http.post('http://localhost:8080/bike-rides', rideData).subscribe(
-        response => {
-          console.log('Bike ride created successfully:', response);
-          this.dialogRef.close(); // Close the dialog after submission
-        },
-        error => {
-          console.error('Error creating bike ride:', error);
-        }
-      );
+        this.http.post('http://localhost:8080/bike-rides', rideData).subscribe(
+          response => {
+            console.log('Bike ride created successfully:', response);
+            this.dialogRef.close(); 
+          },
+          error => {
+            console.error('Error creating bike ride:', error);
+          }
+        );
+      } else {
+        console.error('Creator ID not found in localStorage');
+      }
     }
   }
 }
