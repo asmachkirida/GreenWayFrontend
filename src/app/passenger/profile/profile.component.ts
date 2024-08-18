@@ -100,11 +100,9 @@ export class ProfileComponent implements OnInit {
       console.log('Updated User Data:', updatedUserData);
 
       this.http.put(`http://localhost:8080/admin/update/${this.userId}`, updatedUserData).subscribe(() => {
-        alert('Profile updated successfully');
         this.isEditing = false;
         this.profileForm.disable();
       }, error => {
-        alert('Failed to update profile: ' + error.message);
         console.error('Error updating profile:', error);
       });
     } else {

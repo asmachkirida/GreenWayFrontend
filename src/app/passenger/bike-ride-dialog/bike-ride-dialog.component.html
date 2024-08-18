@@ -1,5 +1,5 @@
-<div class="bike-ride-dialog">
-    <form [formGroup]="bikeRideForm">
+  <div class="bike-ride-dialog">
+    <form [formGroup]="bikeRideForm" class="dialog-form">
       <div class="dialog-header">
         <h2>Organize Bike Ride</h2>
       </div>
@@ -32,5 +32,9 @@
         <button class="create-button" (click)="createBikeRide()">Create Ride</button>
       </div>
     </form>
+    <!-- Add the image to the right -->
+    <div class="dialog-image">
+      <img src="ride1.jpg" alt="Bike Ride" />
+    </div>
   </div>
   

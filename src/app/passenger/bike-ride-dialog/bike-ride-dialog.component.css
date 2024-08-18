@@ -96,3 +96,33 @@
     background-color: #588157;
   }
   
+  .bike-ride-dialog {
+    display: flex; /* Use Flexbox to align form and image side by side */
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px; /* Adjust max-width to accommodate the image */
+    z-index: 999;
+  }
+  
+  .dialog-form {
+    flex: 1; /* Let the form take up the remaining space */
+  }
+  
+  .dialog-image {
+    margin-left: 20px; /* Space between the form and the image */
+  }
+  
+  .dialog-image img {
+    max-width: 250px; /* Adjust the image size */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
