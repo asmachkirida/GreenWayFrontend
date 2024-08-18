@@ -1,64 +1,82 @@
 <div class="profile-container">
-  <div class="profile-content">
-    <div class="left-pane">
-      <div class="profile-card">
-        <h1>Profile</h1>
-        <hr>
-        <h3>Edit My Profile Information</h3>
-        <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
-          <div class="profile-form">
-            <div class="form-row">
-              <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email">
-              </mat-form-field>
-            </div>
-            <div class="form-row">
-              <mat-form-field appearance="fill">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName">
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName">
-              </mat-form-field>
-            </div>
-            <div class="form-row">
-              <mat-form-field appearance="fill">
-                <mat-label>Birth Date</mat-label>
-                <input matInput type="date" formControlName="birthDate">
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                <mat-label>Phone Number</mat-label>
-                <input matInput formControlName="phoneNumber">
-              </mat-form-field>
-            </div>
-            <div class="form-row">
-              <mat-form-field appearance="fill">
-                <mat-label>City</mat-label>
-                <input matInput formControlName="city">
-              </mat-form-field>
-            </div>
-            <div *ngIf="isEditing" class="form-row">
-              <mat-form-field appearance="fill">
-                <mat-label>New Password</mat-label>
-                <input matInput type="password" formControlName="password">
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                <mat-label>Confirm Password</mat-label>
-                <input matInput type="password" formControlName="confirmPassword">
-              </mat-form-field>
-            </div>
-            <div class="form-actions">
-              <button mat-raised-button color="primary" type="submit" [disabled]="!isEditing">Save</button>
-              <button mat-button type="button" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-            </div>
+  <div class="profile-card profile-info">
+    <div class="profile-header">
+      <img src="pro.png" alt="Profile Picture" class="profile-image">
+      <h1>Profile</h1>
+    </div>
+    <hr>
+    <h3>Edit My Profile Information</h3>
+    <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+      <div class="profile-form">
+        <div class="form-row">
+          <div class="input-container full-width">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" formControlName="email" placeholder="Email">
           </div>
-        </form>
+        </div>
+        <div class="form-row">
+          <div class="input-container half-width">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" formControlName="firstName" placeholder="First Name">
+          </div>
+          <div class="input-container half-width">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" formControlName="lastName" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-container half-width">
+            <i class="fas fa-calendar-alt input-icon"></i>
+            <input type="date" formControlName="birthDate">
+          </div>
+          <div class="input-container half-width">
+            <i class="fas fa-phone input-icon"></i>
+            <input type="text" formControlName="phoneNumber" placeholder="Phone Number">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-container full-width">
+            <i class="fas fa-map-marker-alt input-icon"></i>
+            <input type="text" formControlName="city" placeholder="City">
+          </div>
+        </div>
+        <div *ngIf="isEditing" class="form-row">
+          <div class="input-container half-width">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" formControlName="password" placeholder="New Password">
+          </div>
+          <div class="input-container half-width">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="save-button" [disabled]="!isEditing">Save</button>
+          <button type="button" class="edit-button" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="right-pane">
+    <div class="profile-card small-card recent-activity">
+      <h3>Recent Activity</h3>
+      <div class="activity-item">
+        <span class="activity-date">2024-08-17</span>
+        <p>Joined a ride from New York to Boston.</p>
       </div>
     </div>
-    <div class="right-pane">
-  
+
+    <div class="profile-card small-card statistics">
+      <h3>Statistics</h3>
+      <div class="stat">
+        <p class="stat-number">25</p>
+        <p class="stat-label">Total Bike Rides</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">50</p>
+        <p class="stat-label">Total Car Rides</p>
+      </div>
     </div>
   </div>
 </div>

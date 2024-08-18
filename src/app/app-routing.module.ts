@@ -18,6 +18,7 @@ import { CarRidesComponent } from './admin/car-rides/car-rides.component';
 import { BikeRidesComponent } from './admin/bike-rides/bike-rides.component';
 import { CarsComponent } from './admin/cars/cars.component';
 import { AdminComponent } from './admin/admin/admin.component';
+import { AuthGuard } from '../app/services/auth.guard'; // Adjust path as necessary
 
 const routes: Routes = [
   {
@@ -49,8 +50,8 @@ const routes: Routes = [
     ]
   },
   { path: 'hello', component: HelloComponent }, // This route does not include the common layout components
-  { path: 'signup', component: SignupComponent }, // Signup route
-  { path: 'signin', component: SigninComponent }, // Signin route
+  { path: 'signin', component: SigninComponent, canActivate: [AuthGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [AuthGuard] },
   { path: 'search-results', component: SearchResultsComponent }, // Search results route
   { path: '**', redirectTo: '/hello' } // Redirect any unknown path to hello
 ];

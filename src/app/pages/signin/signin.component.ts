@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -10,18 +11,21 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  hide = true;  // This will control the visibility of the password field
+  hide = true;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.signinForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],  // Email field with validation
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {
-    // Any additional initialization logic
-  }
+  ngOnInit(): void {}
 
   togglePasswordVisibility(): void {
     this.hide = !this.hide;
@@ -33,17 +37,17 @@ export class SigninComponent implements OnInit {
       this.http.post<any>(apiUrl, this.signinForm.value).subscribe(response => {
         console.log('Login successful', response);
 
-        // Assuming the API returns a token and user role
         const token = response.token;
-        const role = response.role; // Adjust based on your API response
+        const role = response.role;
 
-        // Save token and user role
         localStorage.setItem('authToken', token);
         localStorage.setItem('userRole', role);
 
-        // Redirect based on user role
+        // Update the authentication state
+        this.authService.updateAuthStatus(true);
+
         if (role === 'PASSENGER') {
-          this.router.navigate(['/passenger']);
+          this.router.navigate(['/passenger/profile']);
         } else if (role === 'DRIVER') {
           this.router.navigate(['/driver']);
         } else {
@@ -51,7 +55,6 @@ export class SigninComponent implements OnInit {
         }
       }, error => {
         console.error('Login failed', error);
-        // Handle login error
       });
     }
   }

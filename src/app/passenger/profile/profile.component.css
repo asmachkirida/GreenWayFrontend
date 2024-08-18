@@ -1,50 +1,46 @@
 .profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 750px 250px;
+  grid-template-rows: auto auto;
+  gap: 50px;
   padding: 20px;
   background-color: #f4f4f4;
-  min-height: 100vh;
-}
-
-.profile-content {
-  display: flex;
-  width: 100%;
-  max-width: 1200px; /* Adjust as needed */
-}
-
-.left-pane {
-  width: 60%;
-  padding-right: 20px; /* Space between panes */
-}
-
-.right-pane {
-  width: 20%;
-}
-
-.right-pane img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
+height: 500px;}
 
 .profile-card {
   background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 100%;
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+}
+
+.profile-info {
+  grid-row: span 2;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 90px;
+  height: 90px;
+  margin-right: 20px;
+  
 }
 
 .profile-card h1 {
-  margin-top: 0;
-  color: #588157; /* Darker green color */
-  text-align: center;
+  margin: 0;
+  color: #588157;
 }
 
 .profile-card h3 {
-  color: #3a5a40; /* Medium green color */
-  text-align: center;
+  color: #3a5a40;
   margin-bottom: 20px;
 }
 
@@ -60,8 +56,38 @@
   margin-bottom: 15px;
 }
 
-.profile-form mat-form-field {
-  width: 48%;
+.input-container.full-width {
+  width: 180%;
+}
+
+.input-container.half-width {
+  width: calc(50% - 10px);
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #588157;
+}
+
+input {
+  width: 80%;
+  padding: 10px 10px 10px 35px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input:focus {
+  border-color: #588157;
+  outline: none;
+  box-shadow: 0 0 8px rgba(88, 129, 87, 0.2);
 }
 
 .form-actions {
@@ -70,11 +96,273 @@
   margin-top: 20px;
 }
 
-button[mat-raised-button] {
-  background-color: #3a5a40; /* Medium green color */
+.save-button,
+.edit-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  gap: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #3a5a40;
+  color: white;
+  margin-left: -20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.save-button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.edit-button {
+  background-color: transparent;
+  color: #3a5a40;
+  border: 1px solid #3a5a40;
+  margin-right: 10px; /* Padding between buttons */
+}
+
+.edit-button:hover {
+  background-color: #588157;
   color: white;
 }
 
-button[mat-button] {
-  color: #588157; /* Darker green color */
+.small-card {
+  height: auto;
+  margin-bottom: 50px;
+}
+
+.recent-activity,
+.statistics {
+  padding: 10px;
+  margin-bottom: 50px;
+
+}
+
+.activity-item {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.activity-date {
+  color: #588157;
+  font-weight: bold;
+}
+
+.statistics .stat {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.stat-number {
+  font-size: 1.5em;
+  color: #3a5a40;
+}
+
+.stat-label {
+  color: #588157;
+}
+
+
+.profile-form .form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 10px; /* Ensure a consistent gap between half-width inputs */
+}
+
+.input-container.full-width {
+  width: 100%;
+}
+
+.input-container.half-width {
+  width: calc(50% - 5px); /* Ensures the two half-width inputs fit perfectly with the gap */
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #588157;
+}
+
+input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input:focus {
+  border-color: #588157;
+  outline: none;
+  box-shadow: 0 0 8px rgba(88, 129, 87, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  background-color: #3a5a40; /* Medium green color */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px; /* Add spacing between Save and Edit buttons */
+}
+
+button:hover {
+  background-color: #588157; /* Darker green color */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.profile-form {
+  width: 100%;
+  max-width: 730px; /* Ensure this matches the desired width of the input container */
+  margin: 0 auto;
+}
+
+.profile-form .form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 10px; /* Gap between half-width inputs */
+}
+
+.input-container {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.input-container.full-width {
+  width: 100%;
+}
+
+.input-container.half-width {
+  width: calc(50% - 5px); /* Ensure the two half-width inputs fit perfectly with the gap */
+}
+
+input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box; /* Ensure padding/borders are included in width */
+}
+
+input:focus {
+  border-color: #588157;
+  outline: none;
+  box-shadow: 0 0 8px rgba(88, 129, 87, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  background-color: #3a5a40; /* Medium green color */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px; /* Space between Save and Edit buttons */
+}
+
+button:hover {
+  background-color: #588157; /* Darker green color */
+}
+
+.right-pane .card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px; /* Space between the cards */
+}
+
+.right-pane .card:last-child {
+  margin-bottom: 0; /* Remove margin from the last card */
+}
+.small-card {
+  width: 250px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px; 
+}
+
+.statistics {
+  margin-top: 0; 
+}
+
+.recent-activity {
+  margin-bottom: 20px; /* Space below this card */
+}
+
+.statistics {
+  margin-top: 20px; /* Space above this card */
+}
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Adjusts space between the left and right panes */
+}
+
+.right-pane {
+  display: flex;
+  flex-direction: column;
+  gap: -100px; /* Adds space between the Recent Activity and Statistics cards */
+}
+
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.small-card {
+  width: 250px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
 }

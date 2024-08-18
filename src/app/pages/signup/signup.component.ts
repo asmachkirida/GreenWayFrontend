@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 declare var google: any;
 
 interface RegisterResponse {
-  token: string; // Adjust based on your actual response structure
+  token: string;
 }
 
 @Component({
@@ -17,9 +18,14 @@ interface RegisterResponse {
 export class SignupComponent implements OnInit, OnDestroy {
   signupForm: FormGroup;
   autocompleteCity: any;
-  hide: boolean = true; // Added hide property
+  hide: boolean = true;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
@@ -27,7 +33,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       birthDate: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       gender: ['', Validators.required],
-      role: ['PASSENGER', Validators.required], // Default role set to 'PASSENGER'
+      role: ['PASSENGER', Validators.required],
       password: ['', Validators.required],
       city: ['', Validators.required]
     });
@@ -61,7 +67,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   togglePasswordVisibility(): void {
-    this.hide = !this.hide; // Toggle hide value
+    this.hide = !this.hide;
   }
 
   onSubmit(): void {
@@ -71,29 +77,20 @@ export class SignupComponent implements OnInit, OnDestroy {
 
       this.http.post<RegisterResponse>('http://localhost:8080/auth/register-passenger', {
         ...formData,
-        membership: 'Normal' // Default membership
+        membership: 'Normal'
       }).subscribe(
         response => {
           console.log('Registration successful:', response);
           
-          // Save the token to local storage or a service
-          if (response.token) {
-            localStorage.setItem('authToken', response.token);
-          }
+          localStorage.setItem('authToken', response.token);
 
-          // Navigate to the profile page
-          this.router.navigate(['/passenger']); // Adjust path as needed
+          // Update the authentication state
+          this.authService.updateAuthStatus(true);
+
+          this.router.navigate(['/passenger']);
         },
         error => {
           console.error('Registration error:', error);
-          // Handle different error scenarios
-          if (error.status === 401) {
-            console.error('Unauthorized');
-          } else if (error.status === 404) {
-            console.error('Not Found');
-          } else {
-            console.error('Error:', error.message);
-          }
         }
       );
     } else {
