@@ -436,3 +436,30 @@ hr {
     margin: 0;
   }
   
+
+
+
+
+
+  .book-now-button {
+    background-color: #3a5a40;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.book-now-button:hover {
+    background-color: #588157;
+}
+
+
+
+
+
+
+
+
+
+  

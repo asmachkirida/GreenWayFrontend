@@ -22,19 +22,18 @@ export class SearchResultsComponent implements OnInit {
     maxPrice: null
   };
   allRides: any[] = [];
+  showDriverDetails: number | null = null;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log('Received search parameters:', params);
       const searchParams = {
         startLocation: params['depart'],
         endLocation: params['destination'],
         nbrPassengers: params['passengers'],
         date: params['date']
       };
-      console.log('Transformed search parameters:', searchParams);
       this.fetchRideData(searchParams);
     });
   }
@@ -66,7 +65,6 @@ export class SearchResultsComponent implements OnInit {
       data => {
         this.allRides = data; // Save all fetched rides before filtering
         this.rides = this.applyFilters(this.allRides); // Apply filters after fetching data
-        console.log('Filtered data:', this.rides);
       },
       error => {
         console.error('Error fetching rides', error);
@@ -75,15 +73,12 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onFilterChange() {
-    console.log('Filter changed:', this.filters);
     this.rides = this.applyFilters(this.allRides);
   }
-  
+
   applyFilters(rides: any[]): any[] {
-    console.log('Applying filters:', this.filters);
     if (!this.filters) return rides;
     return rides.filter(ride => {
-      console.log('Filtering ride:', ride);
       return (!this.filters.petAllowed || ride.petAllowed) &&
              (!this.filters.airConditionning || ride.airConditionning) &&
              (!this.filters.cigaretteAllowed || ride.cigaretteAllowed) &&
@@ -91,7 +86,7 @@ export class SearchResultsComponent implements OnInit {
              (this.filters.maxPrice === null || ride.price <= this.filters.maxPrice);
     });
   }
-  
+
   calculateAge(birthDate: string): number {
     const birth = new Date(birthDate);
     const today = new Date();
@@ -103,12 +98,23 @@ export class SearchResultsComponent implements OnInit {
     return age;
   }
 
-  getDriverImage(): string {
-    return 'https://via.placeholder.com/40';
+  toggleDriverDetails(rideId: number) {
+    this.showDriverDetails = this.showDriverDetails === rideId ? null : rideId;
   }
 
-  testTrigger() {
-    console.log('Checkbox clicked');
+  getStarsArray(rating: number): number[] {
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 >= 0.5 ? 1 : 0;
+    return [...Array(fullStars).fill(1), ...Array(halfStars).fill(0.5)];
   }
-  
+
+  bookNow(ride: any) {
+    // Implement your booking logic here
+    console.log('Booking ride:', ride);
+  }
+
+  getDriverImage(): string {
+    // Replace with actual logic to fetch driver's image URL
+    return 'https://via.placeholder.com/40';
+  }
 }
