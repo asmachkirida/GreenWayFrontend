@@ -102,11 +102,35 @@ export class SearchResultsComponent implements OnInit {
     this.showDriverDetails = this.showDriverDetails === rideId ? null : rideId;
   }
 
-  getStarsArray(rating: number): number[] {
+  getStarsArray(rating: number): string[] {
     const fullStars = Math.floor(rating);
-    const halfStars = rating % 1 >= 0.5 ? 1 : 0;
-    return [...Array(fullStars).fill(1), ...Array(halfStars).fill(0.5)];
+    const decimal = rating % 1;
+    let halfStar = 0;
+  
+    if (decimal >= 0.5) {
+      halfStar = 1;
+    }
+  
+    const emptyStars = 5 - fullStars - halfStar;
+  
+    const starsArray = [
+      ...Array(fullStars).fill('full'),
+      ...Array(halfStar).fill('half'),
+      ...Array(emptyStars).fill('empty')
+    ];
+  
+    console.log('Generated Stars Array:', starsArray);
+  
+    return starsArray;
   }
+  
+  
+  
+  
+  
+  
+
+  
 
   bookNow(ride: any) {
     // Implement your booking logic here

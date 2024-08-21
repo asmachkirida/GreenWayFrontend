@@ -59,6 +59,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { NewsletterComponent } from './components/newsletter/newsletter.component';
 import { ServicesComponent } from './components/services/services.component';
+import { BookRideModalComponent } from './book-ride-modal/book-ride-modal.component';
+
 
 
 
@@ -96,6 +98,7 @@ import { ServicesComponent } from './components/services/services.component';
     ReviewsComponent,
     NewsletterComponent,
     ServicesComponent,
+    BookRideModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -112,26 +112,17 @@
                   <div class="driver-header">
                     <span class="driver-name">
                       {{ ride.driver.firstName }} {{ ride.driver.lastName }}
-                      <i class="gender-icon" [ngClass]="{'fa fa-male': ride.driver.gender === 'Male', 'fa fa-female': ride.driver.gender === 'Female'}"></i>
+                     
+                    </span>
+                    <span class="age-info"> 
+                      {{ ride.driver.age || 'N/A' }} years old
                     </span>
                     <span class="separator"> | </span>
                     <span class="driver-bio">{{ ride.driver.bio || 'No bio available' }}</span>
                   </div>
                   <div class="driver-rating">
-                    <ng-container *ngFor="let star of getStarsArray(ride.driver.rating)">
-                      <i class="fa fa-star" [ngClass]="{'filled': star === 1, 'half-filled': star === 0.7}"></i>
-                    </ng-container>
+                    <p>{{ ride.driver.rating }} <i class="fas fa-star star-icon"></i></p>
                   </div>
-                  <div class="driver-age">Age: {{ ride.driver.age || 'N/A' }}</div>
                 </div>
               </div>
               
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-    
-        
-</div>
