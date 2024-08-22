@@ -82,7 +82,8 @@
             <div class="result-header">
               <div class="time">{{ ride.startTime }} - {{ ride.endTime }} <span>({{ ride.duration }}h)</span></div>
    <!-- Removed price and added button here -->
-   <button class="book-now-button">Book Now</button>            </div>
+   <button class="book-now-button" (click)="bookNow(ride)">Book Now</button>
+  </div>
             <div class="result-body">
               <div class="route">{{ ride.startLocation }} &rarr; {{ ride.endLocation }}</div>
               <div class="date">{{ ride.date | date:'fullDate' }}</div>

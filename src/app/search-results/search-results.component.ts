@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { BookRideModalComponent } from '../book-ride-modal/book-ride-modal.component';
+declare var google: any;
+
 
 @Component({
   selector: 'app-search-results',
@@ -11,7 +15,6 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class SearchResultsComponent implements OnInit {
   apiUrl = 'http://localhost:8080/rides/search';
-  filterUrl = 'http://localhost:8080/rides/filter';
   carApiUrl = 'http://localhost:8080/driver/cars/';
   driverApiUrl = 'http://localhost:8080/admin/get-user/';
   rides: any[] = [];
@@ -24,7 +27,7 @@ export class SearchResultsComponent implements OnInit {
   allRides: any[] = [];
   showDriverDetails: number | null = null;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -119,26 +122,45 @@ export class SearchResultsComponent implements OnInit {
       ...Array(emptyStars).fill('empty')
     ];
   
-    console.log('Generated Stars Array:', starsArray);
-  
     return starsArray;
   }
-  
-  
-  
-  
-  
-  
-
-  
-
-  bookNow(ride: any) {
-    // Implement your booking logic here
-    console.log('Booking ride:', ride);
-  }
-
   getDriverImage(): string {
-    // Replace with actual logic to fetch driver's image URL
     return 'https://via.placeholder.com/40';
   }
+
+  bookNow(ride: any) {
+    this.calculateDistance(ride.startLocation, ride.endLocation, (distance: string, duration: string) => {
+      this.dialog.open(BookRideModalComponent, {
+        data: {
+          startLocation: ride.startLocation,
+          endLocation: ride.endLocation,
+          distance,
+          duration
+        }
+      });
+    });
+  }
+  
+  calculateDistance(origin: string, destination: string, callback: (distance: string, duration: string) => void) {
+    const distanceService = new google.maps.DistanceMatrixService();
+  
+    const request = {
+      origins: [origin],
+      destinations: [destination],
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+  
+    distanceService.getDistanceMatrix(request, (response: any, status: any) => {
+      if (status === google.maps.DistanceMatrixStatus.OK) {
+        const element = response.rows[0].elements[0];
+        const distance = element.distance.text;
+        const duration = element.duration.text;
+        callback(distance, duration);
+      } else {
+        console.error('Error:', status);
+        callback('N/A', 'N/A');
+      }
+    });
+  }
+  
 }
