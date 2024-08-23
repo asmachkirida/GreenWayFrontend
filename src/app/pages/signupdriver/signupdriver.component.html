@@ -7,7 +7,7 @@
           <h1>GREENWAY</h1>
         </div>
         <form [formGroup]="signupdriverForm" (ngSubmit)="onSubmit()" >
-          <div class="flex-row">
+          <div class="flex-row" id="hhh">
             <div class="input-group">
               <i class="fas fa-user icon"></i>
               <input type="text" formControlName="firstName" placeholder="First Name" required>
@@ -18,7 +18,7 @@
             </div>
           </div>
   
-          <div class="input-group">
+          <div class="input-group" id="h">
             <i class="fas fa-calendar-alt icon"></i>
             <input type="date" formControlName="birthDate" placeholder="Birth Date" required>
           </div>
@@ -26,6 +26,14 @@
           <div class="input-group">
             <i class="fas fa-phone icon"></i>
             <input type="text" formControlName="phoneNumber" placeholder="Phone Number" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-user icon"></i>
+            <input type="text" formControlName="licenseNumber" placeholder="License Number" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-user icon"></i>
+            <input type="text" formControlName="bio" placeholder="Bio" required>
           </div>
           <div class="input-group">
             <i class="fas fa-envelope icon"></i>
@@ -46,26 +54,16 @@
               <input type="text" id="city" formControlName="city" placeholder="City" />
             </div>
           </div>
-          <div class="flex-row">
-            <div class="input-group">
-              <i class="fas fa-user icon"></i>
-              <input type="text" formControlName="bio" placeholder="Bio" required>
-            </div>
-            <div class="input-group">
-              <i class="fas fa-user icon"></i>
-              <input type="text" formControlName="licenseNumber" placeholder="License Number" required>
-            </div>
-          </div>
-  
-          <div class="input-group">
+    
+          <div class="input-group" id="hh">
             <i class="fas fa-lock icon"></i>
-            <input [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password" required>
+            <input [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password" required >
             <i class="fas fa-eye eye-icon" (click)="togglePasswordVisibility()"></i>
           </div>
           
           <button type="submit" class="signin-btn">Sign Up</button>
           
-          <div class="already-account">
+          <div class="already-account" id="a">
             <p>Already have an account? <a routerLink="/signin">Sign in</a></p>
           </div>
         </form>
