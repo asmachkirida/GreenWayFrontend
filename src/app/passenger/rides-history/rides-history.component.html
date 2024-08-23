@@ -2,14 +2,21 @@
     <h2>Rides History</h2>
     <hr />
     <div *ngFor="let ride of rides" class="ride-card">
+      <div class="ride-info">
+        <div class="ride-info-item">
+          <i class="fa fa-car"></i>
+          <span class="ride-info-text">{{ ride.startLocation }}</span>
+        </div>
+        <i class="fa fa-arrow-right"></i>
+        <div class="ride-info-item">
+          <i class="fa fa-car"></i>
+          <span class="ride-info-text">{{ ride.endLocation }}</span>
+        </div>
+      </div>
       <div class="ride-details">
-        <p><strong>From:</strong> {{ ride.startLocation }}</p>
-        <p><strong>To:</strong> {{ ride.endLocation }}</p>
-        <p><strong>Date:</strong> {{ ride.date | date: 'fullDate' }}</p>
-        <p><strong>Time:</strong> {{ ride.startTime }} - {{ ride.endTime }}</p>
-        <p><strong>Price:</strong> ${{ ride.price }}</p>
-        <p><strong>Passengers:</strong> {{ ride.nbrPassengers }}</p>
-        <p><strong>Status:</strong> {{ ride.status }}</p>
+        <p><i class="fa fa-calendar"></i> {{ ride.date | date: 'shortDate' }}</p>
+        <p><i class="fa fa-clock"></i> {{ ride.startTime }}</p>
+        <p><i class="fa fa-tachometer-alt"></i> Status: {{ ride.status }}</p>
       </div>
       <div class="ride-actions">
         <button (click)="openAddReviewPopup(ride.id)" class="action-button">
