@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -27,7 +26,7 @@ import { HelloComponent } from './hello/hello.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
-import { SignupdriverComponent } from './components/signupdriver/signupdriver.component';
+import { SignupdriverComponent } from './pages/signupdriver/signupdriver.component';
 
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -65,6 +64,7 @@ import { DriverComponent } from './driver/driver/driver.component';
 import { AddRideComponent } from './driver/add-ride/add-ride.component';
 import { DriverprofileComponent } from './driver/driverprofile/driverprofile.component';
 
+import { ReactiveFormsModule } from '@angular/forms';  // Import this module
 
 
 
@@ -105,6 +105,7 @@ import { DriverprofileComponent } from './driver/driverprofile/driverprofile.com
     DriverComponent,
     AddRideComponent,
     DriverprofileComponent,
+    SignupdriverComponent
   ],
   imports: [
     BrowserModule,

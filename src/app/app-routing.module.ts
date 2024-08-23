@@ -4,6 +4,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HelloComponent } from './hello/hello.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { SignupdriverComponent } from './pages/signupdriver/signupdriver.component';
 import { PassengerComponent } from './passenger/passenger/passenger.component';
 import { ProfileComponent } from './passenger/profile/profile.component';
 import { RidesHistoryComponent } from './passenger/rides-history/rides-history.component';
@@ -67,6 +68,7 @@ const routes: Routes = [
   },
   { path: 'hello', component: HelloComponent }, // This route does not include the common layout components
   { path: 'signin', component: SigninComponent, canActivate: [AuthGuard] },
+  { path: 'signupdriver', component: SignupdriverComponent },
   { path: 'signup', component: SignupComponent, canActivate: [AuthGuard] },
   { path: 'search-results', component: SearchResultsComponent }, // Search results route
   { path: '**', redirectTo: '/hello' } // Redirect any unknown path to hello

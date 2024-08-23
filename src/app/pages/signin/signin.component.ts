@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit {
           if (role === 'PASSENGER') {
             this.router.navigate(['/passenger/profile']);
           } else if (role === 'DRIVER') {
-            this.router.navigate(['/driver']);
+            this.router.navigate(['/driver/profile']);
           } else {
             console.error('Unknown role:', role);
           }
