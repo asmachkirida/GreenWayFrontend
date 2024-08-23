@@ -93,7 +93,7 @@ export class DriverprofileComponent implements OnInit {
     if (this.userId && this.profileForm.valid && this.profileForm.get('password')?.value === this.profileForm.get('confirmPassword')?.value) {
       const updatedUserData = {
         ...this.profileForm.value,
-        role: 'PASSENGER',
+        role: 'DRIVER',
         birthDate: new Date(this.profileForm.get('birthDate')?.value).toISOString()
       };
 

@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
       map(isAuthenticated => {
         console.log('Is Authenticated in Guard:', isAuthenticated);
         if (isAuthenticated) {
-          this.router.navigate(['/passenger']); // Or your desired route
+          this.router.navigate(['/']); // Or your desired route
           return false;
         } else {
           return true;

@@ -74,23 +74,23 @@ export class SignupdriverComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    console.log("fffffffffff");
+    console.log("Form data before submit:", this.signupdriverForm.value);
     if (this.signupdriverForm.valid) {
       const formData = this.signupdriverForm.value;
       console.log('Form Submitted:', formData);
-
+  
       this.http.post<RegisterResponse>('http://localhost:8080/auth/register-driver', {
         ...formData,
         rating: 0
       }).subscribe(
         response => {
-          console.log('Registration successful:', response);
+          console.log('Driver Registration successful:', response);
           
           localStorage.setItem('authToken', response.token);
-
+  
           // Update the authentication state
           this.authService.updateAuthStatus(true);
-
+  
           this.router.navigate(['/driver/profile']);
         },
         error => {
@@ -101,4 +101,5 @@ export class SignupdriverComponent implements OnInit, OnDestroy {
       console.log('Form is invalid');
     }
   }
+  
 }

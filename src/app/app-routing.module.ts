@@ -68,7 +68,7 @@ const routes: Routes = [
   },
   { path: 'hello', component: HelloComponent }, // This route does not include the common layout components
   { path: 'signin', component: SigninComponent, canActivate: [AuthGuard] },
-  { path: 'signupdriver', component: SignupdriverComponent },
+  { path: 'signupdriver', component: SignupdriverComponent,canActivate: [AuthGuard]  },
   { path: 'signup', component: SignupComponent, canActivate: [AuthGuard] },
   { path: 'search-results', component: SearchResultsComponent }, // Search results route
   { path: '**', redirectTo: '/hello' } // Redirect any unknown path to hello
