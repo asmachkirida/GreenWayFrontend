@@ -135,7 +135,9 @@ export class SearchResultsComponent implements OnInit {
           startLocation: ride.startLocation,
           endLocation: ride.endLocation,
           distance,
-          duration
+          duration,
+          rideId: ride.id // Pass the ride ID here
+
         }
       });
     });
