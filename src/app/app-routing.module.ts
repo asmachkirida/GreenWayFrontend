@@ -20,6 +20,13 @@ import { CarsComponent } from './admin/cars/cars.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { AuthGuard } from '../app/services/auth.guard'; // Adjust path as necessary
 
+
+// Driver components
+import { DriverComponent } from './driver/driver/driver.component';
+import { ProfileComponent as DriverProfileComponent } from './driver/profile/profile.component';
+import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/rides-history/rides-history.component';
+import { AddRideComponent } from './driver/add-ride/add-ride.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -35,6 +42,15 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'rides-history', component: RidesHistoryComponent },
       { path: 'bikerides', component: BikeridesComponent },
+    ]
+  },
+  {
+    path: 'driver',
+    component: DriverComponent,
+    children: [
+      { path: 'profile', component: DriverProfileComponent },
+      { path: 'rides-history', component: DriverRidesHistoryComponent },
+      { path: 'add-ride', component: AddRideComponent },
     ]
   },
   {

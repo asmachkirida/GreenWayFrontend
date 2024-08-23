@@ -53,13 +53,14 @@ import { CarRidesComponent } from './admin/car-rides/car-rides.component';
 import { BikeRidesComponent } from './admin/bike-rides/bike-rides.component';
 import { CarsComponent } from './admin/cars/cars.component';
 import { AdminComponent } from './admin/admin/admin.component';
-import { RidesComponent } from './driver/rides/rides.component';
 import { BikeRideDialogComponent } from './passenger/bike-ride-dialog/bike-ride-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { NewsletterComponent } from './components/newsletter/newsletter.component';
 import { ServicesComponent } from './components/services/services.component';
 import { BookRideModalComponent } from './book-ride-modal/book-ride-modal.component';
+import { DriverComponent } from './driver/driver/driver.component';
+import { AddRideComponent } from './driver/add-ride/add-ride.component';
 
 
 
@@ -92,13 +93,14 @@ import { BookRideModalComponent } from './book-ride-modal/book-ride-modal.compon
     BikeRidesComponent,
     CarsComponent,
     AdminComponent,
-    RidesComponent,
     BikeRideDialogComponent,
     FooterComponent,
     ReviewsComponent,
     NewsletterComponent,
     ServicesComponent,
     BookRideModalComponent,
+    DriverComponent,
+    AddRideComponent,
   ],
   imports: [
     BrowserModule,
