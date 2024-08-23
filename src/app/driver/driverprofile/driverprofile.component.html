@@ -1,12 +1,12 @@
 <div class="profile-container">
     <div class="profile-card profile-info">
       <div class="profile-header">
-        <img src="driver.png" alt="Profile Picture" class="profile-image">
+        <img src="pro.png" alt="Profile Picture" class="profile-image">
         <h1>Driver Profile</h1>
       </div>
       <hr>
       <h3>Edit My Profile Information</h3>
-      <form  >
+      <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
         <div class="profile-form">
           <div class="form-row">
             <div class="input-container full-width">

@@ -23,7 +23,7 @@ import { AuthGuard } from '../app/services/auth.guard'; // Adjust path as necess
 
 // Driver components
 import { DriverComponent } from './driver/driver/driver.component';
-import { ProfileComponent as DriverProfileComponent } from './driver/profile/profile.component';
+import { DriverprofileComponent } from './driver/driverprofile/driverprofile.component';
 import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/rides-history/rides-history.component';
 import { AddRideComponent } from './driver/add-ride/add-ride.component';
 
@@ -48,7 +48,7 @@ const routes: Routes = [
     path: 'driver',
     component: DriverComponent,
     children: [
-      { path: 'profile', component: DriverProfileComponent },
+      { path: 'profile', component: DriverprofileComponent },
       { path: 'rides-history', component: DriverRidesHistoryComponent },
       { path: 'add-ride', component: AddRideComponent },
     ]

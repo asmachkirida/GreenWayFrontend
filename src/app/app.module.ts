@@ -63,6 +63,7 @@ import { ServicesComponent } from './components/services/services.component';
 import { BookRideModalComponent } from './book-ride-modal/book-ride-modal.component';
 import { DriverComponent } from './driver/driver/driver.component';
 import { AddRideComponent } from './driver/add-ride/add-ride.component';
+import { DriverprofileComponent } from './driver/driverprofile/driverprofile.component';
 
 
 
@@ -103,6 +104,7 @@ import { AddRideComponent } from './driver/add-ride/add-ride.component';
     BookRideModalComponent,
     DriverComponent,
     AddRideComponent,
+    DriverprofileComponent,
   ],
   imports: [
     BrowserModule,
