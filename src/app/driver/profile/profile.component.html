@@ -1,1 +1,83 @@
-<p>profile works!</p>
+<div class="profile-container">
+    <div class="profile-card profile-info">
+      <div class="profile-header">
+        <img src="driver.png" alt="Profile Picture" class="profile-image">
+        <h1>Driver Profile</h1>
+      </div>
+      <hr>
+      <h3>Edit My Profile Information</h3>
+      <form  >
+        <div class="profile-form">
+          <div class="form-row">
+            <div class="input-container full-width">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" formControlName="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="input-container half-width">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" formControlName="firstName" placeholder="First Name">
+            </div>
+            <div class="input-container half-width">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" formControlName="lastName" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="input-container half-width">
+              <i class="fas fa-calendar-alt input-icon"></i>
+              <input type="date" formControlName="birthDate">
+            </div>
+            <div class="input-container half-width">
+              <i class="fas fa-phone input-icon"></i>
+              <input type="text" formControlName="phoneNumber" placeholder="Phone Number">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="input-container full-width">
+              <i class="fas fa-map-marker-alt input-icon"></i>
+              <input type="text" formControlName="city" placeholder="City">
+            </div>
+          </div>
+          <div *ngIf="isEditing" class="form-row">
+            <div class="input-container half-width">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" formControlName="password" placeholder="New Password">
+            </div>
+            <div class="input-container half-width">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="save-button" [disabled]="!isEditing">Save</button>
+            <button type="button" class="edit-button" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <div class="right-pane">
+      <div class="profile-card small-card recent-activity">
+        <h3>Recent Activity</h3>
+        <div class="activity-item">
+          <span class="activity-date">2024-08-17</span>
+          <p>Completed a ride from New York to Boston.</p>
+        </div>
+      </div>
+  
+      <div class="profile-card small-card statistics">
+        <h3>Statistics</h3>
+        <div class="stat">
+          <p class="stat-number">25</p>
+          <p class="stat-label">Total Rides</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">4.7</p>
+          <p class="stat-label">Average Rating</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

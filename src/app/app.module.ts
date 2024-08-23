@@ -17,6 +17,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms'; // Import FormsModule here
+import { CommonModule } from '@angular/common';  // Import CommonModule
+
 // Angular Material Modules
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -130,7 +132,9 @@ import { AddRideComponent } from './driver/add-ride/add-ride.component';
         MatRadioModule,
         MatSliderModule,
         FormsModule,
-        MatDialogModule
+        MatDialogModule,
+        CommonModule  // Add CommonModule here
+
   ],
   providers: [
     provideClientHydration(),
