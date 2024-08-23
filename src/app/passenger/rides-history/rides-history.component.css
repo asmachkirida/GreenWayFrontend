@@ -17,7 +17,7 @@
     height: 100%;
     background: url('/world2.jpg') no-repeat center center;
     background-size: cover;
-    opacity: 0.7; /* Adjusted opacity of the background image */
+    opacity: 0.1; /* Adjusted opacity of the background image */
     background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better readability */
     z-index: -1;
   }
@@ -43,6 +43,12 @@
     position: relative;
     overflow: hidden;
     /* Background image and opacity are handled by the parent container */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .ride-card:hover {
+    transform: translateY(-3px); /* Moves the card up */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
   }
   
   .ride-info {
@@ -91,7 +97,7 @@
   .ride-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: -10px; /* Move buttons up */
+    margin-top: -15px; /* Move buttons up */
   }
   
   .action-button {
