@@ -73,12 +73,24 @@ export class CarComponent implements OnInit {
   }
 
   addCar(): void {
+    this.newCar.driverId = this.driverId;
+    if (!this.newCar.driverId) {
+      console.error('Driver ID is required');
+      return;
+    }
+  
     this.http.post('http://localhost:8080/driver/cars', this.newCar)
-      .subscribe(() => {
-        this.fetchCars();
-        this.closeModal();
+      .subscribe({
+        next: () => {
+          this.fetchCars();
+          this.closeModal();
+        },
+        error: (err) => {
+          console.error('Error adding car', err);
+        }
       });
   }
+  
 
   editCar(car: any): void {
     // Handle car editing logic
