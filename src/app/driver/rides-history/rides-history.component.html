@@ -1,1 +1,98 @@
-<p>rides-history works!</p>
+<!-- rides-history.component.html -->
+
+<div class="rides-history-container">
+    <h2>My Rides</h2>
+    <h3>Display my rides and add new ones</h3>
+    <hr>
+  
+    <div class="add-ride-container">
+      <button class="add-ride-btn" (click)="openAddRideModal()">
+        <i class="fa fa-plus"></i> Add Ride
+      </button>
+    </div>
+  
+    <div class="rides-table-container">
+      <table class="ride-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ride of pagedRides">
+            <td>{{ ride.id }}</td>
+            <td>{{ ride.startLocation }}</td>
+            <td>{{ ride.endLocation }}</td>
+            <td>{{ ride.date | date }}</td>
+            <td>{{ ride.price | currency }}</td>
+            <td>
+              <button class="action-btn edit-btn" (click)="openEditRideModal(ride)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="action-btn delete-btn" (click)="deleteRide(ride.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="pagination">
+      <button class="pagination-btn" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  
+    <!-- Modal for adding a new ride -->
+    <div class="modal" *ngIf="showAddRideModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeAddRideModal()">&times;</span>
+        <h2>Add New Ride</h2>
+        <form (ngSubmit)="addRide()">
+          <label for="startLocation">Start Location:</label>
+          <input id="startLocation" [(ngModel)]="newRide.startLocation" name="startLocation" required>
+  
+          <label for="endLocation">End Location:</label>
+          <input id="endLocation" [(ngModel)]="newRide.endLocation" name="endLocation" required>
+  
+          <label for="date">Date:</label>
+          <input id="date" [(ngModel)]="newRide.date" name="date" type="date" required>
+  
+          <label for="price">Price:</label>
+          <input id="price" [(ngModel)]="newRide.price" name="price" type="number" required>
+  
+          <button type="submit">Add Ride</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Modal for editing a ride -->
+    <div class="modal" *ngIf="showEditRideModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeEditRideModal()">&times;</span>
+        <h2>Edit Ride</h2>
+        <form (ngSubmit)="updateRide()">
+          <label for="edit-startLocation">Start Location:</label>
+          <input id="edit-startLocation" [(ngModel)]="currentRide.startLocation" name="startLocation" required>
+  
+          <label for="edit-endLocation">End Location:</label>
+          <input id="edit-endLocation" [(ngModel)]="currentRide.endLocation" name="endLocation" required>
+  
+          <label for="edit-date">Date:</label>
+          <input id="edit-date" [(ngModel)]="currentRide.date" name="date" type="date" required>
+  
+          <label for="edit-price">Price:</label>
+          <input id="edit-price" [(ngModel)]="currentRide.price" name="price" type="number" required>
+  
+          <button type="submit">Update Ride</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
