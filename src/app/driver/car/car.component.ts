@@ -9,8 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class CarComponent implements OnInit {
   cars: any[] = [];
   newCar: any = {};
+  currentCar: any = {};
   showModal: boolean = false;
-  driverId: number = 19; // Static driver ID for now
+  showEditCarModal: boolean = false;
+  driverId: number | null = null;
   currentPage: number = 1;
   itemsPerPage: number = 6;
   totalItems: number = 0;
@@ -18,10 +20,22 @@ export class CarComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.fetchCars();
+    this.driverId = this.getDriverIdFromLocalStorage(); 
+    if (this.driverId !== null) {
+      this.fetchCars();
+    } else {
+      console.error('Driver ID is not set in local storage.');
+    }
+  }
+
+  getDriverIdFromLocalStorage(): number | null {
+    const driverId = localStorage.getItem('userId');
+    return driverId ? parseInt(driverId, 10) : null;
   }
 
   fetchCars(): void {
+    if (this.driverId === null) return;
+
     this.http.get<any[]>(`http://localhost:8080/driver/cars/driver/${this.driverId}`)
       .subscribe(data => {
         this.totalItems = data.length;
@@ -30,6 +44,8 @@ export class CarComponent implements OnInit {
   }
 
   updatePage(): void {
+    if (this.driverId === null) return;
+
     this.http.get<any[]>(`http://localhost:8080/driver/cars/driver/${this.driverId}`)
       .subscribe(data => {
         const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -73,12 +89,13 @@ export class CarComponent implements OnInit {
   }
 
   addCar(): void {
-    this.newCar.driverId = this.driverId;
-    if (!this.newCar.driverId) {
-      console.error('Driver ID is required');
+    if (this.driverId === null) {
+      console.error('Driver ID is not available.');
       return;
     }
-  
+
+    this.newCar.driverId = this.driverId;
+
     this.http.post('http://localhost:8080/driver/cars', this.newCar)
       .subscribe({
         next: () => {
@@ -90,10 +107,37 @@ export class CarComponent implements OnInit {
         }
       });
   }
-  
 
-  editCar(car: any): void {
-    // Handle car editing logic
+  openEditCarModal(car: any): void {
+    if (!car || !car.id) {
+      console.error('Invalid car data:', car);
+      return;
+    }
+    this.currentCar = { ...car }; // Copy car data
+    this.showEditCarModal = true;
+  }
+
+  closeEditCarModal(): void {
+    this.showEditCarModal = false;
+    this.currentCar = {}; // Clear car data
+  }
+
+  updateCar(): void {
+    if (!this.currentCar.id) {
+      console.error('Car ID is required for updating.');
+      return;
+    }
+
+    this.http.put(`http://localhost:8080/driver/cars/${this.currentCar.id}`, this.currentCar)
+      .subscribe({
+        next: () => {
+          this.fetchCars();
+          this.closeEditCarModal();
+        },
+        error: (err) => {
+          console.error('Error updating car', err);
+        }
+      });
   }
 
   deleteCar(carId: number): void {

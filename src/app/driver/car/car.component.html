@@ -30,9 +30,9 @@
           <td>{{ car.brand }}</td>
           <td>{{ car.color }}</td>
           <td>
-            <button class="action-btn edit-btn" (click)="editCar(car.id)">
-              <i class="fas fa-edit"></i>
-            </button>
+            <button class="action-btn edit-btn" (click)="openEditCarModal(car)">
+                <i class="fas fa-edit"></i>
+              </button>
             <button class="action-btn delete-btn" (click)="deleteCar(car.id)">
               <i class="fas fa-trash"></i>
             </button>
@@ -67,5 +67,27 @@
     </div>
   </div>
   
+<!-- Modal for editing a car -->
+<div class="modal" *ngIf="showEditCarModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeEditCarModal()">&times;</span>
+      <h2>Edit Car</h2>
+      <form (submit)="updateCar()">
+        <label for="edit-model">Model:</label>
+        <input id="edit-model" [(ngModel)]="currentCar.model" name="model" required>
+        <label for="edit-licensePlate">License Plate:</label>
+        <input id="edit-licensePlate" [(ngModel)]="currentCar.licensePlate" name="licensePlate" required>
+        <label for="edit-capacity">Capacity:</label>
+        <input id="edit-capacity" [(ngModel)]="currentCar.capacity" name="capacity" type="number" required>
+        <label for="edit-brand">Brand:</label>
+        <input id="edit-brand" [(ngModel)]="currentCar.brand" name="brand" required>
+        <label for="edit-color">Color:</label>
+        <input id="edit-color" [(ngModel)]="currentCar.color" name="color" required>
+        <button type="submit">Update Car</button>
+      </form>
+    </div>
+  </div>
+
+
   </div>
   
