@@ -1,1 +1,71 @@
-<p>car works!</p>
+<div class="car-card">
+    <h2>My Cars</h2>
+    <h3>Display my cars and add new ones</h3>
+    <hr>
+  
+    <div class="add-car-container">
+        <button class="add-car-btn" (click)="openModal()">
+          <i class="fa fa-plus"></i> Add Car
+        </button>
+      </div>
+  
+    <table class="car-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Model</th>
+          <th>License Plate</th>
+          <th>Capacity</th>
+          <th>Brand</th>
+          <th>Color</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.id }}</td>
+          <td>{{ car.model }}</td>
+          <td>{{ car.licensePlate }}</td>
+          <td>{{ car.capacity }}</td>
+          <td>{{ car.brand }}</td>
+          <td>{{ car.color }}</td>
+          <td>
+            <button class="edit-btn" (click)="editCar(car)">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button class="delete-btn" (click)="deleteCar(car.id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next</button>
+    </div>
+  
+    <!-- Modal for adding a new car -->
+    <div class="modal" *ngIf="showModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>Add New Car</h2>
+        <form (submit)="addCar()">
+          <label for="model">Model:</label>
+          <input id="model" [(ngModel)]="newCar.model" name="model" required>
+          <label for="licensePlate">License Plate:</label>
+          <input id="licensePlate" [(ngModel)]="newCar.licensePlate" name="licensePlate" required>
+          <label for="capacity">Capacity:</label>
+          <input id="capacity" [(ngModel)]="newCar.capacity" name="capacity" type="number" required>
+          <label for="brand">Brand:</label>
+          <input id="brand" [(ngModel)]="newCar.brand" name="brand" required>
+          <label for="color">Color:</label>
+          <input id="color" [(ngModel)]="newCar.color" name="color" required>
+          <button type="submit">Add Car</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

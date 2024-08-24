@@ -1,0 +1,273 @@
+.car-card {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .car-card h2 {
+    color: #344e41; /* Darker green */
+  }
+  
+  .car-card h3 {
+    color: #3a5a40; /* Medium green */
+  }
+  
+  hr {
+    border: 0;
+    height: 1px;
+    background: #dad7cd; /* Light beige */
+    margin: 10px 0;
+  }
+  
+  .add-car-container {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  .add-car-btn {
+    background-color: #588157; /* Darker green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .add-car-btn:hover {
+    background-color: #3a5a40; /* Medium green */
+  }
+  
+  .car-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .car-table th, .car-table td {
+    border: 1px solid #dad7cd; /* Light beige */
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .car-table th {
+    background-color: #344e41; /* Darker green */
+    color: white;
+  }
+  
+  .car-table tbody tr:hover {
+    background-color: #e0e0e0; /* Light grey */
+  }
+  
+  .edit-btn, .delete-btn {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50; /* Green */
+    margin-right: 5px;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  
+  .delete-btn {
+    background-color: #f44336; /* Red */
+  }
+  
+  .delete-btn:hover {
+    background-color: #e53935; /* Darker red */
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #3a5a40; /* Medium green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .pagination button:disabled {
+    background-color: #9e9e9e; /* Grey */
+    cursor: not-allowed;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background-color: #588157; /* Darker green */
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-content label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  .modal-content input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #dad7cd; /* Light beige */
+    border-radius: 4px;
+  }
+  
+  .modal-content button[type="submit"] {
+    background-color: #588157; /* Darker green */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-content button[type="submit"]:hover {
+    background-color: #3a5a40; /* Medium green */
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #3a5a40; /* Medium green */
+  }
+  
+  .close:hover {
+    color: #588157; /* Darker green */
+  }
+
+  .add-car-container {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  .add-car-btn {
+    background-color: #3a5a40; /* Medium green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .add-car-btn i {
+    font-size: 18px; /* Adjust icon size */
+  }
+  
+  .add-car-btn:hover {
+    background-color: #588157; /* Darker green */
+  }
+  
+  .add-car-btn:focus {
+    outline: none;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  
+  .delete-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c62828; /* Darker red */
+  }
+  
+  .modal-content {
+    background-color: #fff; /* White */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .modal-content input {
+    border: 1px solid #dad7cd; /* Light beige */
+  }
+  
+  .modal-content button[type="submit"] {
+    background-color: #588157; /* Darker green */
+  }
+  
+  .modal-content button[type="submit"]:hover {
+    background-color: #3a5a40; /* Medium green */
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #3a5a40; /* Medium green */
+  }
+  
+  .close:hover {
+    color: #588157; /* Darker green */
+  }
+  
+  
