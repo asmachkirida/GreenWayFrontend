@@ -19,7 +19,9 @@
             <th>Start Location</th>
             <th>End Location</th>
             <th>Date</th>
-            <th>Price</th>
+            <th>Start Time</th>
+            <th>Passengers</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -28,8 +30,10 @@
             <td>{{ ride.id }}</td>
             <td>{{ ride.startLocation }}</td>
             <td>{{ ride.endLocation }}</td>
-            <td>{{ ride.date | date }}</td>
-            <td>{{ ride.price | currency }}</td>
+            <td>{{ ride.date }}</td>
+            <td>{{ ride.startTime }}</td>
+            <td>{{ ride.nbrPassengers }}</td>
+            <td>{{ ride.status }}</td>
             <td>
               <button class="action-btn edit-btn" (click)="openEditRideModal(ride)">
                 <i class="fas fa-edit"></i>
@@ -72,27 +76,41 @@
       </div>
     </div>
   
-    <!-- Modal for editing a ride -->
-    <div class="modal" *ngIf="showEditRideModal">
-      <div class="modal-content">
-        <span class="close" (click)="closeEditRideModal()">&times;</span>
-        <h2>Edit Ride</h2>
-        <form (ngSubmit)="updateRide()">
-          <label for="edit-startLocation">Start Location:</label>
-          <input id="edit-startLocation" [(ngModel)]="currentRide.startLocation" name="startLocation" required>
+<!-- Other content remains the same -->
+
+<!-- Modal for editing a ride -->
+<div class="modal" *ngIf="showEditRideModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeEditRideModal()">&times;</span>
+      <h2>Edit Ride</h2>
+      <form (ngSubmit)="updateRide()">
+        <label for="edit-startLocation">Start Location:</label>
+        <input id="edit-startLocation" [(ngModel)]="currentRide.startLocation" name="startLocation" required>
   
-          <label for="edit-endLocation">End Location:</label>
-          <input id="edit-endLocation" [(ngModel)]="currentRide.endLocation" name="endLocation" required>
+        <label for="edit-endLocation">End Location:</label>
+        <input id="edit-endLocation" [(ngModel)]="currentRide.endLocation" name="endLocation" required>
   
-          <label for="edit-date">Date:</label>
-          <input id="edit-date" [(ngModel)]="currentRide.date" name="date" type="date" required>
+        <label for="edit-date">Date:</label>
+        <input id="edit-date" [(ngModel)]="currentRide.date" name="date" type="date" required>
   
-          <label for="edit-price">Price:</label>
-          <input id="edit-price" [(ngModel)]="currentRide.price" name="price" type="number" required>
+        <label for="edit-startTime">Start Time:</label>
+        <input id="edit-startTime" [(ngModel)]="currentRide.startTime" name="startTime" type="time" required>
   
-          <button type="submit">Update Ride</button>
-        </form>
-      </div>
+        <label for="edit-nbrPassengers">Passengers:</label>
+        <input id="edit-nbrPassengers" [(ngModel)]="currentRide.nbrPassengers" name="nbrPassengers" type="number" required>
+  
+        <label for="edit-status">Status:</label>
+        <select id="edit-status" [(ngModel)]="currentRide.status" name="status" required>
+          <option value="scheduled">Scheduled</option>
+          <option value="ongoing">Ongoing</option>
+          <option value="done">Done</option>
+          <option value="finished">Finished</option>
+        </select>
+  
+        <button type="submit">Update Ride</button>
+      </form>
     </div>
+  </div>
+  
   </div>
   

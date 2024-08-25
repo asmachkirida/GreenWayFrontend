@@ -181,3 +181,73 @@
     color: #f44336; /* Red */
     margin-left: 10px;
   }
+  h2 {
+    font-size: 2rem;
+    color: #3a5a40; /* Darker green */
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    color: #3a5a40; /* Darker green */
+  }
+  
+  hr {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
+  /* General styles for the select element */
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    appearance: none; /* Remove default browser styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' class='feather feather-chevron-down' viewBox='0 0 24 24'%3e%3cpath d='M6 9l6 6 6-6'/-%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the dropdown arrow */
+  .modal-content select::-ms-expand {
+    display: none;
+  }
+  
+  /* Focused state for the select element */
+  .modal-content select:focus {
+    outline: none;
+    border-color: #588157; /* Adjust this color to match your design */
+    box-shadow: 0 0 5px rgba(88, 129, 87, 0.5); /* Adjust this color to match your design */
+  }
+  
+  /* Option styles (browser default is used, but you can adjust) */
+  .modal-content option {
+    color: #333;
+    background-color: #fff;
+    font-size: 16px;
+  }
+  
+  /* Adjust the padding and border of the container to fit the select element */
+  .modal-content .select-container {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  /* Style the dropdown in the edit modal */
+  .modal-content .select-container:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+  

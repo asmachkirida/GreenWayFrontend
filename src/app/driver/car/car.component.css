@@ -182,3 +182,23 @@
     opacity: 0.8; /* Slight change on hover for a visual effect */
   }
   
+  .add-car-btn {
+    background-color: #3a5a40;
+    color: #dad7cd;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .add-car-btn i {
+    margin-right: 5px;
+  }
+  
+  .add-car-btn:hover {
+    background-color: #588157;
+    color: #fff;
+  }

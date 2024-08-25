@@ -64,9 +64,10 @@ import { DriverComponent } from './driver/driver/driver.component';
 import { AddRideComponent } from './driver/add-ride/add-ride.component';
 import { DriverprofileComponent } from './driver/driverprofile/driverprofile.component';
 
-import { ReactiveFormsModule } from '@angular/forms';  // Import this module
+import { ReactiveFormsModule } from '@angular/forms';
+import { CarComponent } from './driver/car/car.component';  // Import this module
 
-
+import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/rides-history/rides-history.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,9 @@ import { ReactiveFormsModule } from '@angular/forms';  // Import this module
     DriverComponent,
     AddRideComponent,
     DriverprofileComponent,
-    SignupdriverComponent
+    SignupdriverComponent,
+    CarComponent,
+    DriverRidesHistoryComponent
   ],
   imports: [
     BrowserModule,

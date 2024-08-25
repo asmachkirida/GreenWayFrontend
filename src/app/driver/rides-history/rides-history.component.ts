@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export interface Ride {
+// Define the Ride structure here
+export type Ride = {
   id: number;
   startLocation: string;
   endLocation: string;
   date: Date;
+  startTime: string;
+  nbrPassengers: number;
+  status: string;
   price: number;
-}
+};
 
 @Component({
   selector: 'app-rides-history',
@@ -22,8 +26,26 @@ export class RidesHistoryComponent implements OnInit {
   totalPages = 0;
   showAddRideModal = false;
   showEditRideModal = false;
-  newRide: Ride = { id: 0, startLocation: '', endLocation: '', date: new Date(), price: 0 };
-  currentRide: Ride = { id: 0, startLocation: '', endLocation: '', date: new Date(), price: 0 };
+  newRide: Ride = {
+    id: 0,
+    startLocation: '',
+    endLocation: '',
+    date: new Date(),
+    startTime: '',
+    nbrPassengers: 0,
+    status: '',
+    price: 0
+  };
+  currentRide: Ride = {
+    id: 0,
+    startLocation: '',
+    endLocation: '',
+    date: new Date(),
+    startTime: '',
+    nbrPassengers: 0,
+    status: '',
+    price: 0
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -65,7 +87,16 @@ export class RidesHistoryComponent implements OnInit {
 
   closeAddRideModal() {
     this.showAddRideModal = false;
-    this.newRide = { id: 0, startLocation: '', endLocation: '', date: new Date(), price: 0 };
+    this.newRide = {
+      id: 0,
+      startLocation: '',
+      endLocation: '',
+      date: new Date(),
+      startTime: '',
+      nbrPassengers: 0,
+      status: '',
+      price: 0
+    };
   }
 
   addRide() {
@@ -85,7 +116,16 @@ export class RidesHistoryComponent implements OnInit {
 
   closeEditRideModal() {
     this.showEditRideModal = false;
-    this.currentRide = { id: 0, startLocation: '', endLocation: '', date: new Date(), price: 0 };
+    this.currentRide = {
+      id: 0,
+      startLocation: '',
+      endLocation: '',
+      date: new Date(),
+      startTime: '',
+      nbrPassengers: 0,
+      status: '',
+      price: 0
+    };
   }
 
   updateRide() {

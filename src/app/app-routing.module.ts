@@ -27,7 +27,7 @@ import { DriverComponent } from './driver/driver/driver.component';
 import { DriverprofileComponent } from './driver/driverprofile/driverprofile.component';
 import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/rides-history/rides-history.component';
 import { AddRideComponent } from './driver/add-ride/add-ride.component';
-
+import { CarComponent } from './driver/car/car.component';
 const routes: Routes = [
   {
     path: '',
@@ -52,6 +52,8 @@ const routes: Routes = [
       { path: 'profile', component: DriverprofileComponent },
       { path: 'rides-history', component: DriverRidesHistoryComponent },
       { path: 'add-ride', component: AddRideComponent },
+      { path: 'car', component: CarComponent },
+
     ]
   },
   {
