@@ -53,30 +53,70 @@
       <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
     </div>
   
-    <!-- Modal for adding a new ride -->
-    <div class="modal" *ngIf="showAddRideModal">
-      <div class="modal-content">
-        <span class="close" (click)="closeAddRideModal()">&times;</span>
-        <h2>Add New Ride</h2>
-        <form (ngSubmit)="addRide()">
-          <label for="startLocation">Start Location:</label>
-          <input id="startLocation" [(ngModel)]="newRide.startLocation" name="startLocation" required>
+
+
+
+    <!-- Add Ride Modal -->
+<div *ngIf="showAddRideModal" class="modal">
+    <div class="modal-content">
+      <h2>Add New Ride</h2>
+      
+ <!-- Modal for adding a ride -->
+<div class="modal" *ngIf="showAddRideModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeAddRideModal()">&times;</span>
+      <h2>Add Ride</h2>
+      <form (ngSubmit)="addRide()">
+        <label for="add-startLocation">Start Location:</label>
+        <input id="add-startLocation" [(ngModel)]="newRide.startLocation" name="startLocation" required>
   
-          <label for="endLocation">End Location:</label>
-          <input id="endLocation" [(ngModel)]="newRide.endLocation" name="endLocation" required>
+        <label for="add-endLocation">End Location:</label>
+        <input id="add-endLocation" [(ngModel)]="newRide.endLocation" name="endLocation" required>
   
-          <label for="date">Date:</label>
-          <input id="date" [(ngModel)]="newRide.date" name="date" type="date" required>
+        <label for="add-date">Date:</label>
+        <input id="add-date" [(ngModel)]="newRide.date" name="date" type="date" required>
   
-          <label for="price">Price:</label>
-          <input id="price" [(ngModel)]="newRide.price" name="price" type="number" required>
+        <label for="add-startTime">Start Time:</label>
+        <input id="add-startTime" [(ngModel)]="newRide.startTime" name="startTime" type="time" required>
   
-          <button type="submit">Add Ride</button>
-        </form>
-      </div>
+        <label for="add-nbrPassengers">Passengers:</label>
+        <input id="add-nbrPassengers" [(ngModel)]="newRide.nbrPassengers" name="nbrPassengers" type="number" required>
+        <label for="add-price">Price:</label>
+        <input id="add-price" [(ngModel)]="newRide.price" name="price" type="number" step="0.01" required>
+  
+  
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" [(ngModel)]="newRide.cigaretteAllowed" name="cigaretteAllowed">
+            Cigarettes Allowed
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="newRide.airConditionning" name="airConditionning">
+            Air Conditionning
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="newRide.petAllowed" name="petAllowed">
+            Pets Allowed
+          </label>
+        </div>
+        <div class="form-group">
+            <label for="car">Select Car:</label>
+            <select id="car" [(ngModel)]="newRide.carId" name="carId" required>
+              <option *ngFor="let car of cars" [value]="car.id">
+                {{ car.brand }} - {{ car.model }}
+            </option>
+            </select>
+          </div>
+  
+       
+  
+        <button type="submit">Add Ride</button>
+      </form>
     </div>
+  </div>
   
-<!-- Other content remains the same -->
+  
+      
 
 <!-- Modal for editing a ride -->
 <div class="modal" *ngIf="showEditRideModal">
@@ -98,12 +138,12 @@
   
         <label for="edit-nbrPassengers">Passengers:</label>
         <input id="edit-nbrPassengers" [(ngModel)]="currentRide.nbrPassengers" name="nbrPassengers" type="number" required>
+        
   
         <label for="edit-status">Status:</label>
         <select id="edit-status" [(ngModel)]="currentRide.status" name="status" required>
           <option value="scheduled">Scheduled</option>
           <option value="ongoing">Ongoing</option>
-          <option value="done">Done</option>
           <option value="finished">Finished</option>
         </select>
   

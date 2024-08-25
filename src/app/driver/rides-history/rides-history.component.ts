@@ -1,16 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// Define the Ride structure here
 export type Ride = {
   id: number;
   startLocation: string;
   endLocation: string;
   date: Date;
   startTime: string;
+  distance: number;
+  cigaretteAllowed: boolean;
+  airConditionning: boolean;
+  petAllowed: boolean;
   nbrPassengers: number;
   status: string;
+  carId: number;
   price: number;
+};
+
+export type Car = {
+  id: number;
+  model: string;
+  brand: string;
 };
 
 @Component({
@@ -22,28 +32,41 @@ export class RidesHistoryComponent implements OnInit {
   rides: Ride[] = [];
   pagedRides: Ride[] = [];
   currentPage = 1;
-  pageSize = 8; // Adjust the page size as needed
+  cars: Car[] = []; // Store the user's cars here
+  pageSize = 8;
   totalPages = 0;
   showAddRideModal = false;
   showEditRideModal = false;
+
   newRide: Ride = {
     id: 0,
     startLocation: '',
     endLocation: '',
     date: new Date(),
     startTime: '',
+    distance: 0,
+    cigaretteAllowed: false,
+    airConditionning: false,
+    petAllowed: false,
     nbrPassengers: 0,
-    status: '',
+    status: 'scheduled', // Default value
+    carId: 0,
     price: 0
   };
+
   currentRide: Ride = {
     id: 0,
     startLocation: '',
     endLocation: '',
     date: new Date(),
     startTime: '',
+    distance: 0,
+    cigaretteAllowed: false,
+    airConditionning: false,
+    petAllowed: false,
     nbrPassengers: 0,
-    status: '',
+    status: 'scheduled', // Default value
+    carId: 0,
     price: 0
   };
 
@@ -51,6 +74,7 @@ export class RidesHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.fetchRides();
+    this.fetchCars(); // Fetch the cars when the component initializes
   }
 
   fetchRides() {
@@ -58,6 +82,12 @@ export class RidesHistoryComponent implements OnInit {
       this.rides = data;
       this.totalPages = Math.ceil(this.rides.length / this.pageSize);
       this.updatePage();
+    });
+  }
+
+  fetchCars() {
+    this.http.get<Car[]>('http://localhost:8080/driver/cars/driver/19').subscribe(data => {
+      this.cars = data; // Store the fetched cars
     });
   }
 
@@ -93,8 +123,13 @@ export class RidesHistoryComponent implements OnInit {
       endLocation: '',
       date: new Date(),
       startTime: '',
+      distance: 0,
+      cigaretteAllowed: false,
+      airConditionning: false,
+      petAllowed: false,
       nbrPassengers: 0,
-      status: '',
+      status: 'scheduled',
+      carId: 0,
       price: 0
     };
   }
@@ -122,8 +157,13 @@ export class RidesHistoryComponent implements OnInit {
       endLocation: '',
       date: new Date(),
       startTime: '',
+      distance: 0,
+      cigaretteAllowed: false,
+      airConditionning: false,
+      petAllowed: false,
       nbrPassengers: 0,
-      status: '',
+      status: 'scheduled',
+      carId: 0,
       price: 0
     };
   }
