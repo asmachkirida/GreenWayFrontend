@@ -2,7 +2,9 @@
 
 <div class="rides-history-container">
     <h2>My Rides</h2>
+
     <h3>Display my rides and add new ones</h3>
+
     <hr>
   
     <div class="add-ride-container">
@@ -56,68 +58,90 @@
 
 
 
-    <!-- Add Ride Modal -->
+<!-- Add Ride Modal -->
 <div *ngIf="showAddRideModal" class="modal">
-    <div class="modal-content">
-      <h2>Add New Ride</h2>
-      
- <!-- Modal for adding a ride -->
-<div class="modal" *ngIf="showAddRideModal">
     <div class="modal-content">
       <span class="close" (click)="closeAddRideModal()">&times;</span>
       <h2>Add Ride</h2>
+  
       <form (ngSubmit)="addRide()">
-        <label for="add-startLocation">Start Location:</label>
-        <input id="add-startLocation" [(ngModel)]="newRide.startLocation" name="startLocation" required>
-  
-        <label for="add-endLocation">End Location:</label>
-        <input id="add-endLocation" [(ngModel)]="newRide.endLocation" name="endLocation" required>
-  
-        <label for="add-date">Date:</label>
-        <input id="add-date" [(ngModel)]="newRide.date" name="date" type="date" required>
-  
-        <label for="add-startTime">Start Time:</label>
-        <input id="add-startTime" [(ngModel)]="newRide.startTime" name="startTime" type="time" required>
-  
-        <label for="add-nbrPassengers">Passengers:</label>
-        <input id="add-nbrPassengers" [(ngModel)]="newRide.nbrPassengers" name="nbrPassengers" type="number" required>
-        <label for="add-price">Price:</label>
-        <input id="add-price" [(ngModel)]="newRide.price" name="price" type="number" step="0.01" required>
-  
-  
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" [(ngModel)]="newRide.cigaretteAllowed" name="cigaretteAllowed">
-            Cigarettes Allowed
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="newRide.airConditionning" name="airConditionning">
-            Air Conditionning
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="newRide.petAllowed" name="petAllowed">
-            Pets Allowed
-          </label>
-        </div>
+        <!-- Location Inputs -->
         <div class="form-group">
-            <label for="car">Select Car:</label>
-            <select id="car" [(ngModel)]="newRide.carId" name="carId" required>
-              <option *ngFor="let car of cars" [value]="car.id">
-                {{ car.brand }} - {{ car.model }}
-            </option>
-            </select>
-          </div>
+          <label for="startLocation">Start Location:</label>
+          <input 
+            #startLocation 
+            id="startLocation" 
+            type="text" 
+            [(ngModel)]="newRide.startLocation" 
+            name="startLocation" 
+            required
+          >
+        </div>
   
-       
+        <div class="form-group">
+          <label for="endLocation">End Location:</label>
+          <input 
+            #endLocation 
+            id="endLocation" 
+            type="text" 
+            [(ngModel)]="newRide.endLocation" 
+            name="endLocation" 
+            required
+          >
+        </div>
   
+        <div class="form-group">
+          <label for="add-date">Date:</label>
+          <input 
+            id="add-date" 
+            type="date" 
+            [(ngModel)]="newRide.date" 
+            name="date" 
+            required
+          >
+        </div>
+  
+        <div class="form-group">
+          <label for="startTime">Start Time:</label>
+          <input 
+            id="startTime" 
+            type="time" 
+            [(ngModel)]="newRide.startTime" 
+            name="startTime" 
+            required
+          >
+        </div>
+  
+<select 
+  id="car" 
+  [(ngModel)]="newRide.carId" 
+  name="carId" 
+  required
+>
+  <option *ngFor="let car of cars" [value]="car.id">
+    {{ car.brand }}
+  </option>
+</select>
+
+  
+        <!-- Other Ride Details -->
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input 
+            id="price" 
+            type="number" 
+            [(ngModel)]="newRide.price" 
+            name="price" 
+            required
+          >
+        </div>
+  
+        <!-- Submit Button -->
         <button type="submit">Add Ride</button>
       </form>
     </div>
   </div>
   
-  
-      
-
 <!-- Modal for editing a ride -->
 <div class="modal" *ngIf="showEditRideModal">
     <div class="modal-content">
@@ -151,6 +175,7 @@
       </form>
     </div>
   </div>
-  
+
+
   </div>
   

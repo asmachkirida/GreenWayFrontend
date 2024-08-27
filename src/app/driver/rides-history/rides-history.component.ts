@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Renderer2, ElementRef ,ViewChild, AfterViewChecked} from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+declare var google: any;
 
 export type Ride = {
   id: number;
@@ -28,7 +33,10 @@ export type Car = {
   templateUrl: './rides-history.component.html',
   styleUrls: ['./rides-history.component.css']
 })
-export class RidesHistoryComponent implements OnInit {
+export class RidesHistoryComponent implements OnInit , AfterViewInit ,AfterViewChecked  {
+  @ViewChild('startLocation') startLocationInput!: ElementRef;
+  @ViewChild('endLocation') endLocationInput!: ElementRef;
+  
   rides: Ride[] = [];
   pagedRides: Ride[] = [];
   currentPage = 1;
@@ -37,6 +45,11 @@ export class RidesHistoryComponent implements OnInit {
   totalPages = 0;
   showAddRideModal = false;
   showEditRideModal = false;
+  private autocompleteInitialized = false;
+
+  private apiUrl = 'http://localhost:8080/rides'; // API endpoint
+  selectedCarId: number = 0; // Track selected car ID
+
 
   newRide: Ride = {
     id: 0,
@@ -70,12 +83,56 @@ export class RidesHistoryComponent implements OnInit {
     price: 0
   };
 
-  constructor(private http: HttpClient) {}
+
+  constructor(
+    private http: HttpClient,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) {}
+
 
   ngOnInit() {
     this.fetchRides();
     this.fetchCars(); // Fetch the cars when the component initializes
   }
+
+  ngAfterViewInit() {
+    if (this.startLocationInput && this.endLocationInput) {
+      this.loadGoogleMaps();
+    } else {
+      console.error('Input elements are not available during AfterViewInit.');
+    }
+  }
+  
+
+  ngAfterViewChecked() {
+    if (this.startLocationInput && this.endLocationInput && !this.autocompleteInitialized) {
+      this.autocompleteInitialized = true;
+      this.initAutocomplete();
+    }
+  }
+  
+
+  loadGoogleMaps() {
+    if (typeof google !== 'undefined') {
+      this.initAutocomplete();
+    } else {
+      (window as any)['initMap'] = () => this.initAutocomplete();
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCbXyLXLuR28SIid6xOTLvfm4igpYM4r_o&libraries=places&callback=initMap';
+      document.body.appendChild(script);
+    }
+  }
+
+  initAutocomplete() {
+    if (this.startLocationInput && this.endLocationInput) {
+      new google.maps.places.Autocomplete(this.startLocationInput.nativeElement);
+      new google.maps.places.Autocomplete(this.endLocationInput.nativeElement);
+    } else {
+      console.error('Input elements not found or not instances of HTMLInputElement');
+    }
+  }
+  
 
   fetchRides() {
     this.http.get<Ride[]>('http://localhost:8080/rides').subscribe(data => {
@@ -86,7 +143,7 @@ export class RidesHistoryComponent implements OnInit {
   }
 
   fetchCars() {
-    this.http.get<Car[]>('http://localhost:8080/driver/cars/driver/19').subscribe(data => {
+    this.http.get<Car[]>('http://localhost:8080/driver/cars/driver/48').subscribe(data => {
       this.cars = data; // Store the fetched cars
     });
   }
@@ -135,14 +192,55 @@ export class RidesHistoryComponent implements OnInit {
   }
 
   addRide() {
-    this.http.post<Ride>('http://localhost:8080/rides', this.newRide).subscribe({
-      next: () => {
-        this.fetchRides();
-        this.closeAddRideModal();
-      },
-      error: (err) => console.error('Error adding ride', err)
-    });
+    // Prepare the data to be sent
+    const rideData = {
+      startLocation: this.newRide.startLocation,
+      endLocation: this.newRide.endLocation,
+      date: this.newRide.date,
+      startTime: this.newRide.startTime,
+      distance: this.newRide.distance,
+      price: this.newRide.price,
+      cigaretteAllowed: this.newRide.cigaretteAllowed,
+      airConditionning: this.newRide.airConditionning,
+      petAllowed: this.newRide.petAllowed,
+      nbrPassengers: this.newRide.nbrPassengers,
+      status: this.newRide.status
+      // Do not include carId here, it will be part of the URL
+    };
+  
+    const selectedCarId = this.newRide.carId; // Replace this with your actual logic to get the selected car ID
+
+    // Construct the URL with carId as a query parameter
+    const url = `${this.apiUrl}?carId=${selectedCarId}`;
+  
+    // Log the URL and carId being sent
+    console.log('URL with query parameter:', url);
+    console.log('Car ID being sent:', selectedCarId);
+    console.log('Data being sent:', rideData);
+  
+    // Log the data being sent
+    console.log('Sending data:', rideData);
+  
+    // Make the HTTP POST request
+    this.http.post(url, rideData)
+      .pipe(
+        catchError(error => {
+          console.error('Error adding ride:', error);
+          return of(null); // Return a fallback observable
+        })
+      )
+      .subscribe(
+        response => {
+          console.log('Ride added successfully:', response);
+          // Optionally handle successful response here
+        },
+        error => {
+          console.error('Error adding ride:', error);
+        }
+      );
   }
+  
+  
 
   openEditRideModal(ride: Ride) {
     this.currentRide = { ...ride };
