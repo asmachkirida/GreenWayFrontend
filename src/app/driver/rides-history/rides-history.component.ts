@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Renderer2, ElementRef ,ViewChild, AfterViewChecked} from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 declare var google: any;
 
@@ -218,55 +219,96 @@ export class RidesHistoryComponent implements OnInit , AfterViewInit ,AfterViewC
       price: 0
     };
   }
+  getLatLng(address: string): Observable<any> {
+    const encodedAddress = encodeURIComponent(address);
+    const apiKey = 'AIzaSyCbXyLXLuR28SIid6xOTLvfm4igpYM4r_o'; // Replace with your Google Maps API Key
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${apiKey}`;
+    
+    return this.http.get<any>(url);
+  }
+  
+  calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = this.degToRad(lat2 - lat1);
+    const dLon = this.degToRad(lon2 - lon1);
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.degToRad(lat1)) * Math.cos(this.degToRad(lat2)) * 
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+  
+  degToRad(deg: number): number {
+    return deg * (Math.PI / 180);
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
 
   addRide() {
-    // Prepare the data to be sent
-    const rideData = {
-      startLocation: this.newRide.startLocation,
-      endLocation: this.newRide.endLocation,
-      date: this.newRide.date,
-      startTime: this.newRide.startTime,
-      distance: this.newRide.distance,
-      price: this.newRide.price,
-      cigaretteAllowed: this.newRide.cigaretteAllowed,
-      airConditionning: this.newRide.airConditionning,
-      petAllowed: this.newRide.petAllowed,
-      nbrPassengers: this.newRide.nbrPassengers,
-      status: this.newRide.status
-      // Do not include carId here, it will be part of the URL
-    };
+    const startAddress = this.newRide.startLocation;
+    const endAddress = this.newRide.endLocation;
   
-    const selectedCarId = this.newRide.carId; // Replace this with your actual logic to get the selected car ID
-
-    // Construct the URL with carId as a query parameter
-    const url = `${this.apiUrl}?carId=${selectedCarId}`;
+    // Fetch lat/lng for start and end locations
+    this.getLatLng(startAddress).subscribe(startResponse => {
+      const startLat = startResponse.results[0].geometry.location.lat;
+      const startLng = startResponse.results[0].geometry.location.lng;
   
-    // Log the URL and carId being sent
-    console.log('URL with query parameter:', url);
-    console.log('Car ID being sent:', selectedCarId);
-    console.log('Data being sent:', rideData);
+      this.getLatLng(endAddress).subscribe(endResponse => {
+        const endLat = endResponse.results[0].geometry.location.lat;
+        const endLng = endResponse.results[0].geometry.location.lng;
   
-    // Log the data being sent
-    console.log('Sending data:', rideData);
+        // Calculate distance
+        const distance = this.calculateDistance(startLat, startLng, endLat, endLng);
   
-    // Make the HTTP POST request
-    this.http.post(url, rideData)
-      .pipe(
-        catchError(error => {
-          console.error('Error adding ride:', error);
-          return of(null); // Return a fallback observable
-        })
-      )
-      .subscribe(
-        response => {
-          console.log('Ride added successfully:', response);
-          // Optionally handle successful response here
-        },
-        error => {
-          console.error('Error adding ride:', error);
-        }
-      );
+        // Prepare the ride data
+        const rideData = {
+          startLocation: startAddress,
+          endLocation: endAddress,
+          date: this.newRide.date,
+          startTime: this.newRide.startTime,
+          distance: distance, // Set the actual distance here
+          price: this.newRide.price,
+          cigaretteAllowed: this.newRide.cigaretteAllowed,
+          airConditionning: this.newRide.airConditionning,
+          petAllowed: this.newRide.petAllowed,
+          nbrPassengers: this.newRide.nbrPassengers,
+          status: this.newRide.status
+        };
+  
+        const selectedCarId = this.newRide.carId;
+        const url = `${this.apiUrl}?carId=${selectedCarId}`;
+  
+        this.http.post(url, rideData)
+          .pipe(
+            catchError(error => {
+              console.error('Error adding ride:', error);
+              return of(null);
+            })
+          )
+          .subscribe(
+            response => {
+              console.log('Ride added successfully:', response);
+              this.closeAddRideModal();
+            },
+            error => {
+              console.error('Error adding ride:', error);
+            }
+          );
+      });
+    });
   }
+  
   
   
 
