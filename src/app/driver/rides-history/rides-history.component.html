@@ -66,29 +66,31 @@
   
       <form (ngSubmit)="addRide()">
         <!-- Location Inputs -->
-        <div class="form-group">
-          <label for="startLocation">Start Location:</label>
-          <input 
-            #startLocation 
-            id="startLocation" 
-            type="text" 
-            [(ngModel)]="newRide.startLocation" 
-            name="startLocation" 
-            required
-          >
-        </div>
+      <!-- In rides-history.component.html -->
+
+<div class="form-group">
+    <label for="startLocation">Start Location:</label>
+    <input 
+      id="startLocation" 
+      type="text" 
+      [(ngModel)]="newRide.startLocation" 
+      name="startLocation" 
+      required
+      #startLocation
+    >
+  </div>
   
-        <div class="form-group">
-          <label for="endLocation">End Location:</label>
-          <input 
-            #endLocation 
-            id="endLocation" 
-            type="text" 
-            [(ngModel)]="newRide.endLocation" 
-            name="endLocation" 
-            required
-          >
-        </div>
+  <div class="form-group">
+    <label for="endLocation">End Location:</label>
+    <input 
+      id="endLocation" 
+      type="text" 
+      [(ngModel)]="newRide.endLocation" 
+      name="endLocation" 
+      required
+      #endLocation
+    >
+  </div>
   
         <div class="form-group">
           <label for="add-date">Date:</label>

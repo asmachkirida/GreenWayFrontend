@@ -126,12 +126,33 @@ export class RidesHistoryComponent implements OnInit , AfterViewInit ,AfterViewC
 
   initAutocomplete() {
     if (this.startLocationInput && this.endLocationInput) {
-      new google.maps.places.Autocomplete(this.startLocationInput.nativeElement);
-      new google.maps.places.Autocomplete(this.endLocationInput.nativeElement);
+      const startAutocomplete = new google.maps.places.Autocomplete(this.startLocationInput.nativeElement);
+      const endAutocomplete = new google.maps.places.Autocomplete(this.endLocationInput.nativeElement);
+  
+      startAutocomplete.addListener('place_changed', () => {
+        const place = startAutocomplete.getPlace();
+        if (place.formatted_address) {
+          console.log('Start Location selected:', place.formatted_address);
+          this.newRide.startLocation = place.formatted_address;
+        } else {
+          console.warn('No formatted address available for the start location.');
+        }
+      });
+  
+      endAutocomplete.addListener('place_changed', () => {
+        const place = endAutocomplete.getPlace();
+        if (place.formatted_address) {
+          console.log('End Location selected:', place.formatted_address);
+          this.newRide.endLocation = place.formatted_address;
+        } else {
+          console.warn('No formatted address available for the end location.');
+        }
+      });
     } else {
       console.error('Input elements not found or not instances of HTMLInputElement');
     }
   }
+  
   
 
   fetchRides() {
