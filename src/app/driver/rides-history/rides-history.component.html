@@ -122,6 +122,34 @@
     {{ car.brand }}
   </option>
 </select>
+  <!-- Checkbox Inputs -->
+  <div class="form-group checkbox-group">
+    <label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="newRide.cigaretteAllowed" 
+        name="cigaretteAllowed"
+      >
+      Cigarettes Allowed
+    </label>
+    <label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="newRide.airConditionning" 
+        name="airConditionning"
+      >
+      Air Conditioning
+    </label>
+    <label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="newRide.petAllowed" 
+        name="petAllowed"
+      >
+      Pets Allowed
+    </label>
+  </div>
+
 
   
         <!-- Other Ride Details -->

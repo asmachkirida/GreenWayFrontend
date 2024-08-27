@@ -141,11 +141,18 @@ export class RidesHistoryComponent implements OnInit , AfterViewInit ,AfterViewC
       this.updatePage();
     });
   }
-
   fetchCars() {
-    this.http.get<Car[]>('http://localhost:8080/driver/cars/driver/48').subscribe(data => {
-      this.cars = data; // Store the fetched cars
-    });
+    // Get the userId from local storage
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.http.get<Car[]>(`http://localhost:8080/driver/cars/driver/${userId}`).subscribe(data => {
+        this.cars = data; // Store the fetched cars
+      }, error => {
+        console.error('Error fetching cars:', error);
+      });
+    } else {
+      console.error('User ID not found in local storage');
+    }
   }
 
   updatePage() {
