@@ -13,6 +13,7 @@ export class DriverprofileComponent implements OnInit {
   isEditing = false;
   userEmail: string | null = null;  // Store email instead of user ID
   userId: number | null = null;  // Store user ID
+  profileImage: string = '';  // Default profile image
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
@@ -61,6 +62,10 @@ export class DriverprofileComponent implements OnInit {
 
         // Extract user ID from the response
         this.userId = data.ourUsers.id;
+        const gender = data.ourUsers.gender;  // Assuming gender is part of the response
+
+        // Set the profile image based on gender
+        this.profileImage = gender === 'Female' ? 'gal0.png' : 'pro.png';
 
         // Patch the form with user data
         this.profileForm.patchValue({
