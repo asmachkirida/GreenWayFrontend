@@ -157,12 +157,20 @@ export class RidesHistoryComponent implements OnInit , AfterViewInit ,AfterViewC
   
 
   fetchRides() {
-    this.http.get<Ride[]>('http://localhost:8080/rides').subscribe(data => {
-      this.rides = data;
-      this.totalPages = Math.ceil(this.rides.length / this.pageSize);
-      this.updatePage();
-    });
+    const driverId = localStorage.getItem('userId');
+    if (driverId) {
+      this.http.get<Ride[]>(`http://localhost:8080/rides/driver/${driverId}`).subscribe(data => {
+        this.rides = data;
+        this.totalPages = Math.ceil(this.rides.length / this.pageSize);
+        this.updatePage();
+      }, error => {
+        console.error('Error fetching rides:', error);
+      });
+    } else {
+      console.error('Driver ID not found in local storage');
+    }
   }
+  
   fetchCars() {
     // Get the userId from local storage
     const userId = localStorage.getItem('userId');
@@ -299,6 +307,7 @@ export class RidesHistoryComponent implements OnInit , AfterViewInit ,AfterViewC
           .subscribe(
             response => {
               console.log('Ride added successfully:', response);
+              this.fetchRides();
               this.closeAddRideModal();
             },
             error => {
