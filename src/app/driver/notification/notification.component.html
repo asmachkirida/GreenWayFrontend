@@ -1,10 +1,21 @@
 <div class="notification-container">
     <h3>Notifications</h3>
     <ul class="notification-list">
-      <li *ngFor="let notification of notifications" (click)="markAsRead(notification)">
+      <li *ngFor="let notification of notifications" (click)="markAsRead(notification)" [class.read]="notification.read">
         <i class="fas" [ngClass]="notification.icon"></i>
-        <span>{{ notification.message }}</span>
-        <small>{{ notification.timestamp | date:'short' }}</small>
+        <div class="notification-content">
+          <p class="notification-message">{{ notification.message }}</p>
+          <div class="notification-details">
+            <strong *ngIf="notification.passenger">{{ notification.passenger.fullName }}</strong>
+            <small *ngIf="notification.passenger">
+              <i class="fas fa-phone"></i> {{ notification.passenger.phoneNumber }} |
+              <i class="fas fa-venus-mars"></i> {{ notification.passenger.gender }} |
+              <i class="fas fa-map-marker-alt"></i> {{ notification.passenger.city }}
+            </small>
+          </div>
+          <small class="notification-timestamp">{{ notification.timestamp | date:'short' }}</small>
+        </div>
+        <hr *ngIf="!notification.read" class="notification-separator">
       </li>
     </ul>
   </div>
