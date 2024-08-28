@@ -1,0 +1,37 @@
+.notification-container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notification-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .notification-list li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+  
+  .notification-list li:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .notification-list li i {
+    margin-right: 10px;
+    color: #007bff;
+  }
+  
+  .notification-list li span {
+    flex: 1;
+  }
+  
+  .notification-list li small {
+    color: #888;
+  }
+  

@@ -4,19 +4,21 @@
       <div class="sidebar-header">
         <img src="logo.png" alt="App Logo" class="app-logo">
     </div>
-      <ul class="nav-list">
-        <li class="nav-item" [routerLink]="['/driver/profile']" routerLinkActive="active">
-          <i class="fas fa-user"></i><span>Profile</span>
-        </li>
-        <li class="nav-item" [routerLink]="['/driver/car']" routerLinkActive="active">
-            <i class="fas fa-car"></i><span>My Cars</span>
-          </li>
-        <li class="nav-item" [routerLink]="['/driver/rides-history']" routerLinkActive="active">
-          <i class="fas fa-car"></i><span>Rides History</span>
-        </li>
-      
-      
-      </ul>
+    <ul class="nav-list">
+      <li class="nav-item" [routerLink]="['/driver/profile']" routerLinkActive="active">
+        <i class="fas fa-user"></i><span>Profile</span>
+      </li>
+      <li class="nav-item" [routerLink]="['/driver/car']" routerLinkActive="active">
+        <i class="fas fa-car-side"></i><span>My Cars</span>
+      </li>
+      <li class="nav-item" [routerLink]="['/driver/rides-history']" routerLinkActive="active">
+        <i class="fas fa-history"></i><span>Rides History</span>
+      </li>
+      <li class="nav-item" [routerLink]="['/driver/notifications']" routerLinkActive="active">
+        <i class="fas fa-bell"></i><span>Notifications</span>
+      </li>
+    </ul>
+    
       <div class="sidebar-footer">
         <li class="nav-item" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i><span>Logout</span>

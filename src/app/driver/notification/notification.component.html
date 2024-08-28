@@ -1,0 +1,11 @@
+<div class="notification-container">
+    <h3>Notifications</h3>
+    <ul class="notification-list">
+      <li *ngFor="let notification of notifications" (click)="markAsRead(notification)">
+        <i class="fas" [ngClass]="notification.icon"></i>
+        <span>{{ notification.message }}</span>
+        <small>{{ notification.timestamp | date:'short' }}</small>
+      </li>
+    </ul>
+  </div>
+  
