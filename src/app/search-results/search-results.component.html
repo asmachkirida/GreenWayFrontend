@@ -29,16 +29,19 @@
             <hr>
             <div class="filter-section">
                 <h4>Services</h4>
+                <hr>
                 <label class="styled-checkbox">
                     <input type="checkbox"  [(ngModel)]="filters.petAllowed" (change)="onFilterChange()">
                     <span>Pets Allowed</span>
                     <mat-icon>pets</mat-icon>
                 </label>
+                <hr>
                 <label class="styled-checkbox">
                     <input type="checkbox" [(ngModel)]="filters.cigaretteAllowed" (change)="onFilterChange()">
                     <span>Cigarettes Allowed</span>
                     <mat-icon>smoking_rooms</mat-icon>
                 </label>
+                <hr>
                 <label class="styled-checkbox">
                     <input type="checkbox" [(ngModel)]="filters.airConditionning" (change)="onFilterChange()">
                     <span>AC Available</span>
@@ -46,33 +49,9 @@
                 </label>
             </div>
             <hr>
-            <div class="filter-section">
-                <h4>Driver</h4>
-                <label class="styled-checkbox">
-                    <input type="checkbox">
-                    <span>Female</span>
-                    <mat-icon>female</mat-icon>
-                </label>
-                <label class="styled-checkbox">
-                    <input type="checkbox">
-                    <span>Male</span>
-                    <mat-icon>male</mat-icon>
-                </label>
-            </div>
-            <hr>
-            <div class="filter-section">
-                <h4>Price</h4>
-                <label class="styled-checkbox">
-                    <input type="checkbox">
-                    <span>Low to High</span>
-                    <mat-icon>arrow_downward</mat-icon>
-                </label>
-                <label class="styled-checkbox">
-                    <input type="checkbox">
-                    <span>High to Low</span>
-                    <mat-icon>arrow_upward</mat-icon>
-                </label>
-            </div>
+   
+          
+    
         </div>
     </div>
     <div class="right-pane">
