@@ -25,20 +25,37 @@ export class BookRideModalComponent {
     const userId = localStorage.getItem('userId');
     
     if (userId) {
-      const url = `http://localhost:8080/rides/${this.data.rideId}/passengers`;
+      const bookingUrl = `http://localhost:8080/rides/${this.data.rideId}/passengers`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.post(url, userId, { headers }).subscribe(
+      this.http.post(bookingUrl, userId, { headers }).subscribe(
         () => {
-          this.dialogRef.close();
           console.log('Booking confirmed successfully for ride ID:', this.data.rideId);
-          this.router.navigate(['/passenger/rides-history']); 
 
+          // Prepare the notification message
+          const message = 'A new passenger just booked a ride with you, contact them as soon as possible';
+          const notificationUrl = `http://localhost:8080/driver/notifications/create?passengerId=${userId}&driverId=${this.data.driverId}&message=${encodeURIComponent(message)}`;
 
+          console.log('Sending notification with the following data:', {
+            passengerId: userId,
+            driverId: this.data.driverId,
+            message: message
+          });
+
+          // Send the notification
+          this.http.post(notificationUrl, {}, { headers }).subscribe(
+            () => {
+              console.log('Notification sent successfully to driver ID:', this.data.driverId);
+              this.dialogRef.close();
+              this.router.navigate(['/passenger/rides-history']);
+            },
+            error => {
+              console.error('Error sending notification', error);
+            }
+          );
         },
         error => {
           console.error('Error booking ride', error);
-
         }
       );
     } else {
