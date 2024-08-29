@@ -29,15 +29,17 @@ export class SearchResultsComponent implements OnInit {
   };
   allRides: any[] = [];
   showDriverDetails: number | null = null;
+  nbrPassengers: number = 0; // Store number of passengers
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      this.nbrPassengers = +params['passengers']; // Retrieve and parse the number of passengers
       const searchParams = {
         startLocation: params['depart'],
         endLocation: params['destination'],
-        nbrPassengers: params['passengers'],
+        nbrPassengers: this.nbrPassengers,
         date: params['date']
       };
       this.fetchRideData(searchParams);
@@ -82,16 +84,6 @@ export class SearchResultsComponent implements OnInit {
     this.rides = this.applyFilters(this.allRides);
   }
 
-  applyFilters(rides: any[]): any[] {
-    if (!this.filters) return rides;
-    return rides.filter(ride => {
-      return (!this.filters.petAllowed || ride.petAllowed) &&
-             (!this.filters.airConditionning || ride.airConditionning) &&
-             (!this.filters.cigaretteAllowed || ride.cigaretteAllowed) &&
-             (this.filters.minPrice === null || ride.price >= this.filters.minPrice) &&
-             (this.filters.maxPrice === null || ride.price <= this.filters.maxPrice);
-    });
-  }
 
   calculateAge(birthDate: string): number {
     const birth = new Date(birthDate);
@@ -137,9 +129,22 @@ export class SearchResultsComponent implements OnInit {
         rideId: ride.id,
         driverId: ride.car.driverId,  
         startLocation: ride.startLocation,
-        endLocation: ride.endLocation
+        endLocation: ride.endLocation,
+        nbrPassengers: this.nbrPassengers // Pass number of passengers to the modal
+
       }
     });
   }
  
+  applyFilters(rides: any[]): any[] {
+    if (!this.filters) return rides;
+    return rides.filter(ride => {
+      return ride.status !== 'COMPLETED' &&  // Filter out fully booked rides
+             (!this.filters.petAllowed || ride.petAllowed) &&
+             (!this.filters.airConditionning || ride.airConditionning) &&
+             (!this.filters.cigaretteAllowed || ride.cigaretteAllowed) &&
+             (this.filters.minPrice === null || ride.price >= this.filters.minPrice) &&
+             (this.filters.maxPrice === null || ride.price <= this.filters.maxPrice);
+    });
+  }
 }
