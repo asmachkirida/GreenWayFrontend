@@ -1,18 +1,13 @@
-<h1>Ride Details</h1>
-<hr>
-<div class="location-container">
-  <span>{{ data.startLocation }}</span>
-  <span class="arrow">→</span>
-  <span>{{ data.endLocation }}</span>
-</div>
-<p class="detail"><strong>Distance:</strong> {{ data.distance }}</p>
-<p class="detail"><strong>Estimated Time:</strong> {{ data.duration }}</p>
-
-<div class="button-container">
-  <button class="cancel" (click)="closeDialog()">
-    <i class="fas fa-times icon"></i> Cancel
-  </button>
-  <button class="confirm" (click)="confirmBooking()">
-    <i class="fas fa-check icon"></i> Confirm
-  </button>
+<div class="modal-container">
+  <div class="modal-header">
+    <h2>Confirm Your Booking</h2>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to book this ride?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="confirm-button" (click)="confirmBooking()">Yes, Book It</button>
+    <div class="separator"></div>
+    <button class="cancel-button" (click)="closeDialog()">Cancel</button>
+  </div>
 </div>

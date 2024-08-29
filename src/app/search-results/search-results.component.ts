@@ -5,6 +5,9 @@ import { forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { BookRideModalComponent } from '../book-ride-modal/book-ride-modal.component';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 declare var google: any;
 
 
@@ -129,40 +132,13 @@ export class SearchResultsComponent implements OnInit {
   }
 
   bookNow(ride: any) {
-    this.calculateDistance(ride.startLocation, ride.endLocation, (distance: string, duration: string) => {
-      this.dialog.open(BookRideModalComponent, {
-        data: {
-          startLocation: ride.startLocation,
-          endLocation: ride.endLocation,
-          distance,
-          duration,
-          rideId: ride.id // Pass the ride ID here
-
-        }
-      });
-    });
-  }
-  
-  calculateDistance(origin: string, destination: string, callback: (distance: string, duration: string) => void) {
-    const distanceService = new google.maps.DistanceMatrixService();
-  
-    const request = {
-      origins: [origin],
-      destinations: [destination],
-      travelMode: google.maps.TravelMode.DRIVING
-    };
-  
-    distanceService.getDistanceMatrix(request, (response: any, status: any) => {
-      if (status === google.maps.DistanceMatrixStatus.OK) {
-        const element = response.rows[0].elements[0];
-        const distance = element.distance.text;
-        const duration = element.duration.text;
-        callback(distance, duration);
-      } else {
-        console.error('Error:', status);
-        callback('N/A', 'N/A');
+    this.dialog.open(BookRideModalComponent, {
+      data: {
+        rideId: ride.id,
+        startLocation: ride.startLocation,
+        endLocation: ride.endLocation
       }
     });
   }
-  
+ 
 }

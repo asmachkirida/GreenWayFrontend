@@ -31,17 +31,18 @@ export class BookRideModalComponent {
       this.http.post(url, userId, { headers }).subscribe(
         () => {
           this.dialogRef.close();
-          // Optionally, redirect or update UI
-       //   this.router.navigate(['/confirmation']); // Example: Redirect to a confirmation page
+          console.log('Booking confirmed successfully for ride ID:', this.data.rideId);
+          this.router.navigate(['/passenger/rides-history']); 
+
+
         },
         error => {
           console.error('Error booking ride', error);
-          // Handle error (e.g., show an error message)
+
         }
       );
     } else {
       console.error('User ID not found in localStorage');
-      // Handle missing user ID scenario
     }
   }
 }
