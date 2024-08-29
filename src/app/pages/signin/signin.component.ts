@@ -52,6 +52,8 @@ export class SigninComponent implements OnInit {
           const userId = userResponse.ourUsers.id;
 
           localStorage.setItem('userId', userId.toString());
+          localStorage.setItem('userRole', role);
+
           console.log('User ID:', userId);
 
           this.authService.updateAuthStatus(true);

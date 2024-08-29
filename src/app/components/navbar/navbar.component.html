@@ -1,11 +1,16 @@
 <nav class="navbar">
-    <div class="navbar-content">
-      <span class="app-name">GreenWay</span>
-      <div class="nav-links">
+  <div class="navbar-content">
+    <span class="app-name">GreenWay</span>
+    <div class="nav-links">
+      <ng-container *ngIf="!isAuthenticated; else loggedIn">
         <a href="/signin">Sign In</a>
         <a href="/signup">Sign Up</a>
-      </div>
-      
+      </ng-container>
+      <ng-template #loggedIn>
+        <a [href]="profileLink">
+          <i class="fas fa-user"></i>
+        </a>
+      </ng-template>
     </div>
-  </nav>
-  
+  </div>
+</nav>
