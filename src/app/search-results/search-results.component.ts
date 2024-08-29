@@ -135,6 +135,7 @@ export class SearchResultsComponent implements OnInit {
     this.dialog.open(BookRideModalComponent, {
       data: {
         rideId: ride.id,
+        driverId: ride.car.driverId,  
         startLocation: ride.startLocation,
         endLocation: ride.endLocation
       }
