@@ -130,11 +130,12 @@ export class SearchResultsComponent implements OnInit {
         driverId: ride.car.driverId,  
         startLocation: ride.startLocation,
         endLocation: ride.endLocation,
-        nbrPassengers: this.nbrPassengers // Pass number of passengers to the modal
-
+        ridenbrpassenger: ride.nbrPassengers, // Pass the number of passengers specific to the ride
+        nbrPassengers: this.nbrPassengers // Pass the number of passengers from the search
       }
     });
-  }
+}
+
  
   applyFilters(rides: any[]): any[] {
     if (!this.filters) return rides;

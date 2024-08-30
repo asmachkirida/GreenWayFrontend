@@ -25,37 +25,51 @@ export class BookRideModalComponent {
     const userId = localStorage.getItem('userId');
     
     if (userId) {
-      const bookingUrl = `http://localhost:8080/rides/${this.data.rideId}/passengers`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.post(bookingUrl, userId, { headers }).subscribe(
+      // Step 1: Add the passenger to the ride
+      const addPassengerUrl = `http://localhost:8080/rides/${this.data.rideId}/passengers`;
+      this.http.post(addPassengerUrl, userId, { headers }).subscribe(
         () => {
-          console.log('Booking confirmed successfully for ride ID:', this.data.rideId);
+          console.log('Passenger added to ride successfully');
 
-          // Prepare the notification message
-          const message = 'A new passenger just booked a ride with you, contact them as soon as possible';
-          const notificationUrl = `http://localhost:8080/driver/notifications/create?passengerId=${userId}&driverId=${this.data.driverId}&message=${encodeURIComponent(message)}`;
+          // Step 2: Calculate the remaining passengers and update the ride's status if necessary
+          let remainingPassengers = this.data.ridenbrpassenger - this.data.nbrPassengers;
+          let rideStatus = 'active'; // Default status
 
-          console.log('Sending notification with the following data:', {
-            passengerId: userId,
-            driverId: this.data.driverId,
-            message: message
-          });
+          if (remainingPassengers <= 0) {
+            remainingPassengers = 0;
+            rideStatus = 'completed'; // Mark ride as completed if no seats are left
+          }
 
-          // Send the notification
-          this.http.post(notificationUrl, {}, { headers }).subscribe(
+          // Step 3: Update the ride's passenger number and status
+          const updatePassengersUrl = `http://localhost:8080/rides/${this.data.rideId}/update-passengers-status?nbrPassengers=${remainingPassengers}&status=${rideStatus}`;
+
+          this.http.patch(updatePassengersUrl, null, { headers }).subscribe(
             () => {
-              console.log('Notification sent successfully to driver ID:', this.data.driverId);
-              this.dialogRef.close();
-              this.router.navigate(['/passenger/rides-history']);
+              console.log('Ride passengers number and status updated successfully');
+
+              // Step 4: Notify the driver
+              const notifyDriverUrl = `http://localhost:8080/driver/notifications/create?passengerId=${userId}&driverId=${this.data.driverId}&message=Booking confirmed for ride ID: ${this.data.rideId}`;
+              
+              this.http.post(notifyDriverUrl, null, { headers }).subscribe(
+                () => {
+                  console.log('Driver notified successfully');
+                  this.dialogRef.close();
+                  this.router.navigate(['/passenger/rides-history']);
+                },
+                error => {
+                  console.error('Error notifying the driver', error);
+                }
+              );
             },
             error => {
-              console.error('Error sending notification', error);
+              console.error('Error updating ride passengers or status', error);
             }
           );
         },
         error => {
-          console.error('Error booking ride', error);
+          console.error('Error adding passenger to ride', error);
         }
       );
     } else {
