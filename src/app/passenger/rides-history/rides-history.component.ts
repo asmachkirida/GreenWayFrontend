@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RidesHistoryComponent implements OnInit {
   rides: any[] = [];
+  reviewDetails: string = '';
+  selectedRideId: number | null = null;
+  showAddReviewModal: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -23,14 +26,31 @@ export class RidesHistoryComponent implements OnInit {
     );
   }
 
-
-  openAddReviewPopup(rideId: number) {
-    // Logic to open add review popup
-    console.log('Add Review for Ride ID:', rideId);
+  openAddReviewPopup(rideId: number): void {
+    this.selectedRideId = rideId;
+    this.showAddReviewModal = true;
   }
 
-  openRateDriverPopup(rideId: number) {
-    // Logic to open rate driver popup
-    console.log('Rate Driver for Ride ID:', rideId);
+  closeAddReviewModal(): void {
+    this.showAddReviewModal = false;
+    this.reviewDetails = '';
+  }
+
+  submitReview(): void {
+    if (this.selectedRideId) {
+      const review = {
+        details: this.reviewDetails,
+        rideId: this.selectedRideId
+      };
+      this.http.post('http://localhost:8080/passenger/reviews', review).subscribe(
+        () => {
+          this.closeAddReviewModal();
+          this.ngOnInit(); // Refresh the rides history
+        },
+        (error) => {
+          console.error('Error submitting review:', error);
+        }
+      );
+    }
   }
 }

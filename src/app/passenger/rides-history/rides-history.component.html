@@ -1,31 +1,39 @@
 <div class="rides-history-container">
-    <h2>Rides History</h2>
-    <hr />
-    <div *ngFor="let ride of rides" class="ride-card">
-      <div class="ride-info">
-        <div class="ride-info-item">
-          <i class="fa fa-car"></i>
-          <span class="ride-info-text">{{ ride.startLocation }}</span>
-        </div>
-        <i class="fa fa-arrow-right"></i>
-        <div class="ride-info-item">
-          <i class="fa fa-car"></i>
-          <span class="ride-info-text">{{ ride.endLocation }}</span>
-        </div>
+  <h2>Rides History</h2>
+  <hr />
+  <div *ngFor="let ride of rides" class="ride-card">
+    <div class="ride-info">
+      <div class="ride-info-item">
+        <i class="fa fa-car"></i>
+        <span class="ride-info-text">{{ ride.startLocation }}</span>
       </div>
-      <div class="ride-details">
-        <p><i class="fa fa-calendar"></i> {{ ride.date | date: 'shortDate' }}</p>
-        <p><i class="fa fa-clock"></i> {{ ride.startTime }}</p>
-        <p><i class="fa fa-tachometer-alt"></i> Status: {{ ride.status }}</p>
-      </div>
-      <div class="ride-actions">
-        <button (click)="openAddReviewPopup(ride.id)" class="action-button">
-          <i class="fa fa-pencil-alt"></i> Add Review
-        </button>
-        <button (click)="openRateDriverPopup(ride.id)" class="action-button">
-          <i class="fa fa-star"></i> Rate Driver
-        </button>
+      <i class="fa fa-arrow-right"></i>
+      <div class="ride-info-item">
+        <i class="fa fa-car"></i>
+        <span class="ride-info-text">{{ ride.endLocation }}</span>
       </div>
     </div>
+    <div class="ride-details">
+      <p><i class="fa fa-calendar"></i> {{ ride.date | date: 'shortDate' }}</p>
+      <p><i class="fa fa-clock"></i> {{ ride.startTime }}</p>
+      <p><i class="fa fa-tachometer-alt"></i> Status: {{ ride.status }}</p>
+    </div>
+    <div class="ride-actions">
+      <button (click)="openAddReviewPopup(ride.id)" class="action-button">
+        <i class="fa fa-pencil-alt"></i> Add Review
+      </button>
+    </div>
   </div>
-  
+</div>
+
+<!-- Add Review Modal -->
+<div id="addReviewModal" class="modal" [ngClass]="{'show': showAddReviewModal}">
+  <div class="modal-content">
+    <span class="close" (click)="closeAddReviewModal()">&times;</span>
+    <h2>Add Review</h2>
+    <form (ngSubmit)="submitReview()">
+      <textarea [(ngModel)]="reviewDetails" name="review" required placeholder="Write your review here..."></textarea>
+      <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+  </div>
+</div>
