@@ -22,6 +22,9 @@
       <button (click)="openAddReviewPopup(ride.id)" class="action-button">
         <i class="fa fa-pencil-alt"></i> Add Review
       </button>
+      <button (click)="openUpdateRatingModal(ride.driverId)" class="action-button">
+        <i class="fa fa-star"></i> Rate Driver
+      </button>
     </div>
   </div>
 </div>
@@ -34,6 +37,30 @@
     <form (ngSubmit)="submitReview()">
       <textarea [(ngModel)]="reviewDetails" name="review" required placeholder="Write your review here..."></textarea>
       <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Update Rating Modal -->
+<div id="updateRatingModal" class="modal" [ngClass]="{'show': showUpdateRatingModal}">
+  <div class="modal-content">
+    <span class="close" (click)="closeUpdateRatingModal()">&times;</span>
+    <h2>Update Driver Rating</h2>
+    <form (ngSubmit)="submitRating()">
+      <label for="rating">New Rating:</label>
+      <input
+        type="number"
+        id="rating"
+        [(ngModel)]="newRating"
+        name="rating"
+        class="form-control"
+        min="0"
+        max="5"
+        step="0.1"
+        required
+      />
+      <button type="submit" class="btn btn-primary">Submit Rating</button>
     </form>
   </div>
 </div>
