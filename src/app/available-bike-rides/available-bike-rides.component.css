@@ -1,0 +1,255 @@
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+.left-pane {
+    width: 25%;
+    margin-top: 10px;
+}
+
+.right-pane {
+    width: 75%;
+    margin-top: 90px;
+    padding-left: 20px;
+}
+
+.filter-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.filter-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 10px 0;
+}
+
+.styled-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.styled-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.styled-checkbox input[type="checkbox"] + span {
+    position: relative;
+    padding-left: 35px;
+}
+
+.styled-checkbox input[type="checkbox"] + span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #3a5a40;
+    background: white;
+}
+
+.styled-checkbox input[type="checkbox"]:checked + span::before {
+    background: white;
+}
+
+.styled-checkbox input[type="checkbox"]:checked + span::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #3a5a40;
+}
+
+.styled-checkbox span:hover::before {
+    border-color: #588157;
+}
+
+.bike-ride-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.bike-ride-card:hover {
+    transform: translateY(-5px);
+}
+
+.bike-ride-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.time {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.book-now-button {
+    background-color: #3a5a40;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.book-now-button:hover {
+    background-color: #588157;
+}
+
+.bike-ride-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.route {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.date {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.info-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.info-box i {
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.filter-section label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.left-pane {
+    width: 25%;
+    margin-top: 25px;
+}
+
+.filter-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.filter-section label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 10px 0;
+}
+
+.styled-checkbox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.styled-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-icon {
+    color: #3a5a40; /* Green shade */
+    font-size: 22px;
+}
+
+
+.styled-checkbox:hover {
+    background-color: #f5f5f5; /* Light gray background on hover */
+    border-radius: 5px;
+}

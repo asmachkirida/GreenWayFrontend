@@ -1,1 +1,59 @@
-<p>available-bike-rides works!</p>
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="left-pane">
+        <div class="filter-card">
+            <h3>Filters</h3>
+            <hr>
+            <div class="filter-section">
+                <label class="styled-checkbox">
+                    <input type="checkbox" >
+                    <span>In My Area</span>
+                    <span class="checkbox-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                </label>
+                <hr>
+                <label class="styled-checkbox">
+                    <input type="checkbox" >
+                    <span>Everywhere</span>
+                    <span class="checkbox-icon">
+                        <i class="fas fa-globe"></i>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="right-pane">
+        <div *ngFor="let bikeRide of bikeRides" class="bike-ride-card">
+            <div class="bike-ride-header">
+                <div class="time">{{ bikeRide.startTime }} - {{ bikeRide.endTime }}</div>
+                <button class="book-now-button">Book Now</button>
+            </div>
+            <div class="bike-ride-body">
+                <div class="route">{{ bikeRide.startLocation }} &rarr; {{ bikeRide.endLocation }}</div>
+                <div class="date">{{ bikeRide.date | date:'fullDate' }}</div>
+                
+                <div class="info-row">
+                    <div class="info-box bike-info">
+                        <i class="fas fa-bike"></i>
+                        <p>{{ bikeRide.bikeModel }}</p>
+                    </div>
+                    <div *ngIf="bikeRide.airConditionning" class="info-box">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <div *ngIf="bikeRide.petAllowed" class="info-box">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div *ngIf="bikeRide.cigaretteAllowed" class="info-box">
+                        <i class="fas fa-smoking"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
