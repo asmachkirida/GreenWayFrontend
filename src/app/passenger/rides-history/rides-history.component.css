@@ -263,3 +263,65 @@ textarea {
 .btn-primary:hover {
   background-color: #588157; /* Darker green on hover */
 }
+
+
+
+/* Flexbox for Rating Form */
+.rating-form .rating-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between label, input, and button */
+}
+
+.rating-form .rating-input-container label {
+  flex: 1;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.rating-form .rating-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.rating-form .rating-icon {
+  color: #f4c542; /* Gold color for the star */
+  font-size: 1.2rem;
+  margin-right: 5px; /* Space between icon and input */
+}
+
+.rating-form .rating-input {
+  width: 70px; /* Adjust input width */
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.rating-form .rating-btn {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+/* Flexbox for Rating Form */
+.rating-form .rating-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the start */
+}
+
+.rating-form .rating-input-container label {
+  margin-right: 15px; /* Adjust spacing between label and input */
+  font-size: 1.1rem;
+}
+
+.rating-form .rating-input {
+  width: 220px; /* Increase input width */
+  text-align: center;
+  font-size: 1.1rem;
+  margin-right: 15px; /* Adjust spacing between input and button */
+}
+
+.rating-form .rating-btn {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+}

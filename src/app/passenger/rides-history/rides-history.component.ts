@@ -112,4 +112,7 @@ export class RidesHistoryComponent implements OnInit {
       );
     }
   }
+
+
+  
 }
