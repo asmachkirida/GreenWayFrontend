@@ -1,0 +1,72 @@
+<!-- bikeride-history.component.html -->
+<div class="bikeride-history">
+    <h2>My Bike Ride History</h2>
+    <h3>Display my bike rides and manage them</h3>
+    <hr>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>Start Location</th>
+          <th>End Location</th>
+          <th>Max Riders</th>
+
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ride of bikeRides">
+          <td>{{ ride.id }}</td>
+          <td>{{ ride.date | date }}</td>
+          <td>{{ ride.startTime }}</td>
+          <td>{{ ride.startLocation }}</td>
+          <td>{{ ride.endLocation }}</td>
+          <td>{{ ride.maxRiders }}</td>
+         
+          <td>
+            <button class="action-btn edit-btn" (click)="openEditModal(ride)">
+                <i class="fas fa-edit"></i>
+              </button>
+            <button class="action-btn delete-btn" (click)="deleteBikeRide(ride.id)">
+              <i class="fas fa-trash"></i>
+            </button>
+
+
+
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Edit Bike Ride Modal -->
+    <div class="modal" *ngIf="showEditModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeEditModal()">&times;</span>
+        <h3>Edit Bike Ride</h3>
+        <form (ngSubmit)="updateBikeRide()">
+          <label for="editStartLocation">Start Location:</label>
+          <input id="editStartLocation" [(ngModel)]="currentRide.startLocation" name="startLocation" required>
+  
+          <label for="editEndLocation">End Location:</label>
+          <input id="editEndLocation" [(ngModel)]="currentRide.endLocation" name="endLocation" required>
+  
+          <label for="editDate">Date:</label>
+          <input id="editDate" [(ngModel)]="currentRide.date" name="date" type="date" required>
+  
+          <label for="editStartTime">Start Time:</label>
+          <input id="editStartTime" [(ngModel)]="currentRide.startTime" name="startTime" type="time" required>
+  
+          <label for="editMaxRiders">Max Riders:</label>
+          <input id="editMaxRiders" [(ngModel)]="currentRide.maxRiders" name="maxRiders" type="number" required>
+  
+          <button type="submit">Update Bike Ride</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
