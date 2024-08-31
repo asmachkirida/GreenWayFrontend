@@ -12,7 +12,7 @@ export class BikerideHistoryComponent {
   currentRide: any = {};
   showAddModal: boolean = false;
   showEditModal: boolean = false;
-  driverId: number | null = null;
+  PassengerId: number | null = null;
   currentPage: number = 1;
   itemsPerPage: number = 6;
   totalItems: number = 0;
@@ -20,8 +20,8 @@ export class BikerideHistoryComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.driverId = this.getDriverIdFromLocalStorage();
-    if (this.driverId !== null) {
+    this.PassengerId = this.getDriverIdFromLocalStorage();
+    if (this.PassengerId !== null) {
       this.fetchBikeRides();
     } else {
       console.error('Driver ID is not set in local storage.');
@@ -34,9 +34,9 @@ export class BikerideHistoryComponent {
   }
 
   fetchBikeRides(): void {
-    if (this.driverId === null) return;
+    if (this.PassengerId === null) return;
 
-    this.http.get<any[]>(`http://localhost:8080/bike-rides/creator/38`)
+    this.http.get<any[]>(`http://localhost:8080/bike-rides/creator/${this.PassengerId}`)
       .subscribe(data => {
         this.totalItems = data.length;
         this.updatePage();
@@ -44,9 +44,9 @@ export class BikerideHistoryComponent {
   }
 
   updatePage(): void {
-    if (this.driverId === null) return;
+    if (this.PassengerId === null) return;
 
-    this.http.get<any[]>(`http://localhost:8080/bike-rides/creator/38`)
+    this.http.get<any[]>(`http://localhost:8080/bike-rides/creator/${this.PassengerId}`)
       .subscribe(data => {
         const startIndex = (this.currentPage - 1) * this.itemsPerPage;
         const endIndex = startIndex + this.itemsPerPage;
@@ -69,25 +69,7 @@ export class BikerideHistoryComponent {
     this.newRide = {}; // Clear form
   }
 
-  addBikeRide(): void {
-    if (this.driverId === null) {
-      console.error('Driver ID is not available.');
-      return;
-    }
-
-    this.newRide.creatorId = this.driverId;
-
-    this.http.post('http://localhost:8080/driver/bikerides', this.newRide)
-      .subscribe({
-        next: () => {
-          this.fetchBikeRides();
-          this.closeAddModal();
-        },
-        error: (err) => {
-          console.error('Error adding bike ride', err);
-        }
-      });
-  }
+ 
 
   openEditModal(ride: any): void {
     if (!ride || !ride.id) {
@@ -122,7 +104,7 @@ export class BikerideHistoryComponent {
   }
 
   deleteBikeRide(rideId: number): void {
-    this.http.delete(`http://localhost:8080/driver/bikerides/${rideId}`)
+    this.http.delete(`http://localhost:8080/bike-rides/${rideId}`)
       .subscribe(() => this.fetchBikeRides());
   }
 }
