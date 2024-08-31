@@ -8,8 +8,8 @@ import { SignupdriverComponent } from './pages/signupdriver/signupdriver.compone
 import { PassengerComponent } from './passenger/passenger/passenger.component';
 import { ProfileComponent } from './passenger/profile/profile.component';
 import { RidesHistoryComponent } from './passenger/rides-history/rides-history.component';
-import { BikeridesComponent } from './passenger/bikerides/bikerides.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { BikerideHistoryComponent } from './passenger/bikeride-history/bikeride-history.component';
 
 // Admin components
 import { StatisticsComponent } from './admin/statistics/statistics.component';
@@ -29,6 +29,7 @@ import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/r
 import { AddRideComponent } from './driver/add-ride/add-ride.component';
 import { CarComponent } from './driver/car/car.component';
 import { NotificationComponent } from './driver/notification/notification.component';
+import { AvailableBikeRidesComponent } from './available-bike-rides/available-bike-rides.component';
 const routes: Routes = [
   {
     path: '',
@@ -43,7 +44,7 @@ const routes: Routes = [
     children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'rides-history', component: RidesHistoryComponent },
-      { path: 'bikerides', component: BikeridesComponent },
+      { path: 'bikerides', component: BikerideHistoryComponent },
     ]
   },
   {
@@ -71,6 +72,7 @@ const routes: Routes = [
     ]
   },
   { path: 'hello', component: HelloComponent }, // This route does not include the common layout components
+  { path: 'available-bike-rides', component: AvailableBikeRidesComponent }, // This route does not include the common layout components
   { path: 'signin', component: SigninComponent, canActivate: [AuthGuard] },
   { path: 'signupdriver', component: SignupdriverComponent,canActivate: [AuthGuard]  },
   { path: 'signup', component: SignupComponent, canActivate: [AuthGuard] },

@@ -39,7 +39,6 @@ import { Page2Component } from './passenger/page2/page2.component';
 import { PassengerComponent } from './passenger/passenger/passenger.component';
 
 import { MatMenuModule } from '@angular/material/menu';
-import { BikeridesComponent } from './passenger/bikerides/bikerides.component';
 import { RidesHistoryComponent } from './passenger/rides-history/rides-history.component';
 import { ProfileComponent } from './passenger/profile/profile.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
@@ -69,6 +68,8 @@ import { CarComponent } from './driver/car/car.component';  // Import this modul
 
 import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/rides-history/rides-history.component';
 import { NotificationComponent } from './driver/notification/notification.component';
+import { BikerideHistoryComponent } from './passenger/bikeride-history/bikeride-history.component';
+import { AvailableBikeRidesComponent } from './available-bike-rides/available-bike-rides.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,6 @@ import { NotificationComponent } from './driver/notification/notification.compon
     Page1Component,
     Page2Component,
     PassengerComponent,
-    BikeridesComponent,
     RidesHistoryComponent,
     ProfileComponent,
     SearchResultsComponent,
@@ -110,7 +110,9 @@ import { NotificationComponent } from './driver/notification/notification.compon
     SignupdriverComponent,
     CarComponent,
     DriverRidesHistoryComponent,
-    NotificationComponent
+    NotificationComponent,
+    BikerideHistoryComponent,
+    AvailableBikeRidesComponent
   ],
   imports: [
     BrowserModule,
