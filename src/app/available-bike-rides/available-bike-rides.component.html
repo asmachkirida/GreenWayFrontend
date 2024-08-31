@@ -31,29 +31,26 @@
     <div class="right-pane">
         <div *ngFor="let bikeRide of bikeRides" class="bike-ride-card">
             <div class="bike-ride-header">
-                <div class="time">{{ bikeRide.startTime }} - {{ bikeRide.endTime }}</div>
-                <button class="book-now-button">Book Now</button>
+                <div class="time">{{ bikeRide.startTime }} </div>
+                <button class="book-now-button">Book my place now</button>
             </div>
             <div class="bike-ride-body">
-                <div class="route">{{ bikeRide.startLocation }} &rarr; {{ bikeRide.endLocation }}</div>
+                <div class="route">
+                    <i class="fas fa-bicycle"></i> {{ bikeRide.startLocation }} &rarr; {{ bikeRide.endLocation }}
+                </div>
+                <div class="available-places">Available Places: {{ bikeRide.maxRiders - bikeRide.participants.length }}</div>
                 <div class="date">{{ bikeRide.date | date:'fullDate' }}</div>
-                
-                <div class="info-row">
-                    <div class="info-box bike-info">
-                        <i class="fas fa-bike"></i>
-                        <p>{{ bikeRide.bikeModel }}</p>
+                <hr>
+                <div class="creator-info">
+                    <div class="creator-name">
+                        <strong>Creator:</strong>
                     </div>
-                    <div *ngIf="bikeRide.airConditionning" class="info-box">
-                        <i class="fas fa-snowflake"></i>
-                    </div>
-                    <div *ngIf="bikeRide.petAllowed" class="info-box">
-                        <i class="fas fa-paw"></i>
-                    </div>
-                    <div *ngIf="bikeRide.cigaretteAllowed" class="info-box">
-                        <i class="fas fa-smoking"></i>
+                    <div class="creator-gender">
+                        <strong>Gender:</strong>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
