@@ -84,17 +84,38 @@ hr {
 }
 
 .bike-ride-card {
-    background: #fff;
+    position: relative;
+    background-color: #fffbfb; /* Base grey background */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 15px;
     margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-.bike-ride-card:hover {
+    overflow: hidden; /* Ensure content doesn't overflow the rounded corners */
+  }
+  
+  .bike-ride-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 10%, rgba(88, 129, 87, 0.7), rgba(88, 129, 87, 0) 20%),
+                radial-gradient(circle at 85% 80%, rgba(52, 78, 65, 0.7), rgba(52, 78, 65, 0) 20%);
+    z-index: 0;
+    opacity: 1;
+  }
+  
+  .bike-ride-card .bike-ride-header,
+  .bike-ride-card .bike-ride-body {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .bike-ride-card:hover {
     transform: translateY(-5px);
-}
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 
 .bike-ride-header {
     display: flex;
@@ -273,9 +294,67 @@ hr {
 
 
 
+.bike-ride-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: -5px;
+  }
+  
 
 
 
 
 
 
+  .date-time {
+    display: flex;
+    gap: 10px;
+    font-weight: bold;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .book-now-button {
+    background-color: #3a5a40;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .book-now-button:hover {
+    background-color: #588157;
+  }
+  
+  .bike-ride-body {
+    margin-top: 10px;
+  }
+  
+  .route {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+  
+  .available-places {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .creator-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+    padding-top: 5px;
+  }
+  
+  .creator-info i {
+    color: #3a5a40; /* Green shade for icons */
+    padding-right: 5px;
+  }
+  
+  .separator {
+    margin: 0 8px;
+  }

@@ -30,27 +30,25 @@
     
     <div class="right-pane">
         <div *ngFor="let bikeRide of bikeRides" class="bike-ride-card">
-            <div class="bike-ride-header">
-                <div class="time">{{ bikeRide.startTime }} </div>
-                <button class="book-now-button">Book my place now</button>
+          <div class="bike-ride-header">
+            <button class="book-now-button">Book my place now</button>
+          </div>
+          <div class="bike-ride-body">
+            <div class="route">
+              <i class="fas fa-bicycle"></i> {{ bikeRide.startLocation }} &rarr; {{ bikeRide.endLocation }}
             </div>
-            <div class="bike-ride-body">
-                <div class="route">
-                    <i class="fas fa-bicycle"></i> {{ bikeRide.startLocation }} &rarr; {{ bikeRide.endLocation }}
-                </div>
-                <div class="available-places">Available Places: {{ bikeRide.maxRiders - bikeRide.participants.length }}</div>
-                <div class="date">{{ bikeRide.date | date:'fullDate' }}</div>
-                <hr>
-                <div class="creator-info">
-                    <div class="creator-name">
-                        <strong>Creator:</strong>
-                    </div>
-                    <div class="creator-gender">
-                        <strong>Gender:</strong>
-                    </div>
-                </div>
+            <div class="available-places">Available Places: {{ bikeRide.maxRiders - bikeRide.participants.length }}</div>
+            <div class="date-time">
+              <span class="date">{{ bikeRide.date | date:'fullDate' }} at {{ bikeRide.startTime }}</span>
+             
             </div>
+            <hr>
+            <div class="creator-info">
+              <i class="fas fa-user"></i> {{ creatorDetails[bikeRide.creatorId]?.firstName }} {{ creatorDetails[bikeRide.creatorId]?.lastName }} 
+              <span class="separator">|</span>
+              <i class="fas fa-{{ creatorDetails[bikeRide.creatorId]?.gender === 'Male' ? 'mars' : 'venus' }}"></i> {{ creatorDetails[bikeRide.creatorId]?.gender }}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    
-</div>

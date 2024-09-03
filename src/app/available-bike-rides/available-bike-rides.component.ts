@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AvailableBikeRidesComponent implements OnInit {
   bikeRides: any[] = [];
   userId: number | null = null;
+  creatorDetails: any = {};
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +32,11 @@ export class AvailableBikeRidesComponent implements OnInit {
       .subscribe(data => {
         // Filter out bike rides created by the current user
         this.bikeRides = data.filter(ride => ride.creatorId !== this.userId);
+        
+        // Fetch creator details for each ride
+        this.bikeRides.forEach(bikeRide => {
+          this.fetchCreatorDetails(bikeRide.creatorId);
+        });
       });
   }
 
@@ -46,6 +52,14 @@ export class AvailableBikeRidesComponent implements OnInit {
             console.error('Error joining bike ride', err);
           }
         });
+    }
+  }
+
+  fetchCreatorDetails(creatorId: number) {
+    if (!this.creatorDetails[creatorId]) {
+      this.http.get(`http://localhost:8080/admin/get-user/${creatorId}`).subscribe((data: any) => {
+        this.creatorDetails[creatorId] = data.ourUsers;
+      });
     }
   }
 }
