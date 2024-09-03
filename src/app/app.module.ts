@@ -70,6 +70,8 @@ import { RidesHistoryComponent as DriverRidesHistoryComponent } from './driver/r
 import { NotificationComponent } from './driver/notification/notification.component';
 import { BikerideHistoryComponent } from './passenger/bikeride-history/bikeride-history.component';
 import { AvailableBikeRidesComponent } from './available-bike-rides/available-bike-rides.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -143,7 +145,9 @@ import { AvailableBikeRidesComponent } from './available-bike-rides/available-bi
         MatSliderModule,
         FormsModule,
         MatDialogModule,
-        CommonModule  // Add CommonModule here
+        CommonModule,
+        NgxPaginationModule
+        // Add CommonModule here
 
   ],
   providers: [

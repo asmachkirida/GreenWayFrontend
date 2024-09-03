@@ -11,6 +11,10 @@ export class AvailableBikeRidesComponent implements OnInit {
   userId: number | null = null;
   creatorDetails: any = {};
 
+  // Pagination variables
+  currentPage: number = 1;
+  itemsPerPage: number = 3;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {

@@ -358,3 +358,37 @@ hr {
   .separator {
     margin: 0 8px;
   }
+
+
+
+  .pagination-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .pagination-controls .ngx-pagination {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .pagination-controls .ngx-pagination li {
+    display: inline-block;
+  }
+  
+  .pagination-controls .ngx-pagination li a {
+    display: block;
+    padding: 5px 10px;
+    background: #3a5a40;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .pagination-controls .ngx-pagination li a:hover,
+  .pagination-controls .ngx-pagination li.current a {
+    background: #588157;
+  }
+  

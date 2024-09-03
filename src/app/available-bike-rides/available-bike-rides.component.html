@@ -27,11 +27,10 @@
     
     
     
-    
     <div class="right-pane">
-        <div *ngFor="let bikeRide of bikeRides" class="bike-ride-card">
+        <div *ngFor="let bikeRide of bikeRides | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }" class="bike-ride-card">
           <div class="bike-ride-header">
-            <button class="book-now-button">Book my place now</button>
+            <button class="book-now-button" (click)="participateInBikeRide(bikeRide.id)">Book my place now</button>
           </div>
           <div class="bike-ride-body">
             <div class="route">
@@ -40,7 +39,6 @@
             <div class="available-places">Available Places: {{ bikeRide.maxRiders - bikeRide.participants.length }}</div>
             <div class="date-time">
               <span class="date">{{ bikeRide.date | date:'fullDate' }} at {{ bikeRide.startTime }}</span>
-             
             </div>
             <hr>
             <div class="creator-info">
@@ -50,5 +48,8 @@
             </div>
           </div>
         </div>
+      
+        <!-- Pagination controls -->
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
       </div>
-    </div>
+      
