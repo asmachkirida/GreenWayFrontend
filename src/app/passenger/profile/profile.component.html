@@ -63,8 +63,17 @@
     <div class="profile-card small-card recent-activity">
       <h3>Recent Activity</h3>
       <div class="activity-item">
-        <span class="activity-date">2024-08-17</span>
-        <p>Joined a ride from New York to Boston.</p>
+        <span class="activity-date" *ngIf="mostRecentActivityDate">
+          {{ mostRecentActivityDate }}
+        </span>        <p *ngIf="recentActivityDescription">
+          {{ recentActivityDescription }}
+        </p>
+
+    
+
+        <ng-template #noActivity>
+          <p>No recent activity found.</p>
+        </ng-template>
       </div>
     </div>
 

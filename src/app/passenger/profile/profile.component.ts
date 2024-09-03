@@ -16,6 +16,9 @@ export class ProfileComponent implements OnInit {
   profileImage: string = '';  // Default profile image
   totalBikeRides: number = 0;
   totalCarRides: number = 0;
+  mostRecentActivityDate: string | null = null;
+  recentActivityDescription: string = ''; // For description
+
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
@@ -32,17 +35,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     console.log("ngOnInit called");
     this.extractUserEmailFromToken();
-    if (this.userEmail) {
+
+    // Move this into a separate function for better code organization
+    this.getUserIdFromLocalStorage();
+
+    if (this.userEmail && this.userId !== null) {
       this.loadUserData();
-      this.getUserIdFromLocalStorage();
-      if (this.userId) {
-        this.fetchTotalBikeRides();
-        this.fetchTotalCarRides();
-      }
+      this.fetchTotalBikeRides();
+      this.fetchTotalCarRides();
+      this.fetchRecentActivity(); // Add this line to fetch recent activity
+
     } else {
-      console.warn('No user email found. User may not be logged in.');
+      console.warn('No user email or user ID found. User may not be logged in.');
     }
   }
+
   getUserIdFromLocalStorage() {
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
@@ -153,5 +160,50 @@ export class ProfileComponent implements OnInit {
     } else {
       alert('Please ensure all fields are correctly filled and passwords match.');
     }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+fetchRecentActivity() {
+    if (this.userId) {
+      this.http.get<any[]>(`http://localhost:8080/rides/passenger/${this.userId}`).subscribe(data => {
+        const mostRecent = this.findMostRecentDate(data);
+        this.mostRecentActivityDate = mostRecent.dateString; // Formatted date string
+        this.recentActivityDescription = mostRecent.description; // Activity description
+      }, error => {
+        console.error('Error fetching recent activity:', error);
+      });
+    }
+  }
+
+  findMostRecentDate(data: any[]): { dateString: string, description: string } {
+    if (data.length === 0) {
+      return { dateString: '', description: 'No recent activity found.' };
+    }
+
+    let mostRecentDate = new Date(0);
+    let recentDescription = '';
+
+    data.forEach(ride => {
+      const rideDate = new Date(ride.date);
+      if (rideDate > mostRecentDate) {
+        mostRecentDate = rideDate;
+        recentDescription = `Joined a ride from ${ride.startLocation} to ${ride.endLocation}.`; // Customize as needed
+      }
+    });
+
+    return {
+      dateString: mostRecentDate.toISOString().split('T')[0], // Format date as yyyy-mm-dd
+      description: recentDescription
+    };
   }
 }
