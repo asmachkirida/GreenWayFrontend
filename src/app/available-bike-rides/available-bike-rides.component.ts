@@ -15,6 +15,12 @@ export class AvailableBikeRidesComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 3;
 
+  // Modal variables
+  showModal: boolean = false;
+  selectedBikeRideId: number | null = null;
+
+  modalMessage: string = '';
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -34,29 +40,37 @@ export class AvailableBikeRidesComponent implements OnInit {
   fetchAvailableBikeRides(): void {
     this.http.get<any[]>('http://localhost:8080/bike-rides')
       .subscribe(data => {
-        // Filter out bike rides created by the current user
         this.bikeRides = data.filter(ride => ride.creatorId !== this.userId);
-        
-        // Fetch creator details for each ride
         this.bikeRides.forEach(bikeRide => {
           this.fetchCreatorDetails(bikeRide.creatorId);
         });
       });
   }
 
-  participateInBikeRide(bikeRideId: number): void {
-    if (this.userId !== null) {
-      this.http.post(`http://localhost:8080/bike-rides/${bikeRideId}/participants/${this.userId}`, {})
+  openConfirmationModal(bikeRideId: number): void {
+    this.selectedBikeRideId = bikeRideId;
+    this.modalMessage = 'Are you sure you want to book a place in this bike ride?';
+    this.showModal = true;
+  }
+
+  confirmBooking(): void {
+    if (this.selectedBikeRideId !== null && this.userId !== null) {
+      this.http.post(`http://localhost:8080/bike-rides/${this.selectedBikeRideId}/participants/${this.userId}`, {})
         .subscribe({
           next: () => {
-            alert('Successfully joined the bike ride!');
-            // Optionally, you can refresh the list or update the UI here
+            console.log('Successfully joined the bike ride!');
+            this.showModal = false;
+            this.fetchAvailableBikeRides(); // Refresh the list
           },
           error: (err) => {
             console.error('Error joining bike ride', err);
           }
         });
     }
+  }
+
+  cancelBooking(): void {
+    this.showModal = false;
   }
 
   fetchCreatorDetails(creatorId: number) {

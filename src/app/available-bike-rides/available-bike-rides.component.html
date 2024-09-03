@@ -30,13 +30,13 @@
     <div class="right-pane">
         <div *ngFor="let bikeRide of bikeRides | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }" class="bike-ride-card">
           <div class="bike-ride-header">
-            <button class="book-now-button" (click)="participateInBikeRide(bikeRide.id)">Book my place now</button>
-          </div>
+            <button class="book-now-button" (click)="openConfirmationModal(bikeRide.id)">Book my place now</button>
+        </div>
           <div class="bike-ride-body">
             <div class="route">
               <i class="fas fa-bicycle"></i> {{ bikeRide.startLocation }} &rarr; {{ bikeRide.endLocation }}
             </div>
-            <div class="available-places">Available Places: {{ bikeRide.maxRiders - bikeRide.participants.length }}</div>
+            <div class="available-places">Available Places: {{ bikeRide.maxRiders }}</div>
             <div class="date-time">
               <span class="date">{{ bikeRide.date | date:'fullDate' }} at {{ bikeRide.startTime }}</span>
             </div>
@@ -53,3 +53,14 @@
         <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
       </div>
       
+       <!-- Confirmation Modal -->
+  <div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>{{ modalMessage }}</h3>
+      <div class="modal-actions">
+        <button class="btn cancel" (click)="cancelBooking()">Cancel</button>
+        <button class="btn confirm" (click)="confirmBooking()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
