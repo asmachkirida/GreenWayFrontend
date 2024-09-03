@@ -84,6 +84,16 @@ export class AvailableBikeRidesComponent implements OnInit {
 
   inMyArea: boolean = false;
   everywhere: boolean = true;
+  onFilterChange(filterType: 'inMyArea' | 'everywhere'): void {
+    if (filterType === 'inMyArea') {
+      this.inMyArea = true;
+      this.everywhere = false;
+    } else if (filterType === 'everywhere') {
+      this.everywhere = true;
+      this.inMyArea = false;
+    }
+    this.fetchAvailableBikeRides();
+  }
   
   fetchAvailableBikeRides(): void {
     this.http.get<any[]>('http://localhost:8080/bike-rides')

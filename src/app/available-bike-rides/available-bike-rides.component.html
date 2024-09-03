@@ -7,7 +7,7 @@
           <hr>
           <div class="filter-section">
             <label class="styled-checkbox">
-              <input type="checkbox" [(ngModel)]="inMyArea" (change)="fetchAvailableBikeRides()">
+              <input type="checkbox" [checked]="inMyArea" (change)="onFilterChange('inMyArea')">
               <span>In My Area</span>
               <span class="checkbox-icon">
                 <i class="fas fa-map-marker-alt"></i>
@@ -15,7 +15,7 @@
             </label>
             <hr>
             <label class="styled-checkbox">
-              <input type="checkbox" [(ngModel)]="everywhere" (change)="fetchAvailableBikeRides()">
+              <input type="checkbox" [checked]="everywhere" (change)="onFilterChange('everywhere')">
               <span>Everywhere</span>
               <span class="checkbox-icon">
                 <i class="fas fa-globe"></i>
@@ -24,6 +24,7 @@
           </div>
         </div>
       </div>
+      
       
     
     
