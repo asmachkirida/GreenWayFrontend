@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 @Component({
   selector: 'app-driverprofile',
   templateUrl: './driverprofile.component.html',
-  styleUrl: './driverprofile.component.css'
+  styleUrls: ['./driverprofile.component.css']
 })
 export class DriverprofileComponent implements OnInit {
   profileForm: FormGroup;
@@ -14,6 +14,11 @@ export class DriverprofileComponent implements OnInit {
   userEmail: string | null = null;  // Store email instead of user ID
   userId: number | null = null;  // Store user ID
   profileImage: string = '';  // Default profile image
+  totalRides: number = 0;
+  recentActivity: any[] = [];
+  rating: number | null = null;
+  mostRecentActivityDate: string | null = null;
+  recentActivityDescription: string = ''; // For description
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
@@ -31,10 +36,14 @@ export class DriverprofileComponent implements OnInit {
   ngOnInit(): void {
     console.log("ngOnInit called");
     this.extractUserEmailFromToken();
-    if (this.userEmail) {
+    this.extractUserIdFromLocalStorage();
+    if (this.userEmail && this.userId !== null) {
       this.loadUserData();
+      this.loadTotalRides();
+      this.loadRecentActivity();
+      this.fetchRecentActivity(); // Add this line to fetch recent activity
     } else {
-      console.warn('No user email found. User may not be logged in.');
+      console.warn('No user email or ID found. User may not be logged in.');
     }
   }
 
@@ -54,6 +63,12 @@ export class DriverprofileComponent implements OnInit {
     }
   }
 
+  extractUserIdFromLocalStorage() {
+    const userId = localStorage.getItem('userId');
+    console.log('User ID:', userId);
+    this.userId = userId ? parseInt(userId, 10) : null;
+  }
+
   loadUserData() {
     if (this.userEmail) {
       console.log("Loading user data for email:", this.userEmail);
@@ -66,6 +81,9 @@ export class DriverprofileComponent implements OnInit {
 
         // Set the profile image based on gender
         this.profileImage = gender === 'Female' ? 'gal0.png' : 'pro.png';
+
+        // Set the rating
+        this.rating = data.ourUsers.rating;
 
         // Patch the form with user data
         this.profileForm.patchValue({
@@ -87,6 +105,38 @@ export class DriverprofileComponent implements OnInit {
       });
     }
   }
+
+  loadTotalRides() {
+    if (this.userId !== null) {
+      this.http.get<any[]>(`http://localhost:8080/rides/driver/${this.userId}`).subscribe(rides => {
+        this.totalRides = rides.length;
+        console.log('Total Rides:', this.totalRides);
+      }, error => {
+        console.error('Error fetching rides:', error);
+        alert('Failed to load total rides.');
+      });
+    }
+  }
+
+// driverprofile.component.ts
+
+loadRecentActivity(): void {
+  if (this.userId !== null) {
+    this.http.get<any[]>(`http://localhost:8080/rides/driver/${this.userId}`).subscribe(rides => {
+      // Assuming the API response contains rides with a date field
+      this.recentActivity = rides
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 10); // Get the most recent 10 rides, adjust as needed
+
+      console.log('Recent Activity:', this.recentActivity);
+    }, error => {
+      console.error('Error fetching recent activity:', error);
+      alert('Failed to load recent activity.');
+    });
+  }
+}
+
+
 
   enableEditing() {
     this.isEditing = true;
@@ -114,4 +164,41 @@ export class DriverprofileComponent implements OnInit {
       alert('Please ensure all fields are correctly filled and passwords match.');
     }
   }
+
+
+  
+fetchRecentActivity() {
+  if (this.userId) {
+    this.http.get<any[]>(`http://localhost:8080/rides/driver/${this.userId}`).subscribe(data => {
+      const mostRecent = this.findMostRecentDate(data);
+      this.mostRecentActivityDate = mostRecent.dateString; // Formatted date string
+      this.recentActivityDescription = mostRecent.description; // Activity description
+    }, error => {
+      console.error('Error fetching recent activity:', error);
+    });
+  }
+}
+
+findMostRecentDate(data: any[]): { dateString: string, description: string } {
+  if (data.length === 0) {
+    return { dateString: '', description: 'No recent activity found.' };
+  }
+
+  let mostRecentDate = new Date(0);
+  let recentDescription = '';
+
+  data.forEach(ride => {
+    const rideDate = new Date(ride.date);
+    if (rideDate > mostRecentDate) {
+      mostRecentDate = rideDate;
+      recentDescription = `Added a ride from ${ride.startLocation} to ${ride.endLocation}.`; // Customize as needed
+    }
+  });
+
+  return {
+    dateString: mostRecentDate.toISOString().split('T')[0], // Format date as yyyy-mm-dd
+    description: recentDescription
+  };
+}
+
 }
