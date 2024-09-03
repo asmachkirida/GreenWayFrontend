@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-drivers',
@@ -67,10 +70,7 @@ export class DriversComponent implements OnInit {
     }
   }
 
-  exportData() {
-    // Implement export logic (e.g., export to CSV or Excel)
-    console.log('Export data');
-  }
+
 
   deleteDriver(id: number) {
     if (confirm('Are you sure you want to delete this driver?')) {
@@ -84,4 +84,41 @@ export class DriversComponent implements OnInit {
       });
     }
   }
+
+  exportData() {
+    // Fetch all drivers, not just the paginated ones
+    this.http.get<any[]>(`http://localhost:8080/admin/drivers`).subscribe(data => {
+      const csvData = this.convertToCSV(data);
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+      saveAs(blob, 'drivers.csv');
+    });
+  }
+  
+  convertToCSV(drivers: any[]): string {
+    const header = ['ID', 'Email', 'First Name', 'Last Name', 'Birth Date', 'Phone Number', 'Gender', 'City', 'License Number', 'Rating'];
+    const rows = drivers.map(driver => [
+      driver.id,
+      driver.email,
+      driver.firstName,
+      driver.lastName,
+      new Date(driver.birthDate).toLocaleDateString(), // Format the date as needed
+      driver.phoneNumber,
+      driver.gender,
+      driver.city,
+      driver.licenseNumber || 'N/A',
+      driver.rating
+    ]);
+  
+    const csvContent = [header, ...rows].map(e => e.join(',')).join('\n');
+    return csvContent;
+  }
+  
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
+    saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
 }
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
