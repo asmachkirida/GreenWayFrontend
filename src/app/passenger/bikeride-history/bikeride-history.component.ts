@@ -62,11 +62,15 @@ export class BikerideHistoryComponent {
 
   openAddModal(): void {
     this.showAddModal = true;
+    this.updatePage();
+
   }
 
   closeAddModal(): void {
     this.showAddModal = false;
     this.newRide = {}; // Clear form
+    this.updatePage();
+
   }
 
  
@@ -78,6 +82,8 @@ export class BikerideHistoryComponent {
     }
     this.currentRide = { ...ride }; // Copy ride data
     this.showEditModal = true;
+    this.updatePage();
+
   }
 
   closeEditModal(): void {

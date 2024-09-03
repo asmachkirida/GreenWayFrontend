@@ -14,7 +14,8 @@ export class ProfileComponent implements OnInit {
   userEmail: string | null = null;  // Store email instead of user ID
   userId: number | null = null;  // Store user ID
   profileImage: string = '';  // Default profile image
-
+  totalBikeRides: number = 0;
+  totalCarRides: number = 0;
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
@@ -33,8 +34,47 @@ export class ProfileComponent implements OnInit {
     this.extractUserEmailFromToken();
     if (this.userEmail) {
       this.loadUserData();
+      this.getUserIdFromLocalStorage();
+      if (this.userId) {
+        this.fetchTotalBikeRides();
+        this.fetchTotalCarRides();
+      }
     } else {
       console.warn('No user email found. User may not be logged in.');
+    }
+  }
+  getUserIdFromLocalStorage() {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      this.userId = parseInt(storedUserId, 10);
+      console.log('User ID:', this.userId);
+    } else {
+      console.warn('No user ID found in localStorage.');
+    }
+  }
+  fetchTotalBikeRides() {
+    if (this.userId) {
+      this.http.get<any[]>(`http://localhost:8080/bike-rides/creator/${this.userId}`).subscribe(data => {
+        this.totalBikeRides = data.length;
+        console.log(data);
+      }, error => {
+        console.error('Error fetching bike rides:', error);
+      });
+    }
+  }
+
+  fetchTotalCarRides() {
+
+    if (this.userId) {
+
+      this.http.get<any[]>(`http://localhost:8080/rides/passenger/${this.userId}`).subscribe(data => {
+
+        this.totalCarRides = data.length;
+        console.log(data);
+
+      }, error => {
+        console.error('Error fetching car rides:', error);
+      });
     }
   }
 
