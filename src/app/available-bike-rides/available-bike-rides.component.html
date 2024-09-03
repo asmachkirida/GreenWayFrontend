@@ -3,27 +3,28 @@
 <div class="container">
     <div class="left-pane">
         <div class="filter-card">
-            <h3>Filters</h3>
+          <h3>Filters</h3>
+          <hr>
+          <div class="filter-section">
+            <label class="styled-checkbox">
+              <input type="checkbox" [(ngModel)]="inMyArea" (change)="fetchAvailableBikeRides()">
+              <span>In My Area</span>
+              <span class="checkbox-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </span>
+            </label>
             <hr>
-            <div class="filter-section">
-                <label class="styled-checkbox">
-                    <input type="checkbox" >
-                    <span>In My Area</span>
-                    <span class="checkbox-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </span>
-                </label>
-                <hr>
-                <label class="styled-checkbox">
-                    <input type="checkbox" >
-                    <span>Everywhere</span>
-                    <span class="checkbox-icon">
-                        <i class="fas fa-globe"></i>
-                    </span>
-                </label>
-            </div>
+            <label class="styled-checkbox">
+              <input type="checkbox" [(ngModel)]="everywhere" (change)="fetchAvailableBikeRides()">
+              <span>Everywhere</span>
+              <span class="checkbox-icon">
+                <i class="fas fa-globe"></i>
+              </span>
+            </label>
+          </div>
         </div>
-    </div>
+      </div>
+      
     
     
     
