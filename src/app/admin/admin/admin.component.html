@@ -2,8 +2,8 @@
     <!-- Left Pane: Sidebar -->
     <div class="admin-sidebar">
       <div class="sidebar-header">
-        <h2>GreenWay Admin</h2>
-      </div>
+        <img src="logo.png" alt="App Logo" class="app-logo">
+    </div>
       <ul class="nav-list">
         <li class="nav-item" [routerLink]="['/admin/statistics']" routerLinkActive="active">
           <i class="fas fa-home"></i><span>Dashboard</span>
@@ -25,12 +25,9 @@
         </li>
       </ul>
       <div class="sidebar-footer">
-        <li class="nav-item">
-          <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+        <li class="nav-item" (click)="logout()">          <i class="fas fa-sign-out-alt"></i><span>Logout</span>
         </li>
-        <li class="nav-item">
-          <i class="fas fa-cog"></i><span>Settings</span>
-        </li>
+     
       </div>
     </div>
   
