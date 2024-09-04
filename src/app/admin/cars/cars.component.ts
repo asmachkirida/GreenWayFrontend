@@ -13,7 +13,8 @@ export class CarsComponent implements OnInit {
   totalPages = 1;
   searchTerm = '';
   drivers: { [key: number]: string } = {}; // Store driver full names by ID
-
+  showEditCarModal = false;
+  selectedCar: any = null;
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -131,5 +132,49 @@ export class CarsComponent implements OnInit {
     ).join('\n');
     return header + rows;
   }
+
+
+  openEditCarModal(car: any) {
+    this.selectedCar = { ...car };
+    this.showEditCarModal = true;
+  }
+
+  closeEditCarModal() {
+    this.showEditCarModal = false;
+  }
+
+  updateCar(): void {
+    if (!this.selectedCar || !this.selectedCar.id) {
+      console.error('Car ID is required for updating.');
+      return;
+    }
+  
+    const carData = {
+      model: this.selectedCar.model,
+      licensePlate: this.selectedCar.licensePlate,
+      capacity: this.selectedCar.capacity,
+      brand: this.selectedCar.brand,
+      color: this.selectedCar.color,
+      driverId: this.selectedCar.driverId // Assuming driverId is the only necessary reference
+    };
+  
+    console.log('Data being sent to update the car:', carData);
+  
+    this.http.put(`http://localhost:8080/driver/cars/${this.selectedCar.id}`, carData)
+      .subscribe({
+        next: () => {
+          this.loadCars(); // Reload the car list
+          this.closeEditCarModal(); // Close the modal
+          console.log("done!!!");
+          this.loadCars(); // Reload the car list
+
+        },
+        error: (err) => {
+          console.error('Error updating car:', err);
+        }
+      });
+  }
+  
+
   
 }

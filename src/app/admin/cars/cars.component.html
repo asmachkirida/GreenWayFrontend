@@ -44,7 +44,7 @@
           <td>{{ car.color }}</td>
           <td>{{ drivers[car.driverId] || 'Loading...' }}</td>
           <td>
-            <button (click)="editCar(car.id)" class="action-btn edit-btn">
+            <button (click)="openEditCarModal(car)" class="action-btn edit-btn">
               <i class="fas fa-edit"></i>
             </button>
             <button (click)="deleteCar(car.id)" class="action-btn delete-btn">
@@ -62,3 +62,32 @@
     </div>
   </div>
   
+
+  <!-- Modal for editing a car -->
+<div class="modal" *ngIf="showEditCarModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditCarModal()">&times;</span>
+    <h2>Edit Car</h2>
+    <form (submit)="updateCar()">
+      <label for="edit-brand">Brand:</label>
+      <input id="edit-brand" [(ngModel)]="selectedCar.brand" name="brand" required>
+
+      <label for="edit-model">Model:</label>
+      <input id="edit-model" [(ngModel)]="selectedCar.model" name="model" required>
+
+      <label for="edit-capacity">Capacity:</label>
+      <input id="edit-capacity" [(ngModel)]="selectedCar.capacity" name="capacity" type="number" required>
+
+      <label for="edit-licensePlate">License Plate:</label>
+      <input id="edit-licensePlate" [(ngModel)]="selectedCar.licensePlate" name="licensePlate" required>
+
+      <label for="edit-color">Color:</label>
+      <input id="edit-color" [(ngModel)]="selectedCar.color" name="color" required>
+
+      <label for="edit-driverName">Driver Name:</label>
+      <input id="edit-driverName" [(ngModel)]="selectedCar.driverName" name="driverName" disabled>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</div>
