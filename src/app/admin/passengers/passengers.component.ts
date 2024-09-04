@@ -51,10 +51,7 @@ export class PassengersComponent implements OnInit {
     }
   }
 
-  exportData() {
-    console.log('Export data');
-    // Implement export logic (e.g., export to CSV or Excel)
-  }
+
 
   deletePassenger(id: number) {
     if (confirm('Are you sure you want to delete this passenger?')) {
@@ -65,4 +62,33 @@ export class PassengersComponent implements OnInit {
       });
     }
   }
+
+
+  exportData() {
+    this.http.get<any[]>(`http://localhost:8080/admin/passengers`).subscribe(data => {
+      this.exportToCSV(data);
+    }, error => {
+      console.error('Error exporting data:', error);
+    });
+  }
+  
+  exportToCSV(data: any[]) {
+    const csvData = this.convertToCSV(data);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'passengers.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
+  convertToCSV(data: any[]): string {
+    const header = 'ID,Email,First Name,Last Name,Birth Date,Phone Number,Gender,City,Membership\n';
+    const rows = data.map(passenger =>
+      `${passenger.id},${passenger.email},${passenger.firstName},${passenger.lastName},${new Date(passenger.birthDate).toLocaleDateString()},${passenger.phoneNumber},${passenger.gender},${passenger.city},${passenger.membership || 'N/A'}`
+    ).join('\n');
+    return header + rows;
+  }
+  
 }
