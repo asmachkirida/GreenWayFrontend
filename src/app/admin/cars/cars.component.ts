@@ -102,7 +102,34 @@ export class CarsComponent implements OnInit {
     }
   }
 
+
+
+
   exportData() {
-    console.log('Export data');
+    this.http.get<any[]>(`http://localhost:8080/driver/cars`).subscribe(data => {
+      this.exportToCSV(data);
+    }, error => {
+      console.error('Error exporting data:', error);
+    });
   }
+  
+  exportToCSV(data: any[]) {
+    const csvData = this.convertToCSV(data);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cars.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
+  convertToCSV(data: any[]): string {
+    const header = 'ID,Brand,Model,Capacity,License Plate,Color,Driver Name\n';
+    const rows = data.map(car =>
+      `${car.id},${car.brand},${car.model},${car.capacity},${car.licensePlate},${car.color},${this.drivers[car.driverId] || 'Unknown Driver'}`
+    ).join('\n');
+    return header + rows;
+  }
+  
 }
