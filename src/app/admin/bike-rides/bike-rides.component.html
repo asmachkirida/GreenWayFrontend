@@ -1,5 +1,16 @@
 <div class="bike-rides-container">
-    <button (click)="exportData()">Export to CSV</button>
+    <div class="header">
+      <h1>Bike Rides</h1>
+  
+      <div class="header-actions">
+        <h3>Bike Rides List</h3>
+        <div class="actions">
+          <button class="export-btn" (click)="exportData()">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+        </div>
+      </div>
+    </div>
   
     <table>
       <thead>
@@ -17,42 +28,52 @@
       <tbody>
         <tr *ngFor="let ride of bikeRides">
           <td>{{ ride.id }}</td>
-          <td>{{ ride.date | date: 'shortDate' }}</td>
+          <td>{{ ride.date | date }}</td>
           <td>{{ ride.startTime }}</td>
           <td>{{ ride.startLocation }}</td>
           <td>{{ ride.endLocation }}</td>
           <td>{{ ride.maxRiders }}</td>
-          <td>{{ ride.creatorName || 'N/A' }}</td>
+          <td>{{ ride.creatorId }}</td>
           <td>
-            <button (click)="openAddEditBikeRideModal(ride)">Edit</button>
-            <button (click)="deleteBikeRide(ride.id)">Delete</button>
+            <button (click)="openAddEditBikeRideModal(ride)" class="action-btn edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deleteBikeRide(ride.id)" class="action-btn delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   
-    <!-- Add/Edit Bike Ride Modal -->
-    <div *ngIf="showAddEditBikeRideModal" class="modal">
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  
+    <!-- Modal for adding or editing a bike ride -->
+    <div class="modal" *ngIf="showAddEditBikeRideModal">
       <div class="modal-content">
         <span class="close" (click)="closeAddEditBikeRideModal()">&times;</span>
-        <h2>{{ selectedBikeRide.id ? 'Edit' : 'Add' }} Bike Ride</h2>
+        <h2>{{ selectedBikeRide?.id ? 'Edit Bike Ride' : 'Add New Bike Ride' }}</h2>
         <form (ngSubmit)="saveBikeRide()">
           <label for="startLocation">Start Location:</label>
-          <input id="startLocation" [(ngModel)]="selectedBikeRide.startLocation" name="startLocation" required />
+          <input id="startLocation" [(ngModel)]="selectedBikeRide.startLocation" name="startLocation" required>
   
           <label for="endLocation">End Location:</label>
-          <input id="endLocation" [(ngModel)]="selectedBikeRide.endLocation" name="endLocation" required />
+          <input id="endLocation" [(ngModel)]="selectedBikeRide.endLocation" name="endLocation" required>
   
           <label for="date">Date:</label>
-          <input id="date" type="date" [(ngModel)]="selectedBikeRide.date" name="date" required />
+          <input id="date" [(ngModel)]="selectedBikeRide.date" name="date" type="date" required>
   
           <label for="startTime">Start Time:</label>
-          <input id="startTime" type="time" [(ngModel)]="selectedBikeRide.startTime" name="startTime" required />
+          <input id="startTime" [(ngModel)]="selectedBikeRide.startTime" name="startTime" type="time" required>
   
           <label for="maxRiders">Max Riders:</label>
-          <input id="maxRiders" type="number" [(ngModel)]="selectedBikeRide.maxRiders" name="maxRiders" required />
+          <input id="maxRiders" [(ngModel)]="selectedBikeRide.maxRiders" name="maxRiders" type="number" required>
   
-          <button type="submit">{{ selectedBikeRide.id ? 'Update' : 'Add' }} Ride</button>
+          <button type="submit">{{ selectedBikeRide?.id ? 'Update Ride' : 'Add Ride' }}</button>
         </form>
       </div>
     </div>
