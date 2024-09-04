@@ -12,7 +12,8 @@ export class PassengersComponent implements OnInit {
   pageSize = 6;
   totalPages = 1;
   searchTerm = '';
-
+  selectedPassenger: any = null;
+  showEditPassengerModal = false;
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -32,10 +33,7 @@ export class PassengersComponent implements OnInit {
     this.loadPassengers();
   }
 
-  editPassenger(id: number) {
-    console.log('Edit passenger', id);
-    // Add logic to navigate to edit form or open a modal for editing
-  }
+
 
   prevPage() {
     if (this.currentPage > 1) {
@@ -91,4 +89,45 @@ export class PassengersComponent implements OnInit {
     return header + rows;
   }
   
+
+
+
+  editPassenger(passenger: any) {
+    this.selectedPassenger = { ...passenger }; 
+    this.showEditPassengerModal = true;
+  }
+
+  closeEditPassengerModal() {
+    this.showEditPassengerModal = false;
+  }
+
+  updatePassenger() {
+    if (!this.selectedPassenger || !this.selectedPassenger.id) {
+      console.error('Passenger ID is required for updating.');
+      return;
+    }
+
+    const updatedPassenger = {
+      email: this.selectedPassenger.email,
+      firstName: this.selectedPassenger.firstName,
+      lastName: this.selectedPassenger.lastName,
+      birthDate: this.selectedPassenger.birthDate,
+      phoneNumber: this.selectedPassenger.phoneNumber,
+      gender: this.selectedPassenger.gender,
+      city: this.selectedPassenger.city,
+      membership: this.selectedPassenger.membership,
+      role: 'PASSENGER' // Ensure the role is included
+    };
+
+    this.http.put(`http://localhost:8080/admin/update/${this.selectedPassenger.id}`, updatedPassenger)
+      .subscribe({
+        next: () => {
+          this.loadPassengers(); 
+          this.closeEditPassengerModal(); // Close the modal
+        },
+        error: (err) => {
+          console.error('Error updating passenger', err);
+        }
+      });
+  }
 }
