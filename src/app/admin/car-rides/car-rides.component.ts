@@ -11,7 +11,6 @@ export class CarRidesComponent implements OnInit {
   currentPage = 1;
   pageSize = 6;
   totalPages = 1;
-  searchTerm = '';
   selectedRide: any = null;
   showAddEditRideModal = false;
 
@@ -22,16 +21,10 @@ export class CarRidesComponent implements OnInit {
   }
 
   loadRides() {
-    const searchQuery = this.searchTerm.trim() ? `?searchTerm=${encodeURIComponent(this.searchTerm.trim())}` : '';
-    this.http.get<any[]>(`http://localhost:8080/admin/rides/search${searchQuery}`).subscribe(data => {
+    this.http.get<any[]>('http://localhost:8080/rides').subscribe(data => {
       this.totalPages = Math.ceil(data.length / this.pageSize);
       this.rides = data.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
     });
-  }
-
-  searchRides() {
-    this.currentPage = 1;
-    this.loadRides();
   }
 
   prevPage() {
@@ -50,7 +43,7 @@ export class CarRidesComponent implements OnInit {
 
   deleteRide(id: number) {
     if (confirm('Are you sure you want to delete this ride?')) {
-      this.http.delete(`http://localhost:8080/admin/delete-ride/${id}`).subscribe(() => {
+      this.http.delete(`http://localhost:8080/rides/${id}`).subscribe(() => {
         this.loadRides(); 
       }, error => {
         console.error('Error deleting ride:', error);
@@ -69,7 +62,7 @@ export class CarRidesComponent implements OnInit {
 
   saveRide() {
     if (!this.selectedRide || !this.selectedRide.id) {
-      this.http.post(`http://localhost:8080/admin/add-ride`, this.selectedRide)
+      this.http.post('http://localhost:8080/admin/add-ride', this.selectedRide)
         .subscribe({
           next: () => {
             this.loadRides();
@@ -80,7 +73,7 @@ export class CarRidesComponent implements OnInit {
           }
         });
     } else {
-      this.http.put(`http://localhost:8080/admin/update-ride/${this.selectedRide.id}`, this.selectedRide)
+      this.http.put(`http://localhost:8080/rides/${this.selectedRide.id}`, this.selectedRide)
         .subscribe({
           next: () => {
             this.loadRides();

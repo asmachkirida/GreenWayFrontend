@@ -8,15 +8,6 @@
           <button class="add-btn" (click)="openAddEditRideModal()">
             <i class="fas fa-plus"></i> Add Ride
           </button>
-          <div class="search-container">
-            <input
-              type="text"
-              placeholder="Search by location"
-              [(ngModel)]="searchTerm"
-              (input)="searchRides()"
-            />
-            <i class="fas fa-search"></i>
-          </div>
         </div>
       </div>
     </div>
@@ -36,10 +27,10 @@
       <tbody>
         <tr *ngFor="let ride of rides">
           <td>{{ ride.id }}</td>
-          <td>{{ ride.departure }}</td>
-          <td>{{ ride.destination }}</td>
+          <td>{{ ride.startLocation }}</td>
+          <td>{{ ride.endLocation }}</td>
           <td>{{ ride.date | date }}</td>
-          <td>{{ ride.time }}</td>
+          <td>{{ ride.startTime }}</td>
           <td>{{ ride.price | currency }}</td>
           <td>
             <button (click)="openAddEditRideModal(ride)" class="action-btn edit-btn">
@@ -65,17 +56,17 @@
         <span class="close" (click)="closeAddEditRideModal()">&times;</span>
         <h2>{{ selectedRide?.id ? 'Edit Ride' : 'Add New Ride' }}</h2>
         <form (ngSubmit)="saveRide()">
-          <label for="departure">Departure:</label>
-          <input id="departure" [(ngModel)]="selectedRide.departure" name="departure" required>
+          <label for="startLocation">Departure:</label>
+          <input id="startLocation" [(ngModel)]="selectedRide.startLocation" name="startLocation" required>
           
-          <label for="destination">Destination:</label>
-          <input id="destination" [(ngModel)]="selectedRide.destination" name="destination" required>
+          <label for="endLocation">Destination:</label>
+          <input id="endLocation" [(ngModel)]="selectedRide.endLocation" name="endLocation" required>
   
           <label for="date">Date:</label>
           <input id="date" [(ngModel)]="selectedRide.date" name="date" type="date" required>
   
-          <label for="time">Time:</label>
-          <input id="time" [(ngModel)]="selectedRide.time" name="time" type="time" required>
+          <label for="startTime">Time:</label>
+          <input id="startTime" [(ngModel)]="selectedRide.startTime" name="startTime" type="startTime" required>
   
           <label for="price">Price:</label>
           <input id="price" [(ngModel)]="selectedRide.price" name="price" type="number" required>
