@@ -92,4 +92,31 @@ export class CarRidesComponent implements OnInit {
         });
     }
   }
+
+  exportData() {
+    this.http.get<any[]>('http://localhost:8080/rides').subscribe(data => {
+      this.exportToCSV(data);
+    }, error => {
+      console.error('Error exporting data:', error);
+    });
+  }
+  
+  exportToCSV(data: any[]) {
+    const csvData = this.convertToCSV(data);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'car-rides.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
+  convertToCSV(data: any[]): string {
+    const header = 'ID,Start Location,End Location,Date,Start Time,End Time,Price,Driver Name,Car Model\n';
+    const rows = data.map(ride =>
+      `${ride.id},${ride.startLocation},${ride.endLocation},${new Date(ride.date).toLocaleDateString()},${ride.startTime},${ride.endTime},${ride.price},${ride.driverName || 'N/A'},${ride.carModel || 'N/A'}`
+    ).join('\n');
+    return header + rows;
+  }
 }
