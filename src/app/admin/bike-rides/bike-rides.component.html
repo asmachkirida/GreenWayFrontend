@@ -1,1 +1,60 @@
-<p>bike-rides works!</p>
+<div class="bike-rides-container">
+    <button (click)="exportData()">Export to CSV</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>Start Location</th>
+          <th>End Location</th>
+          <th>Max Riders</th>
+          <th>Creator</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ride of bikeRides">
+          <td>{{ ride.id }}</td>
+          <td>{{ ride.date | date: 'shortDate' }}</td>
+          <td>{{ ride.startTime }}</td>
+          <td>{{ ride.startLocation }}</td>
+          <td>{{ ride.endLocation }}</td>
+          <td>{{ ride.maxRiders }}</td>
+          <td>{{ ride.creatorName || 'N/A' }}</td>
+          <td>
+            <button (click)="openAddEditBikeRideModal(ride)">Edit</button>
+            <button (click)="deleteBikeRide(ride.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add/Edit Bike Ride Modal -->
+    <div *ngIf="showAddEditBikeRideModal" class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="closeAddEditBikeRideModal()">&times;</span>
+        <h2>{{ selectedBikeRide.id ? 'Edit' : 'Add' }} Bike Ride</h2>
+        <form (ngSubmit)="saveBikeRide()">
+          <label for="startLocation">Start Location:</label>
+          <input id="startLocation" [(ngModel)]="selectedBikeRide.startLocation" name="startLocation" required />
+  
+          <label for="endLocation">End Location:</label>
+          <input id="endLocation" [(ngModel)]="selectedBikeRide.endLocation" name="endLocation" required />
+  
+          <label for="date">Date:</label>
+          <input id="date" type="date" [(ngModel)]="selectedBikeRide.date" name="date" required />
+  
+          <label for="startTime">Start Time:</label>
+          <input id="startTime" type="time" [(ngModel)]="selectedBikeRide.startTime" name="startTime" required />
+  
+          <label for="maxRiders">Max Riders:</label>
+          <input id="maxRiders" type="number" [(ngModel)]="selectedBikeRide.maxRiders" name="maxRiders" required />
+  
+          <button type="submit">{{ selectedBikeRide.id ? 'Update' : 'Add' }} Ride</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
