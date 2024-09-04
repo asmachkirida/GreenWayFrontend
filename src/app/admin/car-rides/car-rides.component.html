@@ -1,21 +1,22 @@
 <div class="car-rides-container">
     <div class="header">
       <h1>Car Rides</h1>
-      <hr />
+
+  
       <div class="header-actions">
+        
         <h3>Car Rides List</h3>
         <div class="actions">
-          <button class="add-btn" (click)="openAddEditRideModal()">
-            <i class="fas fa-plus"></i> Add Ride
-          </button>
+     
         </div>
       </div>
     </div>
-  
+
     <table>
       <thead>
         <tr>
           <th>ID</th>
+          <th>Driver</th>
           <th>Departure</th>
           <th>Destination</th>
           <th>Date</th>
@@ -27,6 +28,7 @@
       <tbody>
         <tr *ngFor="let ride of rides">
           <td>{{ ride.id }}</td>
+          <td>{{ ride.driverName }}</td>
           <td>{{ ride.startLocation }}</td>
           <td>{{ ride.endLocation }}</td>
           <td>{{ ride.date | date }}</td>

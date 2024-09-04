@@ -24,8 +24,15 @@ export class CarRidesComponent implements OnInit {
     this.http.get<any[]>('http://localhost:8080/rides').subscribe(data => {
       this.totalPages = Math.ceil(data.length / this.pageSize);
       this.rides = data.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+     // Fetch driver details for each ride
+     this.rides.forEach(ride => {
+      this.http.get<any>(`http://localhost:8080/driver/cars/${ride.carId}`).subscribe(car => {
+        this.http.get<any>(`http://localhost:8080/admin/get-user/${car.driverId}`).subscribe(user => {
+          ride.driverName = `${user.ourUsers.firstName} ${user.ourUsers.lastName}`;
+        });
+      });
     });
-  }
+  });}
 
   prevPage() {
     if (this.currentPage > 1) {
