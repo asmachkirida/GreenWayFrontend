@@ -1,1 +1,88 @@
-<p>car-rides works!</p>
+<div class="car-rides-container">
+    <div class="header">
+      <h1>Car Rides</h1>
+      <hr />
+      <div class="header-actions">
+        <h3>Car Rides List</h3>
+        <div class="actions">
+          <button class="add-btn" (click)="openAddEditRideModal()">
+            <i class="fas fa-plus"></i> Add Ride
+          </button>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search by location"
+              [(ngModel)]="searchTerm"
+              (input)="searchRides()"
+            />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Departure</th>
+          <th>Destination</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ride of rides">
+          <td>{{ ride.id }}</td>
+          <td>{{ ride.departure }}</td>
+          <td>{{ ride.destination }}</td>
+          <td>{{ ride.date | date }}</td>
+          <td>{{ ride.time }}</td>
+          <td>{{ ride.price | currency }}</td>
+          <td>
+            <button (click)="openAddEditRideModal(ride)" class="action-btn edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deleteRide(ride.id)" class="action-btn delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  
+    <!-- Modal for adding or editing a ride -->
+    <div class="modal" *ngIf="showAddEditRideModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeAddEditRideModal()">&times;</span>
+        <h2>{{ selectedRide?.id ? 'Edit Ride' : 'Add New Ride' }}</h2>
+        <form (ngSubmit)="saveRide()">
+          <label for="departure">Departure:</label>
+          <input id="departure" [(ngModel)]="selectedRide.departure" name="departure" required>
+          
+          <label for="destination">Destination:</label>
+          <input id="destination" [(ngModel)]="selectedRide.destination" name="destination" required>
+  
+          <label for="date">Date:</label>
+          <input id="date" [(ngModel)]="selectedRide.date" name="date" type="date" required>
+  
+          <label for="time">Time:</label>
+          <input id="time" [(ngModel)]="selectedRide.time" name="time" type="time" required>
+  
+          <label for="price">Price:</label>
+          <input id="price" [(ngModel)]="selectedRide.price" name="price" type="number" required>
+  
+          <button type="submit">{{ selectedRide?.id ? 'Update Ride' : 'Add Ride' }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

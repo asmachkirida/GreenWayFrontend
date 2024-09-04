@@ -25,8 +25,11 @@ export class CarsComponent implements OnInit {
     const searchQuery = this.searchTerm.trim() ? `?brand=${encodeURIComponent(this.searchTerm.trim())}` : '';
     this.http.get<any[]>(`http://localhost:8080/driver/cars/search${searchQuery}`).subscribe(data => {
       this.cars = data;
-      this.totalPages = Math.ceil(this.cars.length / this.pageSize);
+ 
       this.updateCarsWithDriverNames();
+      this.totalPages = Math.ceil(data.length / this.pageSize);
+      this.cars = data.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+ 
     });
   }
 
@@ -89,19 +92,7 @@ export class CarsComponent implements OnInit {
     }
   }
 
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePagination();
-    }
-  }
 
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePagination();
-    }
-  }
 
 
 
@@ -175,6 +166,19 @@ export class CarsComponent implements OnInit {
       });
   }
   
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadCars();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadCars();
+    }
+  }
 
   
 }
