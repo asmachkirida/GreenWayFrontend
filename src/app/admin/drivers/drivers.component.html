@@ -50,7 +50,7 @@
           <td>{{ driver.licenseNumber || 'N/A' }}</td>
           <td>{{ driver.rating }}</td>
           <td>
-            <button (click)="editDriver(driver.id)" class="action-btn edit-btn">
+            <button (click)="openEditDriverModal(driver)" class="action-btn edit-btn">
               <i class="fas fa-edit"></i>
             </button>
             <button (click)="deleteDriver(driver.id)" class="action-btn delete-btn">
@@ -68,3 +68,27 @@
     </div>
   </div>
   
+<!-- Modal for editing a driver -->
+<div class="modal" *ngIf="showEditDriverModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditDriverModal()">&times;</span>
+    <h2>Edit Driver</h2>
+    <form (submit)="updateDriver()">
+      <label for="edit-email">Email:</label>
+      <input id="edit-email" [(ngModel)]="selectedDriver.email" name="email" required>
+      <label for="edit-firstName">First Name:</label>
+      <input id="edit-firstName" [(ngModel)]="selectedDriver.firstName" name="firstName" required>
+      <label for="edit-lastName">Last Name:</label>
+      <input id="edit-lastName" [(ngModel)]="selectedDriver.lastName" name="lastName" required>
+      <label for="edit-birthDate">Birth Date:</label>
+      <input id="edit-birthDate" [(ngModel)]="selectedDriver.birthDate" name="birthDate" type="date" required>
+      <label for="edit-phoneNumber">Phone Number:</label>
+      <input id="edit-phoneNumber" [(ngModel)]="selectedDriver.phoneNumber" name="phoneNumber" required>
+  
+      <label for="edit-city">City:</label>
+      <input id="edit-city" [(ngModel)]="selectedDriver.city" name="city" required>
+      
+      <button type="submit">Update Driver</button>
+    </form>
+  </div>
+</div>

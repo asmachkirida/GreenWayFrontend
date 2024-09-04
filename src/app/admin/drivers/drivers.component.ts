@@ -17,6 +17,8 @@ export class DriversComponent implements OnInit {
   totalPages = 1;
   searchTerm = '';
   searchByFirstName = true;
+  selectedDriver: any = null; // To hold the driver data for editing
+  showEditDriverModal: boolean = false; // Modal visibility flag
 
   constructor(private http: HttpClient) {}
 
@@ -28,10 +30,21 @@ export class DriversComponent implements OnInit {
     // Encode search term to handle special characters and spaces properly
     const searchQuery = this.searchTerm.trim() ? `?searchTerm=${encodeURIComponent(this.searchTerm.trim())}` : '';
     this.http.get<any[]>(`http://localhost:8080/admin/drivers/search${searchQuery}`).subscribe(data => {
+      console.log(data);  // Log the response data
+      this.selectedDriver = this.drivers[0];
+console.log(this.drivers);
       this.totalPages = Math.ceil(data.length / this.pageSize);
       this.drivers = data.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
     });
   }
+
+
+
+
+
+
+
+
 
   buildSearchQuery(): string {
     if (this.searchTerm.trim()) {
@@ -49,10 +62,7 @@ export class DriversComponent implements OnInit {
     this.loadDrivers();
   }
 
-  editDriver(id: number) {
-    // Implement edit logic
-    console.log('Edit driver', id);
-  }
+
 
 
 
@@ -114,10 +124,56 @@ export class DriversComponent implements OnInit {
   }
   
 
-  private saveAsExcelFile(buffer: any, fileName: string): void {
-    const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
-    saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  openEditDriverModal(driver: any): void {
+    this.selectedDriver = { ...driver };
+    this.showEditDriverModal = true;
   }
+
+  closeEditDriverModal(): void {
+    this.showEditDriverModal = false;
+    this.selectedDriver = null; 
+  }
+
+  updateDriver(): void {
+    if (!this.selectedDriver || !this.selectedDriver.id) {
+      console.error('Driver ID is required for updating.');
+      return;
+    }
+  
+    const driverData = {
+      email: this.selectedDriver.email,
+      firstName: this.selectedDriver.firstName,
+      lastName: this.selectedDriver.lastName,
+      birthDate: this.selectedDriver.birthDate.split('T')[0], 
+      phoneNumber: this.selectedDriver.phoneNumber,
+      role: this.selectedDriver.role, 
+      city: this.selectedDriver.city
+    };
+  
+    console.log('Data being sent to update the driver:', driverData);
+  
+  
+  
+    // Make the PUT request with only the necessary data
+    this.http.put(`http://localhost:8080/admin/update/${this.selectedDriver.id}`, driverData)
+      .subscribe({
+        next: () => {
+          this.loadDrivers(); // Reload the driver list
+          this.closeEditDriverModal(); // Close the modal
+        },
+        error: (err) => {
+          console.error('Error updating driver', err);
+        }
+      });
+  }
+  
+
+
+
+
+
+
+
 }
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
