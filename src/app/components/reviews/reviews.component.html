@@ -1,72 +1,19 @@
 <div class="reviews-section">
   <h2>User Reviews</h2>
+  <p class="reviews-intro">Here is what people have to say about us!</p> <!-- Added introduction sentence -->
   <div class="reviews-wrapper">
     <div class="reviews-slider">
-      <!-- Review Card 1 -->
-      <div class="review-card">
+      <!-- Loop through reviews -->
+      <div *ngFor="let review of reviews" class="review-card">
         <div class="review-content">
-          <img src="gal.png" alt="User 1" class="review-avatar" />
+          <img src="gal0.png" alt="{{ review.userName }}" class="review-avatar" />
           <div>
-            <p>"Amazing service, I loved the bike ride experience!"</p>
-            <h4>- Jane Doe</h4>
-          </div>
-        </div>
-      </div>
-
-      <!-- Review Card 2 -->
-      <div class="review-card">
-        <div class="review-content">
-          <img src="gal.png" alt="User 2" class="review-avatar" />
-          <div>
-            <p>"Great app, easy to use and very helpful."</p>
-            <h4>- John Smith</h4>
-          </div>
-        </div>
-      </div>
-
-      <!-- Review Card 3 -->
-      <div class="review-card">
-        <div class="review-content">
-          <img src="gal.png" alt="User 3" class="review-avatar" />
-          <div>
-            <p>"I love the simplicity and efficiency of this app."</p>
-            <h4>- Emily Davis</h4>
-          </div>
-        </div>
-      </div>
-
-      <!-- Review Card 4 -->
-      <div class="review-card">
-        <div class="review-content">
-          <img src="gal.png" alt="User 4" class="review-avatar" />
-          <div>
-            <p>"Fantastic experience! Highly recommended."</p>
-            <h4>- Michael Brown</h4>
-          </div>
-        </div>
-      </div>
-
-      <!-- Repeat the cards to create an infinite loop -->
-      <div class="review-card">
-        <div class="review-content">
-          <img src="gal.png" alt="User 1" class="review-avatar" />
-          <div>
-            <p>"Amazing service, I loved the bike ride experience!"</p>
-            <h4>- Jane Doe</h4>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-content">
-          <img src="gal.png" alt="User 2" class="review-avatar" />
-          <div>
-            <p>"Great app, easy to use and very helpful."</p>
-            <h4>- John Smith</h4>
+            <p class="review-text">"{{ review.details }}"</p>
+            <h4 class="review-user">- Green Way User</h4> <!-- Using "Green Way User" -->
+            <p class="review-country">{{ review.country }}</p> <!-- Added country display -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
