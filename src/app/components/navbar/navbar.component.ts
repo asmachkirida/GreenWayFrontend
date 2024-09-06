@@ -17,10 +17,17 @@ export class NavbarComponent implements OnInit {
       this.isAuthenticated = isAuthenticated;
       if (isAuthenticated) {
         const userRole = localStorage.getItem('userRole');
-        this.profileLink = userRole === 'DRIVER' ? '/driver/profile' : '/passenger/profile';
+        if (userRole === 'DRIVER') {
+          this.profileLink = '/driver/profile';
+        } else if (userRole === 'PASSENGER') {
+          this.profileLink = '/passenger/profile';
+        } else if (userRole === 'ADMIN') {
+          this.profileLink = '/admin/statistics'; 
+        }
       }
     });
   }
+  
 
   logout(): void {
     this.authService.logout();
