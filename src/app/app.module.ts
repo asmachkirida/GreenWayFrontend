@@ -17,7 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms'; // Import FormsModule here
 import { CommonModule } from '@angular/common';  // Import CommonModule
-
 // Angular Material Modules
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -71,6 +70,7 @@ import { NotificationComponent } from './driver/notification/notification.compon
 import { BikerideHistoryComponent } from './passenger/bikeride-history/bikeride-history.component';
 import { AvailableBikeRidesComponent } from './available-bike-rides/available-bike-rides.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxChartsModule } from '@swimlane/ngx-charts'; // Import NgxChartsModule
 
 
 @NgModule({
@@ -146,8 +146,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
         FormsModule,
         MatDialogModule,
         CommonModule,
-        NgxPaginationModule
-        // Add CommonModule here
+        NgxPaginationModule,
+        NgxChartsModule        // Add CommonModule here
 
   ],
   providers: [

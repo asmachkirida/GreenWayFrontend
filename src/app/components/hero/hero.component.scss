@@ -1,10 +1,35 @@
 .hero {
+  position: relative;
   text-align: center;
+}
 
-  img {
-    width: 100%;
-    height: 450px; // Set fixed height
-    object-fit: cover; // Maintain aspect ratio and cover the area
-    border-radius: 0px; // Optional styling
-  }
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  height: 450px; /* Fixed height */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 0px; /* Optional styling */
+}
+
+.image-container .image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3a5a40; /* Filter color */
+  opacity: 0.2; /* Adjust transparency */
+  pointer-events: none; /* Ensure the overlay doesn't affect other elements */
+}
+
+app-search-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Make sure it's above the image and overlay */
 }
