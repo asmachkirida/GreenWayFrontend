@@ -1,44 +1,44 @@
 .advantages {
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* Center the cards */
   align-items: center;
   padding: 20px;
   background-color: #f5f5f5;
-  gap: 15px;
+  gap: 20px; /* Adjust gap between cards */
 }
 
 .advantage-card {
-  background-color: white;
-  padding: 20px;
-  width: 250px; /* Small card size */
-  height: 100px;
+  background-color: rgba(255, 255, 255, 0.273);
+  display: flex;
+  align-items: flex-start; /* Align text and icon at the top */
+  width: 450px; /* Adjusted width */
+  height: 80px; /* Adjusted height to accommodate title and description */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 40px;
-
+  padding: 10px;
+  margin-top: 70px;
 }
 
 .advantage-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .icon-container {
-  background-color: #3a5a40;
+  background-color: #ada083; /* Updated color for the icon container */
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin: 0 auto 15px auto;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
+  margin-right: 10px; /* Space between icon and text */
 }
 
 .icon-container:hover {
-  background-color: #588157;
+  background-color: #ada083;
 }
 
 .icon-container i {
@@ -46,9 +46,24 @@
   color: white;
 }
 
-.advantage-card p {
-  font-size: 1em;
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align text at the top */
+}
+
+.title {
+  font-size: 1.2em;
   color: #344e41;
-  line-height: 1.5;
-  margin-top: 10px;
+  font-weight: bold;
+  margin: 0;
+  text-align: left;
+  margin-bottom: 5px; /* Space between title and description */
+}
+
+.description {
+  font-size: 0.85em; /* Smaller font for the description */
+  color: #6c757d; /* Lighter text color for description */
+  text-align: left;
+  margin: 0;
 }
