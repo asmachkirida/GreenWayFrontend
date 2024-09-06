@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApexNonAxisChartSeries, ApexChart, ApexResponsive, ApexLegend, ApexTitleSubtitle, ApexXAxis, ApexYAxis, ApexTooltip, ApexDataLabels } from 'ngx-apexcharts';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css']
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit {
+  rideData: any[] = [];
+  chartData: any[] = [];
+
   public pieChartOptions: {
     series: ApexNonAxisChartSeries;
     chart: ApexChart;
@@ -38,7 +43,7 @@ export class StatisticsComponent {
     tooltip: ApexTooltip;
   };
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.pieChartOptions = {
       series: [44, 55, 13, 43], // Example data
       chart: {
@@ -69,7 +74,7 @@ export class StatisticsComponent {
       series: [
         {
           name: 'Rides',
-          data: [30, 40, 35, 50, 49, 60, 70]
+          data: []
         }
       ],
       chart: {
@@ -77,7 +82,7 @@ export class StatisticsComponent {
         height: 350
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+        categories: []
       },
       yaxis: {
         title: {
@@ -127,6 +132,73 @@ export class StatisticsComponent {
         shared: true,
         intersect: false
       }
+    };
+  }
+
+  ngOnInit(): void {
+    this.fetchRideData().subscribe(data => {
+      this.rideData = data;
+      this.prepareChartData();
+      this.updateBarChart();  // Update the bar chart with the new data
+    });
+  }
+
+  fetchRideData(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/rides');
+  }
+
+  prepareChartData(): void {
+    const monthlyCounts: { [key: string]: number } = {};
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  
+    this.rideData.forEach(ride => {
+      const date = new Date(ride.date);
+      const year = date.getFullYear();
+      const month = date.getMonth(); // 0-based index
+  
+      const key = `${year}-${month}`; // Use year and month to avoid collisions
+  
+      if (!monthlyCounts[key]) {
+        monthlyCounts[key] = 0;
+      }
+      
+      monthlyCounts[key]++;
+    });
+  
+    // Convert to array and sort by year and month
+    this.chartData = Object.keys(monthlyCounts).map(key => {
+      const [year, month] = key.split('-');
+      return {
+        month: `${monthNames[parseInt(month, 10)]} ${year}`,
+        count: monthlyCounts[key]
+      };
+    }).sort((a, b) => {
+      const [monthA, yearA] = a.month.split(' ');
+      const [monthB, yearB] = b.month.split(' ');
+  
+      // Convert years to numbers
+      const yearAInt = parseInt(yearA, 10);
+      const yearBInt = parseInt(yearB, 10);
+  
+      // Convert month names to indices
+      const monthIndexA = monthNames.indexOf(monthA);
+      const monthIndexB = monthNames.indexOf(monthB);
+  
+      // Perform arithmetic operations with numbers
+      return (yearAInt - yearBInt) || (monthIndexA - monthIndexB);
+    });
+  }
+  
+
+  updateBarChart(): void {
+    this.barChartOptions.series = [
+      {
+        name: 'Rides',
+        data: this.chartData.map(d => d.count)
+      }
+    ];
+    this.barChartOptions.xaxis = {
+      categories: this.chartData.map(d => d.month)
     };
   }
 }
