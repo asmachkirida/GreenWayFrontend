@@ -71,6 +71,7 @@ import { BikerideHistoryComponent } from './passenger/bikeride-history/bikeride-
 import { AvailableBikeRidesComponent } from './available-bike-rides/available-bike-rides.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxChartsModule } from '@swimlane/ngx-charts'; // Import NgxChartsModule
+import { NgxApexchartsModule } from 'ngx-apexcharts';
 
 
 @NgModule({
@@ -147,7 +148,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts'; // Import NgxChartsModul
         MatDialogModule,
         CommonModule,
         NgxPaginationModule,
-        NgxChartsModule        // Add CommonModule here
+        NgxChartsModule,
+        NgxApexchartsModule        // Add CommonModule here
 
   ],
   providers: [

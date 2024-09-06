@@ -1,1 +1,32 @@
-<p>statistics works!</p>
+<div class="statistics-page">
+    <h1>Statistics Overview</h1>
+    
+    <div class="statistics-card">
+      <h3>Revenue Distribution</h3>
+      <apx-chart [series]="pieChartOptions.series"
+                 [chart]="pieChartOptions.chart"
+                 [responsive]="pieChartOptions.responsive"
+                 [legend]="pieChartOptions.legend"
+                 [title]="pieChartOptions.title">
+      </apx-chart>
+    </div>
+  
+    <!-- Calendar Card -->
+    <div class="statistics-card">
+      <h3>Calendar</h3>
+      <div class="calendar-placeholder">
+        <!-- Placeholder for calendar -->
+        <p>Calendar will go here</p>
+      </div>
+    </div>
+  
+    <!-- Flip Clock Card -->
+    <div class="statistics-card">
+      <h3>Flip Clock</h3>
+      <div class="flip-clock-placeholder">
+        <!-- Placeholder for flip clock -->
+        <p>Flip clock will go here</p>
+      </div>
+    </div>
+  </div>
+  
