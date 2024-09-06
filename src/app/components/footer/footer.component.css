@@ -1,17 +1,34 @@
 .footer {
-    background-color: #344e41;
-    color: #dad7cd;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    bottom: 0;
+  background-color: #344e41; /* Dark green background */
+  color: #dad7cd; /* Light beige text color */
+  padding: 10px 5px; /* Increased padding for better spacing */
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  border-top: 5px solid #a3987e; /* Top border for separation */
+}
 
-  }
-  
- 
-  
-  .footer-bottom {
-    margin-top: 10px;
-    font-size: 0.9em;
-  }
-  
+.footer-content {
+  max-width: 800px; /* Centered content with max width */
+  margin: 0 auto;
+  margin-top: -30px;
+
+}
+
+.footer h2 {
+  font-size: 2em; /* Large title font size */
+  color: #a3987e; /* Color for the title */
+  margin-bottom: 6px;
+}
+
+.footer p {
+  font-size: 1em; /* Description font size */
+  color: #dad7cd; /* Light beige for the description text */
+  margin: 0 auto 20px;
+  max-width: 600px; /* Maximum width for the description */
+}
+
+.footer-bottom {
+  font-size: 0.9em; /* Smaller font for copyright notice */
+  color: #ffffff; /* Slightly darker green for contrast */
+}
