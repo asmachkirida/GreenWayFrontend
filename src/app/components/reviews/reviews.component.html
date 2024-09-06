@@ -1,8 +1,72 @@
-<div class="reviews">
-    <h2>User Reviews</h2>
-    <div class="review-card" *ngFor="let review of reviews">
-      <p>{{ review.text }}</p>
-      <h4>- {{ review.user }}</h4>
+<div class="reviews-section">
+  <h2>User Reviews</h2>
+  <div class="reviews-wrapper">
+    <div class="reviews-slider">
+      <!-- Review Card 1 -->
+      <div class="review-card">
+        <div class="review-content">
+          <img src="gal.png" alt="User 1" class="review-avatar" />
+          <div>
+            <p>"Amazing service, I loved the bike ride experience!"</p>
+            <h4>- Jane Doe</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Card 2 -->
+      <div class="review-card">
+        <div class="review-content">
+          <img src="gal.png" alt="User 2" class="review-avatar" />
+          <div>
+            <p>"Great app, easy to use and very helpful."</p>
+            <h4>- John Smith</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Card 3 -->
+      <div class="review-card">
+        <div class="review-content">
+          <img src="gal.png" alt="User 3" class="review-avatar" />
+          <div>
+            <p>"I love the simplicity and efficiency of this app."</p>
+            <h4>- Emily Davis</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Card 4 -->
+      <div class="review-card">
+        <div class="review-content">
+          <img src="gal.png" alt="User 4" class="review-avatar" />
+          <div>
+            <p>"Fantastic experience! Highly recommended."</p>
+            <h4>- Michael Brown</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repeat the cards to create an infinite loop -->
+      <div class="review-card">
+        <div class="review-content">
+          <img src="gal.png" alt="User 1" class="review-avatar" />
+          <div>
+            <p>"Amazing service, I loved the bike ride experience!"</p>
+            <h4>- Jane Doe</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-content">
+          <img src="gal.png" alt="User 2" class="review-avatar" />
+          <div>
+            <p>"Great app, easy to use and very helpful."</p>
+            <h4>- John Smith</h4>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
+</div>
+
