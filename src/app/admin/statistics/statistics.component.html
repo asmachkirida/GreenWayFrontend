@@ -3,7 +3,20 @@
       <h1>Statistics Overview</h1>
       <p>Here’s a snapshot of the current statistics related to bike rides and ride-sharing.</p>
     </header>
-  
+   <!-- New Section for Additional Cards -->
+   <div class="additional-cards">
+    <div class="additional-card">
+      <!-- Content for the first card goes here -->
+      <h3>Card Title 1</h3>
+      <p>Content for the first card.</p>
+    </div>
+    <div class="additional-card">
+      <!-- Content for the second card goes here -->
+      <h3>Card Title 2</h3>
+      <p>Content for the second card.</p>
+    </div>
+  </div>
+
     <div class="statistics-cards">
       <!-- Pie Chart Card -->
       <div class="statistics-card">
@@ -30,20 +43,20 @@
                    [tooltip]="barChartOptions.tooltip">
         </apx-chart>
       </div>
-    </div>
   
-    <!-- Line Chart Card -->
-    <div class="statistics-card line-chart-card">
-      <h3>Weekly Bike Rides</h3>
-      <apx-chart [series]="lineChartOptions.series"
-                 [chart]="lineChartOptions.chart"
-                 [xaxis]="lineChartOptions.xaxis"
-                 [yaxis]="lineChartOptions.yaxis"
-                 [title]="lineChartOptions.title"
-                 [colors]="lineChartOptions.colors"
-                 [dataLabels]="lineChartOptions.dataLabels"
-                 [tooltip]="lineChartOptions.tooltip">
-      </apx-chart>
+      <!-- Line Chart Card -->
+      <div class="statistics-card line-chart-card">
+        <h3>Weekly Bike Rides</h3>
+        <apx-chart [series]="lineChartOptions.series"
+                   [chart]="lineChartOptions.chart"
+                   [xaxis]="lineChartOptions.xaxis"
+                   [yaxis]="lineChartOptions.yaxis"
+                   [title]="lineChartOptions.title"
+                   [colors]="lineChartOptions.colors"
+                   [dataLabels]="lineChartOptions.dataLabels"
+                   [tooltip]="lineChartOptions.tooltip">
+        </apx-chart>
+      </div>
     </div>
   </div>
   
