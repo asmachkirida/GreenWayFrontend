@@ -46,13 +46,38 @@ export class StatisticsComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.pieChartOptions = {
-      series: [44, 55, 13, 43], 
-      chart: { width: 380, type: 'pie' },
-      responsive: [{ breakpoint: 480, options: { chart: { width: 200 }, legend: { position: 'bottom' }}}],
-      legend: { position: 'right' },
-      title: { text: 'Revenue Distribution' },
-      colors: ['#9b7f56', '#8b9384', '#d0d0d0', '#e0e0e0']
+      series: [10, 15], // Example data: [Number of Drivers, Number of Passengers]
+      chart: {
+        width: 380,
+        type: 'pie'
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }],
+      legend: {
+        position: 'right',
+        labels: {
+          colors: ['#9b7f56', '#3a5a40'], // Optional: Custom colors for legend text
+        },
+        formatter: (val: string, opts: any) => {
+          const labels = ['Drivers', 'Passengers']; // Custom labels
+          return labels[opts.seriesIndex];
+        }
+      },
+      title: {
+        text: 'Drivers vs. Passengers'
+      },
+      colors: ['#9b7f56', '#3a5a40'], // Colors corresponding to the pie chart segments
     };
+    
 
     this.barChartOptions = {
       series: [{ name: 'Rides', data: [] }],
@@ -88,8 +113,35 @@ export class StatisticsComponent implements OnInit {
       this.bikeRideData = data;
       this.updateLineChart();
     });
+    this.fetchUserData().subscribe(data => {
+      console.log("User data:", data);  // Log the API response
+      this.updatePieChart(data);
+    });
+  }
+  fetchUserData(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/admin/get-all-users');
   }
 
+  updatePieChart(response: any): void {
+    const data = response.ourUsersList;  // Access the 'ourUsersList' array
+    let driversCount = 0;
+    let passengersCount = 0;
+  
+    if (Array.isArray(data)) {
+      data.forEach(user => {
+        if (user.role === 'DRIVER') {
+          driversCount++;
+        } else if (user.role === 'PASSENGER') {
+          passengersCount++;
+        }
+      });
+    }
+  
+    // Update the pie chart series with the counts
+    this.pieChartOptions.series = [driversCount, passengersCount];
+  }
+  
+  
   fetchRideData(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:8080/rides');
   }

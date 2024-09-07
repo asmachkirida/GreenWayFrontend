@@ -17,17 +17,24 @@
     </div>
   </div>
 
-    <div class="statistics-cards">
+    <div class="statistics-cards" >
+  
       <!-- Pie Chart Card -->
-      <div class="statistics-card">
-        <h3>Revenue Distribution</h3>
-        <apx-chart [series]="pieChartOptions.series"
-                   [chart]="pieChartOptions.chart"
-                   [responsive]="pieChartOptions.responsive"
-                   [legend]="pieChartOptions.legend"
-                   [title]="pieChartOptions.title"
-                   [colors]="pieChartOptions.colors">
-        </apx-chart>
+      <div class="statistics-card"> 
+         <h3>Users Distribution </h3>
+      <div id="pie">
+      
+        <apx-chart
+        [series]="pieChartOptions.series"
+        [chart]="pieChartOptions.chart"
+        [legend]="pieChartOptions.legend"
+        [responsive]="pieChartOptions.responsive"
+        [colors]="pieChartOptions.colors"
+        [title]="pieChartOptions.title"
+      >
+      </apx-chart>
+      </div>
+      
       </div>
   
       <!-- Bar Chart Card -->
