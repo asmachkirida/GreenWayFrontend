@@ -44,19 +44,14 @@
         </apx-chart>
       </div>
   
-      <!-- Line Chart Card -->
-      <div class="statistics-card line-chart-card">
-        <h3>Weekly Bike Rides</h3>
-        <apx-chart [series]="lineChartOptions.series"
-                   [chart]="lineChartOptions.chart"
-                   [xaxis]="lineChartOptions.xaxis"
-                   [yaxis]="lineChartOptions.yaxis"
-                   [title]="lineChartOptions.title"
-                   [colors]="lineChartOptions.colors"
-                   [dataLabels]="lineChartOptions.dataLabels"
-                   [tooltip]="lineChartOptions.tooltip">
-        </apx-chart>
-      </div>
+    <!-- Line Chart Card -->
+    <div class="statistics-card">
+      <h3>Weekly Bike Rides</h3>
+      <apx-chart [series]="lineChartOptions.series" [chart]="lineChartOptions.chart"
+                 [xaxis]="lineChartOptions.xaxis" [yaxis]="lineChartOptions.yaxis"
+                 [title]="lineChartOptions.title" [colors]="lineChartOptions.colors"
+                 [dataLabels]="lineChartOptions.dataLabels" [tooltip]="lineChartOptions.tooltip">
+      </apx-chart>
     </div>
   </div>
-  
+</div>
