@@ -100,7 +100,7 @@ export class BikeRidesComponent implements OnInit {
       console.error('Error exporting data:', error);
     });
   }
-  
+
   exportToCSV(data: any[]) {
     const csvData = this.convertToCSV(data);
     const blob = new Blob([csvData], { type: 'text/csv' });
@@ -111,7 +111,7 @@ export class BikeRidesComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
-  
+
   convertToCSV(data: any[]): string {
     const header = 'ID,Date,Start Time,Start Location,End Location,Max Riders,Creator\n';
     const rows = data.map(ride =>
