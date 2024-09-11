@@ -12,7 +12,8 @@ export class StatisticsComponent implements OnInit {
   rideData: any[] = [];
   bikeRideData: any[] = [];
   chartData: any[] = [];
-  
+  totalRides: number = 0;
+  totalBikeRides: number = 0;
   public pieChartOptions: {
     series: ApexNonAxisChartSeries;
     chart: ApexChart;
@@ -105,12 +106,16 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchRideData().subscribe(data => {
       this.rideData = data;
+      this.totalRides = data.length;  // Total rides count
+
       this.prepareChartData();
       this.updateBarChart();
     });
 
     this.fetchBikeRideData().subscribe(data => {
       this.bikeRideData = data;
+      this.totalBikeRides = data.length;  // Total bike rides count
+
       this.updateLineChart();
     });
     this.fetchUserData().subscribe(data => {

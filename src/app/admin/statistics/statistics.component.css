@@ -95,3 +95,28 @@
   }
  
 
+
+
+  .additional-cards {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  
+  .additional-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .additional-card h3 {
+    margin-top: 0;
+  }
+  
+  .additional-card p {
+    margin: 10px 0;
+  }
+  
