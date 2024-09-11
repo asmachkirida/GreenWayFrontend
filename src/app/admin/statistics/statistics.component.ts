@@ -14,6 +14,8 @@ export class StatisticsComponent implements OnInit {
   chartData: any[] = [];
   totalRides: number = 0;
   totalBikeRides: number = 0;
+  mostPopularDestination: string = '';
+  mostPopularDestinationCount: number = 0;
   public pieChartOptions: {
     series: ApexNonAxisChartSeries;
     chart: ApexChart;
@@ -107,6 +109,7 @@ export class StatisticsComponent implements OnInit {
     this.fetchRideData().subscribe(data => {
       this.rideData = data;
       this.totalRides = data.length;  // Total rides count
+      this.computeMostPopularDestination(data);
 
       this.prepareChartData();
       this.updateBarChart();
@@ -208,5 +211,25 @@ export class StatisticsComponent implements OnInit {
 
     this.lineChartOptions.series = [{ name: 'Bike Rides', data: sortedData.map(d => d.count) }];
     this.lineChartOptions.xaxis = { categories: sortedData.map(d => d.week) };
+  }
+
+
+  computeMostPopularDestination(rides: any[]): void {
+    const destinationCounts: { [key: string]: number } = {};
+
+    rides.forEach(ride => {
+      const destination = ride.endLocation;
+      if (!destinationCounts[destination]) {
+        destinationCounts[destination] = 0;
+      }
+      destinationCounts[destination]++;
+    });
+
+    const maxDestination = Object.keys(destinationCounts).reduce((a, b) => 
+      destinationCounts[a] > destinationCounts[b] ? a : b
+    );
+
+    this.mostPopularDestination = maxDestination;
+    this.mostPopularDestinationCount = destinationCounts[maxDestination];
   }
 }
