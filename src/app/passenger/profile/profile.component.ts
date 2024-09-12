@@ -112,7 +112,7 @@ export class ProfileComponent implements OnInit {
         const gender = data.ourUsers.gender;  // Assuming gender is part of the response
 
         // Set the profile image based on gender
-        this.profileImage = gender === 'female' ? 'gal0.png' : 'pro.png';
+        this.profileImage = gender === 'Female' ? 'gal0.png' : 'pro.png';
         console.log(gender);
         // Patch the form with user data
         this.profileForm.patchValue({

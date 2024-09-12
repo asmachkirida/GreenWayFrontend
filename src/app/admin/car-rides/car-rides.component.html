@@ -35,7 +35,7 @@
           <td>{{ ride.endLocation }}</td>
           <td>{{ ride.date | date }}</td>
           <td>{{ ride.startTime }}</td>
-          <td>{{ ride.price | currency }}</td>
+          <td>{{ ride.price | currency:'MAD':'symbol':'1.2-2' }}</td>
           <td>
             <button (click)="openAddEditRideModal(ride)" class="action-btn edit-btn">
               <i class="fas fa-edit"></i>

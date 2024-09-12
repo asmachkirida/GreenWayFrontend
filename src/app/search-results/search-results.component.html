@@ -63,6 +63,8 @@
    <!-- Removed price and added button here -->
    <button class="book-now-button" (click)="bookNow(ride)">Book Now</button>
   </div>
+  <div class="price">{{ ride.price | currency:'MAD':'symbol':'1.2-2' }}</div> <!-- Display price here -->
+
             <div class="result-body">
               <div class="route">{{ ride.startLocation }} &rarr; {{ ride.endLocation }}</div>
               <div class="date">{{ ride.date | date:'fullDate' }}</div>

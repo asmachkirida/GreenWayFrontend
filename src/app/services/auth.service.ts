@@ -1,35 +1,27 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.checkAuthStatus());
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor() {}
 
-  private checkAuthStatus(): boolean {
-    if (isPlatformBrowser(this.platformId)) {
-      return !!localStorage.getItem('authToken');
-    }
-    return false;
+  private hasToken(): boolean {
+    return !!localStorage.getItem('authToken');
   }
 
   updateAuthStatus(isAuthenticated: boolean): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isAuthenticatedSubject.next(isAuthenticated);
-    }
+    this.isAuthenticatedSubject.next(isAuthenticated);
   }
 
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('userRole');
-      localStorage.removeItem('userId');
-      this.isAuthenticatedSubject.next(false);
-    }
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userId');
+    this.isAuthenticatedSubject.next(false);
   }
 }
